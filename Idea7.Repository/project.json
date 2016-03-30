@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0-*",
+  "description": "Idea7.Repository Class Library",
+  "authors": [ "Sebastian Bušek" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "frameworks": {
+    "dnx451": { },
+    "netcore50": { }
+  },
+
+  "dependencies": {
+    "Idea7.Entity": "1.0.0-*",
+    "Idea7.Query": "1.0.0-*",
+    "Idea7.UnitOfWork": "1.0.0-*",
+    "Microsoft.CSharp": "4.0.1-beta-23516"
+  }
+}

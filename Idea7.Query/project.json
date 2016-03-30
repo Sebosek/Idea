@@ -1,0 +1,17 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Idea7.Query Class Library",
+  "authors": [ "Sebastian Bušek" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "frameworks": {
+    "dnx451": { },
+    "netcore50": { }
+  },
+
+  "dependencies": {
+    "Microsoft.CSharp": "4.0.1-beta-23516"
+  }
+}
