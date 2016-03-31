@@ -1,0 +1,25 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Idea7.Repository.EntityFramework.Tests Class Library",
+  "authors": [ "Sebastian Bušek" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "frameworks": {
+    "dnx451": { },
+    "netcore50": { }
+  },
+
+  "dependencies": {
+    "Microsoft.CSharp": "4.0.1-beta-23516",
+    "Idea7.Entity": "1.0.0-*",
+    "Idea7.UnitOfWork.EntityFramework": "1.0.0-*",
+    "Idea7.UnitOfWork": "1.0.0-*",
+    "Idea7.Repository.EntityFramework": "1.0.0-*",
+    "Idea7.Repository": "1.0.0-*",
+    "EntityFramework.Core": "7.0.0-rc1-final",
+    "EntityFramework.InMemory": "7.0.0-rc1-final",
+    "xunit": "2.1.0"
+  }
+}
