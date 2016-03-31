@@ -37,6 +37,41 @@
         }
       }
     },
+    "DNX,Version=v5.0": {
+      "Idea7.Entity/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v5.0",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Idea7.Query/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v5.0",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Idea7.UnitOfWork/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v5.0",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Microsoft.CSharp/4.0.1-beta-23516": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      }
+    },
     ".NETCore,Version=v5.0": {
       "Idea7.Entity/1.0.0": {
         "type": "project",
@@ -438,6 +473,76 @@
       "Idea7.UnitOfWork/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Microsoft.CSharp/4.0.1-beta-23516": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      }
+    },
+    "DNX,Version=v5.0/win7-x86": {
+      "Idea7.Entity/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v5.0",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Idea7.Query/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v5.0",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Idea7.UnitOfWork/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v5.0",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Microsoft.CSharp/4.0.1-beta-23516": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      }
+    },
+    "DNX,Version=v5.0/win7-x64": {
+      "Idea7.Entity/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v5.0",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Idea7.Query/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v5.0",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Idea7.UnitOfWork/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v5.0",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516"
         }
@@ -2017,6 +2122,7 @@
       "Microsoft.CSharp >= 4.0.1-beta-23516"
     ],
     "DNX,Version=v4.5.1": [],
+    "DNX,Version=v5.0": [],
     ".NETCore,Version=v5.0": []
   }
 }

@@ -18,6 +18,7 @@ namespace Idea7.Repository.EntityFramework.Tests
 
             _manager = new UnitOfWorkManager();
             _context = new HeroDbContext(options.Options);
+
             SeedHeroes();
         }
 
@@ -33,7 +34,7 @@ namespace Idea7.Repository.EntityFramework.Tests
             var superman = new Hero
             {
                 Name = "Superman",
-                RealName = "Kal El",
+                RealName = "Kal-El",
                 Origin = "Krypton"
             };
 

@@ -8,6 +8,7 @@
 
   "frameworks": {
     "dnx451": { },
+    "dnx50": { },
     "netcore50": { }
   },
 
@@ -20,6 +21,8 @@
     "Idea7.Repository": "1.0.0-*",
     "EntityFramework.Core": "7.0.0-rc1-final",
     "EntityFramework.InMemory": "7.0.0-rc1-final",
-    "xunit": "2.1.0"
+    "xunit": "2.1.0",
+    "xunit.runner.console": "2.2.0-beta1-build3239",
+    "xunit.runner.visualstudio": "2.1.0"
   }
 }

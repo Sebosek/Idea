@@ -8,6 +8,7 @@
 
   "frameworks": {
     "dnx451": { },
+    "dnx50": { },
     "netcore50": { }
   },
 
