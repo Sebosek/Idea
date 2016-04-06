@@ -10,7 +10,7 @@ namespace Idea7.UnitOfWork
 
         public UnitOfWorkManager()
         {
-            _stack = new ThreadLocal<Stack<IUnitOfWork>>();
+            _stack = new ThreadLocal<Stack<IUnitOfWork>> {Value = new Stack<IUnitOfWork>()};
         }
 
         protected Stack<IUnitOfWork> Stack => _stack.Value;

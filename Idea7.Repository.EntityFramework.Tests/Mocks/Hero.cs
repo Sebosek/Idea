@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using Idea7.Entity;
 
 namespace Idea7.Repository.EntityFramework.Tests.Mocks
@@ -8,7 +9,12 @@ namespace Idea7.Repository.EntityFramework.Tests.Mocks
         public string Name { get; set; }
         public string RealName { get; set; }
         public string Origin { get; set; }
-        public IEnumerable<Hero> Friends { get; set; }
-        public IEnumerable<Hero> Enemies { get; set; }
+
+        public IList<HeroRelationship> Relationships { get; set; }
+
+        public Hero()
+        {
+            Relationships = new List<HeroRelationship>();
+        }
     }
 }
