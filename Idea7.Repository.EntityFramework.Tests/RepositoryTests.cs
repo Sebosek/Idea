@@ -1,4 +1,6 @@
-﻿using Idea7.Repository.EntityFramework.Tests.Mocks;
+﻿using System;
+
+using Idea7.Repository.EntityFramework.Tests.Mocks;
 
 using Xunit;
 
@@ -13,7 +15,7 @@ namespace Idea7.Repository.EntityFramework.Tests
         public const string HarleyKey = "1635bbb8-4168-4b42-a717-5b7813d913d7";
         public const string CyborgKey = "0d615564-9ceb-4c19-aff2-95882c38ec5e";
 
-        private RepositoryFixture _fixture;
+        private readonly RepositoryFixture _fixture;
 
         public RepositoryTests(RepositoryFixture fixture)
         {
@@ -45,6 +47,63 @@ namespace Idea7.Repository.EntityFramework.Tests
         public void FindCyborg_ShouldFoundNothing()
         {
             Hero cyborg;
+            using (new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+            {
+                var repository = new HeroRepository(_fixture.UowManager);
+                cyborg = repository.Find(CyborgKey);
+            }
+
+            Assert.Null(cyborg);
+        }
+
+        [Fact]
+        public void CreateHero_ShouldSuccess()
+        {
+            Hero cyborg = new Hero
+            {
+                Id = CyborgKey,
+                Name = "Cyborg",
+                RealName = "Victor Stone",
+                Origin = "Detroit"
+            };
+            using (var uow = new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+            {
+                var repository = new HeroRepository(_fixture.UowManager);
+                repository.Create(cyborg);
+
+                uow.Commit();
+            }
+
+            cyborg = null;
+
+            using (new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+            {
+                var repository = new HeroRepository(_fixture.UowManager);
+                cyborg = repository.Find(CyborgKey);
+            }
+
+            Assert.NotNull(cyborg);
+            Assert.Equal(cyborg.Name, "Cyborg");
+        }
+
+        [Fact]
+        public void CreateHero_NotCommitedShouldFoundNothing()
+        {
+            Hero cyborg = new Hero
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Cyborg",
+                RealName = "Victor Stone",
+                Origin = "Detroit"
+            };
+            using (var uow = new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+            {
+                var repository = new HeroRepository(_fixture.UowManager);
+                repository.Create(cyborg);
+            }
+
+            cyborg = null;
+
             using (new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
             {
                 var repository = new HeroRepository(_fixture.UowManager);

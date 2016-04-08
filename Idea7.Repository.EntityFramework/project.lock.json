@@ -66,7 +66,8 @@
           "Idea7.Entity": "1.0.0",
           "Idea7.Query": "1.0.0",
           "Idea7.UnitOfWork": "1.0.0",
-          "Microsoft.CSharp": "4.0.1-beta-23516"
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Linq.Queryable": "4.0.1-beta-23516"
         }
       },
       "Idea7.UnitOfWork/1.0.0": {
@@ -321,6 +322,15 @@
         },
         "runtime": {
           "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll": {}
+        }
+      },
+      "System.Linq.Queryable/4.0.1-beta-23516": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
         }
       }
     },
@@ -388,7 +398,8 @@
           "Idea7.Entity": "1.0.0",
           "Idea7.Query": "1.0.0",
           "Idea7.UnitOfWork": "1.0.0",
-          "Microsoft.CSharp": "4.0.1-beta-23516"
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Linq.Queryable": "4.0.1-beta-23516"
         }
       },
       "Idea7.UnitOfWork/1.0.0": {
@@ -644,6 +655,15 @@
         "runtime": {
           "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll": {}
         }
+      },
+      "System.Linq.Queryable/4.0.1-beta-23516": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
       }
     },
     ".NETCore,Version=v5.0": {
@@ -706,7 +726,8 @@
           "Idea7.Entity": "1.0.0",
           "Idea7.Query": "1.0.0",
           "Idea7.UnitOfWork": "1.0.0",
-          "Microsoft.CSharp": "4.0.1-beta-23516"
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Linq.Queryable": "4.0.1-beta-23516"
         }
       },
       "Idea7.UnitOfWork/1.0.0": {
@@ -1222,7 +1243,7 @@
           "lib/netcore50/System.Linq.Expressions.dll": {}
         }
       },
-      "System.Linq.Queryable/4.0.0": {
+      "System.Linq.Queryable/4.0.1-beta-23516": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.10",
@@ -1526,7 +1547,8 @@
           "Idea7.Entity": "1.0.0",
           "Idea7.Query": "1.0.0",
           "Idea7.UnitOfWork": "1.0.0",
-          "Microsoft.CSharp": "4.0.1-beta-23516"
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Linq.Queryable": "4.0.1-beta-23516"
         }
       },
       "Idea7.UnitOfWork/1.0.0": {
@@ -1781,6 +1803,15 @@
         },
         "runtime": {
           "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll": {}
+        }
+      },
+      "System.Linq.Queryable/4.0.1-beta-23516": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
         }
       }
     },
@@ -1848,7 +1879,8 @@
           "Idea7.Entity": "1.0.0",
           "Idea7.Query": "1.0.0",
           "Idea7.UnitOfWork": "1.0.0",
-          "Microsoft.CSharp": "4.0.1-beta-23516"
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Linq.Queryable": "4.0.1-beta-23516"
         }
       },
       "Idea7.UnitOfWork/1.0.0": {
@@ -2103,6 +2135,15 @@
         },
         "runtime": {
           "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll": {}
+        }
+      },
+      "System.Linq.Queryable/4.0.1-beta-23516": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
         }
       }
     },
@@ -2170,7 +2211,8 @@
           "Idea7.Entity": "1.0.0",
           "Idea7.Query": "1.0.0",
           "Idea7.UnitOfWork": "1.0.0",
-          "Microsoft.CSharp": "4.0.1-beta-23516"
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Linq.Queryable": "4.0.1-beta-23516"
         }
       },
       "Idea7.UnitOfWork/1.0.0": {
@@ -2425,6 +2467,15 @@
         },
         "runtime": {
           "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll": {}
+        }
+      },
+      "System.Linq.Queryable/4.0.1-beta-23516": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
         }
       }
     },
@@ -2492,7 +2543,8 @@
           "Idea7.Entity": "1.0.0",
           "Idea7.Query": "1.0.0",
           "Idea7.UnitOfWork": "1.0.0",
-          "Microsoft.CSharp": "4.0.1-beta-23516"
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Linq.Queryable": "4.0.1-beta-23516"
         }
       },
       "Idea7.UnitOfWork/1.0.0": {
@@ -2748,6 +2800,15 @@
         "runtime": {
           "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll": {}
         }
+      },
+      "System.Linq.Queryable/4.0.1-beta-23516": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
       }
     },
     ".NETCore,Version=v5.0/win7-x86": {
@@ -2810,7 +2871,8 @@
           "Idea7.Entity": "1.0.0",
           "Idea7.Query": "1.0.0",
           "Idea7.UnitOfWork": "1.0.0",
-          "Microsoft.CSharp": "4.0.1-beta-23516"
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Linq.Queryable": "4.0.1-beta-23516"
         }
       },
       "Idea7.UnitOfWork/1.0.0": {
@@ -3326,7 +3388,7 @@
           "lib/netcore50/System.Linq.Expressions.dll": {}
         }
       },
-      "System.Linq.Queryable/4.0.0": {
+      "System.Linq.Queryable/4.0.1-beta-23516": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.10",
@@ -3655,7 +3717,8 @@
           "Idea7.Entity": "1.0.0",
           "Idea7.Query": "1.0.0",
           "Idea7.UnitOfWork": "1.0.0",
-          "Microsoft.CSharp": "4.0.1-beta-23516"
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Linq.Queryable": "4.0.1-beta-23516"
         }
       },
       "Idea7.UnitOfWork/1.0.0": {
@@ -4171,7 +4234,7 @@
           "lib/netcore50/System.Linq.Expressions.dll": {}
         }
       },
-      "System.Linq.Queryable/4.0.0": {
+      "System.Linq.Queryable/4.0.1-beta-23516": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.10",
@@ -5230,36 +5293,45 @@
         "System.Linq.Expressions.nuspec"
       ]
     },
-    "System.Linq.Queryable/4.0.0": {
+    "System.Linq.Queryable/4.0.1-beta-23516": {
       "type": "package",
       "serviceable": true,
-      "sha512": "DIlvCNn3ucFvwMMzXcag4aFnFJ1fdxkQ5NqwJe9Nh7y8ozzhDm07YakQL/yoF3P1dLzY1T2cTpuwbAmVSdXyBA==",
+      "sha512": "xjYDiDG8kxEIZiIWK0FLElmHjIXkW2l3Gi4raTi1+kdYvEBVqCpMUxL3V/1Sr1FCSB1eFtNtPYP/BPtoG56p1g==",
       "files": [
-        "lib/dotnet/System.Linq.Queryable.dll",
+        "lib/dotnet5.4/System.Linq.Queryable.dll",
         "lib/net45/_._",
         "lib/netcore50/System.Linq.Queryable.dll",
         "lib/win8/_._",
         "lib/wp80/_._",
         "lib/wpa81/_._",
-        "ref/dotnet/de/System.Linq.Queryable.xml",
-        "ref/dotnet/es/System.Linq.Queryable.xml",
-        "ref/dotnet/fr/System.Linq.Queryable.xml",
-        "ref/dotnet/it/System.Linq.Queryable.xml",
-        "ref/dotnet/ja/System.Linq.Queryable.xml",
-        "ref/dotnet/ko/System.Linq.Queryable.xml",
-        "ref/dotnet/ru/System.Linq.Queryable.xml",
-        "ref/dotnet/System.Linq.Queryable.dll",
-        "ref/dotnet/System.Linq.Queryable.xml",
-        "ref/dotnet/zh-hans/System.Linq.Queryable.xml",
-        "ref/dotnet/zh-hant/System.Linq.Queryable.xml",
+        "ref/dotnet5.1/de/System.Linq.Queryable.xml",
+        "ref/dotnet5.1/es/System.Linq.Queryable.xml",
+        "ref/dotnet5.1/fr/System.Linq.Queryable.xml",
+        "ref/dotnet5.1/it/System.Linq.Queryable.xml",
+        "ref/dotnet5.1/ja/System.Linq.Queryable.xml",
+        "ref/dotnet5.1/ko/System.Linq.Queryable.xml",
+        "ref/dotnet5.1/ru/System.Linq.Queryable.xml",
+        "ref/dotnet5.1/System.Linq.Queryable.dll",
+        "ref/dotnet5.1/System.Linq.Queryable.xml",
+        "ref/dotnet5.1/zh-hans/System.Linq.Queryable.xml",
+        "ref/dotnet5.1/zh-hant/System.Linq.Queryable.xml",
         "ref/net45/_._",
+        "ref/netcore50/de/System.Linq.Queryable.xml",
+        "ref/netcore50/es/System.Linq.Queryable.xml",
+        "ref/netcore50/fr/System.Linq.Queryable.xml",
+        "ref/netcore50/it/System.Linq.Queryable.xml",
+        "ref/netcore50/ja/System.Linq.Queryable.xml",
+        "ref/netcore50/ko/System.Linq.Queryable.xml",
+        "ref/netcore50/ru/System.Linq.Queryable.xml",
         "ref/netcore50/System.Linq.Queryable.dll",
         "ref/netcore50/System.Linq.Queryable.xml",
+        "ref/netcore50/zh-hans/System.Linq.Queryable.xml",
+        "ref/netcore50/zh-hant/System.Linq.Queryable.xml",
         "ref/win8/_._",
         "ref/wp80/_._",
         "ref/wpa81/_._",
-        "System.Linq.Queryable.4.0.0.nupkg",
-        "System.Linq.Queryable.4.0.0.nupkg.sha512",
+        "System.Linq.Queryable.4.0.1-beta-23516.nupkg",
+        "System.Linq.Queryable.4.0.1-beta-23516.nupkg.sha512",
         "System.Linq.Queryable.nuspec"
       ]
     },

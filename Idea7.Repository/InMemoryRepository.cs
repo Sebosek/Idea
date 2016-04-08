@@ -7,7 +7,7 @@ using Idea7.Query;
 namespace Idea7.Repository
 {
     /// <summary>
-    /// Initialize abstract in-memory repository
+    /// Abstract in-memory repository
     /// </summary>
     public abstract class InMemoryRepository<TEntity, TKey> : IRepository<TEntity, TKey>
         where TEntity : class, IEntity<TKey>
