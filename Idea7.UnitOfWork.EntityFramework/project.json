@@ -9,7 +9,11 @@
   "frameworks": {
     "dnx451": { },
     "dnx50": { },
-    "netcore50": { }
+    "netcore50": { },
+
+    "net451": { },
+    "net5": { },
+    "dotnet5.4": { }
   },
 
   "dependencies": {
