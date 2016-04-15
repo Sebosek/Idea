@@ -7,14 +7,13 @@
   "licenseUrl": "",
 
   "frameworks": {
-    "dotnet5.4": {
-      "dependencies": {
-        "Microsoft.CSharp": "4.0.1-beta-23516",
-        "Idea7.UnitOfWork.EntityFramework": "1.0.0-*",
-        "Idea7.UnitOfWork": "1.0.0-*",
-        "Idea7.Repository": "1.0.0-*",
-        "EntityFramework.Core": "7.0.0-rc1-final"
-      }
-    }
+    "dotnet5.4": { }
+  },
+  "dependencies": {
+    "EntityFramework.Core": "7.0.0-rc1-final",
+    "Idea7.Repository": "1.0.0-*",
+    "Idea7.UnitOfWork": "1.0.0-*",
+    "Idea7.UnitOfWork.EntityFramework": "1.0.0-*",
+    "Microsoft.CSharp": "4.0.1-beta-23516"
   }
 }

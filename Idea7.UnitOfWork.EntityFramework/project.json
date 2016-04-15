@@ -7,12 +7,12 @@
   "licenseUrl": "",
 
   "frameworks": {
-    "dotnet5.4": {
-      "dependencies": {
-        "Microsoft.CSharp": "4.0.1-beta-23516",
-        "Idea7.UnitOfWork": "1.0.0-*",
-        "EntityFramework.Core": "7.0.0-rc1-final"
-      }
-    }
+    "net451": { },
+    "dotnet5.4": { }
+  },
+  "dependencies": {
+    "Microsoft.CSharp": "4.0.1-beta-23516",
+    "Idea7.UnitOfWork": "1.0.0-*",
+    "EntityFramework.Core": "7.0.0-rc1-final"
   }
 }

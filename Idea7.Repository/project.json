@@ -6,14 +6,14 @@
   "projectUrl": "",
   "licenseUrl": "",
   "frameworks": {
-    "dotnet5.4": {
-      "dependencies": {
-        "System.Linq.Queryable": "4.0.1-beta-23516",
-        "Microsoft.CSharp": "4.0.1-beta-23516",
-        "Idea7.Entity": "1.0.0-*",
-        "Idea7.Query": "1.0.0-*",
-        "Idea7.UnitOfWork": "1.0.0-*"
-      }
-    }
+    "net451": { },
+    "dotnet5.4": { }
+  },
+  "dependencies": {
+    "System.Linq.Queryable": "4.0.1-beta-23516",
+    "Microsoft.CSharp": "4.0.1-beta-23516",
+    "Idea7.Entity": "1.0.0-*",
+    "Idea7.Query": "1.0.0-*",
+    "Idea7.UnitOfWork": "1.0.0-*"
   }
 }
