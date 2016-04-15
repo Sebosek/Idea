@@ -13,7 +13,17 @@ namespace Idea7.UnitOfWork
             _stack = new ThreadLocal<Stack<IUnitOfWork>> {Value = new Stack<IUnitOfWork>()};
         }
 
-        protected Stack<IUnitOfWork> Stack => _stack.Value;
+        protected internal Stack<IUnitOfWork> Stack
+        {
+            get
+            {
+                return _stack.Value;
+            }
+            set
+            {
+                _stack.Value = value;
+            }
+        }
 
         public void Add(IUnitOfWork uow)
         {
@@ -22,6 +32,10 @@ namespace Idea7.UnitOfWork
 
         public void Close()
         {
+            if (Stack.Count == 0)
+            {
+                throw new Exception("None Unit of Work is currently open.");
+            }
             Stack.Pop();
         }
 

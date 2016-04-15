@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Idea7.UnitOfWork.Tests")]
 namespace Idea7.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
