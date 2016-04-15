@@ -1,26 +1,20 @@
 {
   "version": "1.0.0-*",
   "description": "Idea7.Repository.EntityFramework Class Library",
-  "authors": [ "CZ010157" ],
+  "authors": [ "Sebastian Bušek" ],
   "tags": [ "" ],
   "projectUrl": "",
   "licenseUrl": "",
 
   "frameworks": {
-    "dnx451": { },
-    "dnx50": { },
-    "netcore50": { },
-
-    "net451": { },
-    "net5": { },
-    "dotnet5.4": { }
-  },
-
-  "dependencies": {
-    "Microsoft.CSharp": "4.0.1-beta-23516",
-    "Idea7.UnitOfWork.EntityFramework": "1.0.0-*",
-    "Idea7.UnitOfWork": "1.0.0-*",
-    "Idea7.Repository": "1.0.0-*",
-    "EntityFramework.Core": "7.0.0-rc1-final"
+    "dotnet5.4": {
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.1-beta-23516",
+        "Idea7.UnitOfWork.EntityFramework": "1.0.0-*",
+        "Idea7.UnitOfWork": "1.0.0-*",
+        "Idea7.Repository": "1.0.0-*",
+        "EntityFramework.Core": "7.0.0-rc1-final"
+      }
+    }
   }
 }

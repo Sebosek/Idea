@@ -7,16 +7,10 @@
   "licenseUrl": "",
 
   "frameworks": {
-    "dnx451": { },
-    "dnx50": { },
-    "netcore50": { },
-
-    "net451": { },
-    "net5": { },
-    "dotnet5.4": { }
-  },
-
-  "dependencies": {
-    "Microsoft.CSharp": "4.0.1-beta-23516"
+    "dotnet5.4": {
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.1-beta-23516"
+      }
+    }
   }
 }

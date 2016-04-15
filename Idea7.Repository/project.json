@@ -5,22 +5,15 @@
   "tags": [ "" ],
   "projectUrl": "",
   "licenseUrl": "",
-
   "frameworks": {
-    "dnx451": { },
-    "dnx50": { },
-    "netcore50": { },
-
-    "net451": { },
-    "net5": { },
-    "dotnet5.4": { }
-  },
-
-  "dependencies": {
-    "Idea7.Entity": "1.0.0-*",
-    "Idea7.Query": "1.0.0-*",
-    "Idea7.UnitOfWork": "1.0.0-*",
-    "Microsoft.CSharp": "4.0.1-beta-23516",
-    "System.Linq.Queryable": "4.0.1-beta-23516"
+    "dotnet5.4": {
+      "dependencies": {
+        "System.Linq.Queryable": "4.0.1-beta-23516",
+        "Microsoft.CSharp": "4.0.1-beta-23516",
+        "Idea7.Entity": "1.0.0-*",
+        "Idea7.Query": "1.0.0-*",
+        "Idea7.UnitOfWork": "1.0.0-*"
+      }
+    }
   }
 }
