@@ -19,7 +19,7 @@ namespace Idea7.UnitOfWork
             _isOpen = true;
         }
 
-        protected bool IsOpen => _isOpen;
+        protected internal bool IsOpen => _isOpen;
         public string Id { get; }
 
         protected virtual void DoCommit() { }
