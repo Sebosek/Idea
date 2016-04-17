@@ -27,7 +27,7 @@ namespace Idea7.UnitOfWork
 
         public void Commit()
         {
-            if (_isOpen)
+            if (IsOpen)
             {
                 var last = _manager.Current();
                 if (!last.Equals(this))
@@ -47,7 +47,7 @@ namespace Idea7.UnitOfWork
 
         public void Rollback()
         {
-            if (_isOpen)
+            if (IsOpen)
             {
                 var last = _manager.Current();
                 if (!last.Equals(this))
