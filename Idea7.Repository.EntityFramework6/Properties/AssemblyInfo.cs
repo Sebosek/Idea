@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Idea7.UnitOfWork.EntityFramework6")]
+[assembly: AssemblyTitle("Idea7.Repository.EntityFramework6")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Idea7.UnitOfWork.EntityFramework6")]
+[assembly: AssemblyProduct("Idea7.Repository.EntityFramework6")]
 [assembly: AssemblyCopyright("Copyright © Sebastian Bušek 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e450f422-53d5-4529-b610-fa295a894d1a")]
+[assembly: Guid("cfa7c43c-5f74-4537-9884-7ddaff3f40f1")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -1,4 +1,6 @@
-﻿namespace Idea7.UnitOfWork.EntityFramework6
+﻿using System;
+
+namespace Idea7.UnitOfWork.EntityFramework6
 {
     public class UnitOfWorkFactory : IUnitOfWorkFactory
     {
@@ -7,6 +9,15 @@
 
         public UnitOfWorkFactory(IDbContextFactory factory, IUnitOfWorkManager manager)
         {
+            if (factory == null)
+            {
+                throw new NullReferenceException("IDbContextFactory is null in UnitOfWorkFactory!");
+            }
+            if (manager == null)
+            {
+                throw new NullReferenceException("IUnitOfWorkManager is null in UnitOfWorkFactory!");
+            }
+
             _factory = factory;
             _manager = manager;
         }

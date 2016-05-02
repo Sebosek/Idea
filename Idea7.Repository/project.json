@@ -6,7 +6,8 @@
   "projectUrl": "",
   "licenseUrl": "",
   "frameworks": {
-    "net451": { },
+    "net452": { },
+    "net462": { },
     "dotnet5.4": { }
   },
   "dependencies": {

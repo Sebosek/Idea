@@ -2,24 +2,68 @@
   "locked": false,
   "version": 2,
   "targets": {
-    ".NETFramework,Version=v4.5.1": {
+    ".NETFramework,Version=v4.5.2": {
       "Idea7.Entity/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.2",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516"
         }
       },
       "Idea7.Query/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.2",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516"
         }
       },
       "Idea7.UnitOfWork/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.2",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Microsoft.CSharp/4.0.1-beta-23516": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "System.Linq.Queryable/4.0.1-beta-23516": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.6.2": {
+      "Idea7.Entity/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.2",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Idea7.Query/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.2",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Idea7.UnitOfWork/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.2",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516"
         }
@@ -321,24 +365,24 @@
         }
       }
     },
-    ".NETFramework,Version=v4.5.1/win7-x86": {
+    ".NETFramework,Version=v4.5.2/win7-x86": {
       "Idea7.Entity/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.2",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516"
         }
       },
       "Idea7.Query/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.2",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516"
         }
       },
       "Idea7.UnitOfWork/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.2",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516"
         }
@@ -365,24 +409,112 @@
         }
       }
     },
-    ".NETFramework,Version=v4.5.1/win7-x64": {
+    ".NETFramework,Version=v4.5.2/win7-x64": {
       "Idea7.Entity/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.2",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516"
         }
       },
       "Idea7.Query/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.2",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516"
         }
       },
       "Idea7.UnitOfWork/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.2",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Microsoft.CSharp/4.0.1-beta-23516": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "System.Linq.Queryable/4.0.1-beta-23516": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.6.2/win7-x86": {
+      "Idea7.Entity/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.2",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Idea7.Query/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.2",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Idea7.UnitOfWork/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.2",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Microsoft.CSharp/4.0.1-beta-23516": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "System.Linq.Queryable/4.0.1-beta-23516": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.6.2/win7-x64": {
+      "Idea7.Entity/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.2",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Idea7.Query/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.2",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516"
+        }
+      },
+      "Idea7.UnitOfWork/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.2",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516"
         }
@@ -1904,7 +2036,8 @@
       "Idea7.Query >= 1.0.0-*",
       "Idea7.UnitOfWork >= 1.0.0-*"
     ],
-    ".NETFramework,Version=v4.5.1": [],
+    ".NETFramework,Version=v4.5.2": [],
+    ".NETFramework,Version=v4.6.2": [],
     ".NETPlatform,Version=v5.4": []
   }
 }

@@ -1,29 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace Idea7.UnitOfWork
 {
     public class UnitOfWorkManager : IUnitOfWorkManager
     {
-        private readonly ThreadLocal<Stack<IUnitOfWork>> _stack;
+        private string _id;
+        
+        private readonly Stack<IUnitOfWork> _stack;
 
         public UnitOfWorkManager()
         {
-            _stack = new ThreadLocal<Stack<IUnitOfWork>> {Value = new Stack<IUnitOfWork>()};
+            _stack = new Stack<IUnitOfWork>();
+            _id = Guid.NewGuid().ToString();
         }
 
-        protected internal Stack<IUnitOfWork> Stack
-        {
-            get
-            {
-                return _stack.Value;
-            }
-            set
-            {
-                _stack.Value = value;
-            }
-        }
+        public Stack<IUnitOfWork> Stack => _stack;
 
         public void Add(IUnitOfWork uow)
         {
