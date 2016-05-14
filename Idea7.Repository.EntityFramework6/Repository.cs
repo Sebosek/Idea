@@ -42,7 +42,7 @@ namespace Idea7.Repository.EntityFramework6
         public TEntity Find(TKey id)
         {
             ResolveUnitOfWork();
-            return _database.SingleOrDefault(s => s.Id.Equals(id));
+            return _database.Find(id);
         }
 
         public void Create(TEntity entity)

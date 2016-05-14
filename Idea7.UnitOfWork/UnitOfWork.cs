@@ -69,6 +69,13 @@ namespace Idea7.UnitOfWork
         {
             if (_isDisposed) return;
             _isDisposed = true;
+
+            if (IsOpen)
+            {
+                Rollback();
+            }
+
+            _manager.Close();
         }
 
         public override bool Equals(object obj)
