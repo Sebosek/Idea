@@ -40,13 +40,13 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Idea7.Entity">
-      <HintPath>..\artifacts\bin\Idea7.Entity\Debug\net451\Idea7.Entity.dll</HintPath>
+      <HintPath>..\artifacts\bin\Idea7.Entity\Debug\net452\Idea7.Entity.dll</HintPath>
     </Reference>
     <Reference Include="Idea7.Query">
-      <HintPath>..\artifacts\bin\Idea7.Query\Debug\net451\Idea7.Query.dll</HintPath>
+      <HintPath>..\artifacts\bin\Idea7.Query\Debug\net452\Idea7.Query.dll</HintPath>
     </Reference>
     <Reference Include="Idea7.UnitOfWork">
-      <HintPath>..\artifacts\bin\Idea7.UnitOfWork\Debug\net451\Idea7.UnitOfWork.dll</HintPath>
+      <HintPath>..\artifacts\bin\Idea7.UnitOfWork\Debug\net452\Idea7.UnitOfWork.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

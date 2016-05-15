@@ -21,37 +21,37 @@ namespace Idea7.Repository.EntityFramework6
             _manager = manager;
         }
 
-        public long Count(IQueryObject<TEntity> query)
+        public virtual long Count(IQueryObject<TEntity> query)
         {
             ResolveUnitOfWork();
             return query.Count(_database.AsQueryable());
         }
 
-        public IEnumerable<TEntity> Fetch(IQueryObject<TEntity> query)
+        public virtual IEnumerable<TEntity> Fetch(IQueryObject<TEntity> query)
         {
             ResolveUnitOfWork();
             return query.Fetch(_database.AsQueryable());
         }
 
-        public TEntity FetchOne(IQueryObject<TEntity> query)
+        public virtual TEntity FetchOne(IQueryObject<TEntity> query)
         {
             ResolveUnitOfWork();
             return query.FetchOne(_database.AsQueryable());
         }
 
-        public TEntity Find(TKey id)
+        public virtual TEntity Find(TKey id)
         {
             ResolveUnitOfWork();
             return _database.Find(id);
         }
 
-        public void Create(TEntity entity)
+        public virtual void Create(TEntity entity)
         {
             ResolveUnitOfWork();
             _database.Add(entity);
         }
 
-        public void Update(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
             ResolveUnitOfWork();
 
@@ -59,7 +59,7 @@ namespace Idea7.Repository.EntityFramework6
             _context.Entry(entity).State = EntityState.Modified;
         }
 
-        public void Delete(TEntity entity)
+        public virtual void Delete(TEntity entity)
         {
             ResolveUnitOfWork();
             _database.Remove(entity);
