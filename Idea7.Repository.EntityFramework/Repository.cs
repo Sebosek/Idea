@@ -6,7 +6,7 @@ using Idea7.Entity;
 using Idea7.Query;
 using Idea7.UnitOfWork;
 
-using Microsoft.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Idea7.Repository.EntityFramework
 {

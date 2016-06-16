@@ -2,17 +2,29 @@
   "version": "1.0.0-*",
   "description": "Idea7.UnitOfWork.EntityFramework Class Library",
   "authors": [ "Sebastian Bušek" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+  "packOptions": {
+    "tags": [ "Unit of work", "UoW", "Entity Framework Core" ],
+    "repository": {
+      "url": "https://github.com/Sebosek/Idea7"
+    }
+  },
 
   "frameworks": {
-    "net452": { },
-    "dotnet5.4": { }
+    "netstandard1.5": {
+      "imports": [ "portable-net451+win8" ],
+      "dependencies": {
+        "System.ComponentModel.Annotations": "4.1.0-rc2-24027"
+      }
+    },
+    "net451": {
+      "frameworkAssemblies": {
+        "System.ComponentModel.DataAnnotations": "4.0.0.0"
+      }
+    }
   },
   "dependencies": {
-    "Microsoft.CSharp": "4.0.1-beta-23516",
-    "Idea7.UnitOfWork": "1.0.0-*",
-    "EntityFramework.Core": "7.0.0-rc1-final"
+    "NETStandard.Library": "1.5.0-rc2-24027",
+    "Microsoft.EntityFrameworkCore": "1.0.0-rc2-final",
+    "Idea7.UnitOfWork": "1.0.0-*"
   }
 }

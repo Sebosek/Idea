@@ -4,7 +4,7 @@ using Idea7.Repository.EntityFramework.Tests.Mocks;
 using Idea7.UnitOfWork;
 using Idea7.UnitOfWork.EntityFramework;
 
-using Microsoft.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Idea7.Repository.EntityFramework.Tests
 {

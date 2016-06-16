@@ -1,6 +1,6 @@
 ﻿using Idea7.UnitOfWork.EntityFramework;
 
-using Microsoft.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Idea7.Repository.EntityFramework.Tests.Mocks
 {
