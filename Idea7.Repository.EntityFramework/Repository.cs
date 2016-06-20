@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 using Idea7.Entity;
 using Idea7.Query;
@@ -16,6 +17,9 @@ namespace Idea7.Repository.EntityFramework
         private readonly IUnitOfWorkManager _manager;
         private DbSet<TEntity> _database;
         private DbContext _context;
+
+        protected DbSet<TEntity> Database => _database;
+        protected DbContext Context => _context;
 
         public Repository(IUnitOfWorkManager manager)
         {
@@ -66,7 +70,7 @@ namespace Idea7.Repository.EntityFramework
             _database.Remove(entity);
         }
         
-        public void ResolveUnitOfWork()
+        protected void ResolveUnitOfWork()
         {
             if (_context != null && _database != null)
             {
@@ -81,6 +85,59 @@ namespace Idea7.Repository.EntityFramework
 
             _context = uow.DbContext;
             _database = _context.Set<TEntity>();
+        }
+
+        public Task<TEntity> FindAsync(TKey id)
+        {
+            ResolveUnitOfWork();
+            return _database.SingleOrDefaultAsync(s => s.Id.Equals(id));
+        }
+
+        public Task CreateAsync(TEntity entity)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                ResolveUnitOfWork();
+                _database.Add(entity);
+            });
+        }
+
+        public Task UpdateAsync(TEntity entity)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                ResolveUnitOfWork();
+
+                _database.Attach(entity);
+                _context.Entry(entity).State = EntityState.Modified;
+            });
+        }
+
+        public Task DeleteAsync(TEntity entity)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                ResolveUnitOfWork();
+                _database.Remove(entity);
+            });
+        }
+
+        public Task<long> CountAsync(IQueryObject<TEntity> query)
+        {
+            ResolveUnitOfWork();
+            return Task.FromResult(query.Count(_database.AsQueryable()));
+        }
+
+        public Task<IEnumerable<TEntity>> FetchAsync(IQueryObject<TEntity> query)
+        {
+            ResolveUnitOfWork();
+            return Task.FromResult(query.Fetch(_database.AsQueryable()));
+        }
+
+        public Task<TEntity> FetchOneAsync(IQueryObject<TEntity> query)
+        {
+            ResolveUnitOfWork();
+            return Task.FromResult(query.FetchOne(_database.AsQueryable()));
         }
     }
 }

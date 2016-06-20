@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Idea7.UnitOfWork.EntityFramework
 {
@@ -17,6 +18,11 @@ namespace Idea7.UnitOfWork.EntityFramework
         protected override void DoCommit()
         {
             _context.SaveChanges();
+        }
+
+        protected override async Task DoCommitAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

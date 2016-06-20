@@ -2633,7 +2633,6 @@
         "framework": ".NETStandard,Version=v1.5",
         "dependencies": {
           "Idea7.Repository": "1.0.0",
-          "Idea7.UnitOfWork": "1.0.0",
           "Idea7.UnitOfWork.EntityFramework": "1.0.0",
           "Microsoft.EntityFrameworkCore": "1.0.0-rc2-final",
           "NETStandard.Library": "1.5.0-rc2-24027"
@@ -2650,7 +2649,6 @@
         "framework": ".NETStandard,Version=v1.2",
         "dependencies": {
           "Idea7.Entity": "1.0.0",
-          "Idea7.Query": "1.0.0",
           "NETStandard.Library": "1.5.0-rc2-24027"
         },
         "compile": {

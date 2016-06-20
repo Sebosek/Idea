@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Idea7.Entity;
 using Idea7.Query;
 
@@ -29,6 +29,21 @@ namespace Idea7.Repository
             return query.FetchOne(Data.AsQueryable());
         }
 
+        public Task<long> CountAsync(IQueryObject<TEntity> query)
+        {
+            return Task.FromResult(query.Count(Data.AsQueryable()));
+        }
+
+        public Task<IEnumerable<TEntity>> FetchAsync(IQueryObject<TEntity> query)
+        {
+            return Task.FromResult(query.Fetch(Data.AsQueryable()));
+        }
+
+        public Task<TEntity> FetchOneAsync(IQueryObject<TEntity> query)
+        {
+            return Task.FromResult(query.FetchOne(Data.AsQueryable()));
+        }
+
         public TEntity Find(TKey id)
         {
             return Data.SingleOrDefault(s => s.Id.Equals(id));
@@ -48,6 +63,30 @@ namespace Idea7.Repository
         public void Delete(TEntity entity)
         {
             Data.Remove(entity);
+        }
+
+        public Task<TEntity> FindAsync(TKey id)
+        {
+            return Task.FromResult<TEntity>(Data.SingleOrDefault(s => s.Id.Equals(id)));
+        }
+
+        public Task CreateAsync(TEntity entity)
+        {
+            return Task.Factory.StartNew(() => Data.Add(entity));
+        }
+
+        public Task UpdateAsync(TEntity entity)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                Data.Remove(entity);
+                Data.Add(entity);
+            });
+        }
+
+        public Task DeleteAsync(TEntity entity)
+        {
+            return Task.Factory.StartNew(() => Data.Remove(entity));
         }
     }
 }

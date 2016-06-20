@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 [assembly: InternalsVisibleTo("Idea7.UnitOfWork.Tests")]
 namespace Idea7.UnitOfWork
@@ -7,8 +8,8 @@ namespace Idea7.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         private readonly IUnitOfWorkManager _manager;
-        private bool _isDisposed = false;
-        private bool _isOpen = false;
+        private bool _isDisposed;
+        private bool _isOpen;
 
         public UnitOfWork(IUnitOfWorkManager manager)
         {
@@ -23,7 +24,9 @@ namespace Idea7.UnitOfWork
         public string Id { get; }
 
         protected virtual void DoCommit() { }
+        protected virtual Task DoCommitAsync() { return Task.FromResult(false); }
         protected virtual void DoRollback() { }
+        protected virtual Task DoRollbackAsync() { return Task.FromResult(false); }
 
         public void Commit()
         {
@@ -45,6 +48,24 @@ namespace Idea7.UnitOfWork
             }
         }
 
+        public Task CommitAsync()
+        {
+            if (IsOpen)
+            {
+                var last = _manager.Current();
+                if (!last.Equals(this))
+                {
+                    throw new Exception("Try to commit outside Unit of work.");
+                }
+
+                var task = DoCommitAsync();
+                _isOpen = false;
+                return task;
+            }
+
+            throw new Exception("Unit of work isn't open.");
+        }
+
         public void Rollback()
         {
             if (IsOpen)
@@ -56,13 +77,30 @@ namespace Idea7.UnitOfWork
                 }
 
                 DoRollback();
-
                 _isOpen = false;
             }
             else
             {
                 throw new Exception("Unit of work isn't open.");
             }
+        }
+
+        public Task RollbackAsync()
+        {
+            if (IsOpen)
+            {
+                var last = _manager.Current();
+                if (!last.Equals(this))
+                {
+                    throw new Exception("Try to rollback outside Unit of work.");
+                }
+
+                var task = DoRollbackAsync();
+                _isOpen = false;
+                return task;
+            }
+
+            throw new Exception("Unit of work isn't open.");
         }
 
         public void Dispose()
@@ -82,6 +120,11 @@ namespace Idea7.UnitOfWork
         {
             var argument = obj as IUnitOfWork;
             return argument != null && Id.Equals(argument.Id);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
         }
     }
 }
