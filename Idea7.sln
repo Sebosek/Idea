@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idea7.UnitOfWork.EntityFram
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idea7.Repository.EntityFramework6", "Idea7.Repository.EntityFramework6\Idea7.Repository.EntityFramework6.csproj", "{CFA7C43C-5F74-4537-9884-7DDAFF3F40F1}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Idea7.Query.EntityFramework", "Idea7.Query.EntityFramework\Idea7.Query.EntityFramework.xproj", "{8EF40BDD-5DAC-40F0-B7C3-F32DBB11597C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{CFA7C43C-5F74-4537-9884-7DDAFF3F40F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFA7C43C-5F74-4537-9884-7DDAFF3F40F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFA7C43C-5F74-4537-9884-7DDAFF3F40F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EF40BDD-5DAC-40F0-B7C3-F32DBB11597C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EF40BDD-5DAC-40F0-B7C3-F32DBB11597C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EF40BDD-5DAC-40F0-B7C3-F32DBB11597C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EF40BDD-5DAC-40F0-B7C3-F32DBB11597C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
