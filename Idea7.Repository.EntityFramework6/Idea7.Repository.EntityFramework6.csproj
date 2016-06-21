@@ -45,11 +45,17 @@
     <Reference Include="Idea7.Query">
       <HintPath>..\Idea7.Query\bin\Debug\netstandard1.2\Idea7.Query.dll</HintPath>
     </Reference>
-    <Reference Include="Idea7.Repository">
+    <Reference Include="Idea7.Repository, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Idea7.Repository\bin\Debug\netstandard1.2\Idea7.Repository.dll</HintPath>
     </Reference>
-    <Reference Include="Idea7.UnitOfWork">
+    <Reference Include="Idea7.UnitOfWork, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Idea7.UnitOfWork\bin\Debug\netstandard1.2\Idea7.UnitOfWork.dll</HintPath>
+    </Reference>
+    <Reference Include="Idea7.UnitOfWork.EntityFramework6, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Idea7.UnitOfWork.EntityFramework6\bin\Debug\Idea7.UnitOfWork.EntityFramework6.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -68,12 +74,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Idea7.UnitOfWork.EntityFramework6\Idea7.UnitOfWork.EntityFramework6.csproj">
-      <Project>{e450f422-53d5-4529-b610-fa295a894d1a}</Project>
-      <Name>Idea7.UnitOfWork.EntityFramework6</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

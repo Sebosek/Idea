@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Idea7.Entity;
 using Idea7.Query;
 using Idea7.UnitOfWork;
@@ -80,6 +80,59 @@ namespace Idea7.Repository.EntityFramework6
 
             _context = uow.DbContext;
             _database = _context.Set<TEntity>();
+        }
+
+        public Task<TEntity> FindAsync(TKey id)
+        {
+            ResolveUnitOfWork();
+            return _database.FindAsync(id);
+        }
+
+        public Task CreateAsync(TEntity entity)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                ResolveUnitOfWork();
+                _database.Add(entity);
+            });
+        }
+
+        public Task UpdateAsync(TEntity entity)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                ResolveUnitOfWork();
+
+                _database.Attach(entity);
+                _context.Entry(entity).State = EntityState.Modified;
+            });
+        }
+
+        public Task DeleteAsync(TEntity entity)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                ResolveUnitOfWork();
+                _database.Remove(entity);
+            });
+        }
+
+        public Task<long> CountAsync(IQueryObject<TEntity> query)
+        {
+            ResolveUnitOfWork();
+            return Task.FromResult(query.Count(_database.AsQueryable()));
+        }
+
+        public Task<IEnumerable<TEntity>> FetchAsync(IQueryObject<TEntity> query)
+        {
+            ResolveUnitOfWork();
+            return Task.FromResult(query.Fetch(_database.AsQueryable()));
+        }
+
+        public Task<TEntity> FetchOneAsync(IQueryObject<TEntity> query)
+        {
+            ResolveUnitOfWork();
+            return Task.FromResult(query.FetchOne(_database.AsQueryable()));
         }
     }
 }

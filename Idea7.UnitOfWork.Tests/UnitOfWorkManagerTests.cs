@@ -23,7 +23,7 @@ namespace Idea7.UnitOfWork.Tests
             var uow = CreateUnitOfWork();
 
             manager.Add(uow);
-            var current = manager.Stack.Peek();
+            var current = manager.Current();
 
             Assert.Equal(uow.Id, current.Id);
         }
@@ -58,12 +58,12 @@ namespace Idea7.UnitOfWork.Tests
 
             manager.Add(uow);
 
-            var before = manager.Stack.Count;
+            var before = manager.Stack[0];
             manager.Close();
-            var after = manager.Stack.Count;
+            var after = manager.Stack[0];
 
-            Assert.Equal(before, 1);
-            Assert.Equal(after, 0);
+            Assert.NotNull(before);
+            Assert.Null(after);
         }
 
         [Fact]
@@ -79,7 +79,8 @@ namespace Idea7.UnitOfWork.Tests
         private IUnitOfWork CreateUnitOfWork()
         {
             var uow = new Moq.Mock<IUnitOfWork>();
-            uow.Setup(p => p.Id).Returns(UoWId); // SetupProperty(p => p.Id).SetReturnsDefault(UoWId);
+            uow.Setup(p => p.Id).Returns(UoWId);
+            uow.Setup(p => p.IsCommited).Returns(false);
 
             return uow.Object;
         }

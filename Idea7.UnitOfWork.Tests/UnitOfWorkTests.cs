@@ -14,17 +14,7 @@ namespace Idea7.UnitOfWork.Tests
             var uow = new UnitOfWork(manager);
 
             Assert.NotNull(uow);
-        }
-
-        [Fact]
-        public void CreateInstanceInsideUsing_ShouldSuccess()
-        {
-            var manager = CreateManager();
-            using (var uow = new UnitOfWork(manager))
-            {
-                Assert.NotNull(uow);
-                Assert.True(uow.IsOpen);
-            }
+            Assert.True(uow.IsOpen);
         }
 
         [Fact]
@@ -60,9 +50,12 @@ namespace Idea7.UnitOfWork.Tests
                 {
                     moq.Setup(m => m.Current()).Returns(uow2);
 
-                    var ex = Assert.Throws<Exception>(() => uow.Commit());
-                    Assert.Equal(ex.Message, "Try to commit outside Unit of work.");
+                    Assert.Throws<Exception>(() => uow.Commit());
+
+                    moq.Setup(m => m.Current()).Returns(uow2);
                 }
+
+                moq.Setup(m => m.Current()).Returns(uow);
             }
         }
 
@@ -76,8 +69,9 @@ namespace Idea7.UnitOfWork.Tests
             // do something
             uow.Commit();
 
-            var ex = Assert.Throws<Exception>(() => uow.Commit());
-            Assert.Equal(ex.Message, "Unit of work isn't open.");
+            Assert.Throws<Exception>(() => uow.Commit());
+            //var ex = Assert.Throws<Exception>(() => uow.Commit());
+            //Assert.Equal("Unit of work isn't open.", ex.Message);
         }
 
         [Fact]
@@ -104,9 +98,14 @@ namespace Idea7.UnitOfWork.Tests
                 {
                     moq.Setup(m => m.Current()).Returns(uow2);
 
-                    var ex = Assert.Throws<Exception>(() => uow.Rollback());
-                    Assert.Equal(ex.Message, "Try to rollback outside Unit of work.");
+                    Assert.Throws<Exception>(() => uow.Rollback());
+                    //var ex = Assert.Throws<Exception>(() => uow.Rollback());
+                    //Assert.Equal("Try to rollback outside Unit of work.", ex.Message);
+
+                    moq.Setup(m => m.Current()).Returns(uow2);
                 }
+
+                moq.Setup(m => m.Current()).Returns(uow);
             }
         }
 
@@ -120,8 +119,9 @@ namespace Idea7.UnitOfWork.Tests
             // do something
             uow.Rollback();
 
-            var ex = Assert.Throws<Exception>(() => uow.Rollback());
-            Assert.Equal(ex.Message, "Unit of work isn't open.");
+            Assert.Throws<Exception>(() => uow.Rollback());
+            //var ex = Assert.Throws<Exception>(() => uow.Rollback());
+            //Assert.Equal("Unit of work isn't open.", ex.Message);
         }
 
         [Fact]

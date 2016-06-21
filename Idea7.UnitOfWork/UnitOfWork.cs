@@ -10,6 +10,7 @@ namespace Idea7.UnitOfWork
         private readonly IUnitOfWorkManager _manager;
         private bool _isDisposed;
         private bool _isOpen;
+        private bool _isCommited;
 
         public UnitOfWork(IUnitOfWorkManager manager)
         {
@@ -21,7 +22,9 @@ namespace Idea7.UnitOfWork
         }
 
         protected internal bool IsOpen => _isOpen;
+
         public string Id { get; }
+        public bool IsCommited => _isCommited;
 
         protected virtual void DoCommit() { }
         protected virtual Task DoCommitAsync() { return Task.FromResult(false); }
@@ -38,8 +41,12 @@ namespace Idea7.UnitOfWork
                     throw new Exception("Try to commit outside Unit of work.");
                 }
 
-                DoCommit();
+                if (_manager.CanCommit())
+                {
+                    DoCommit();
+                }
 
+                _isCommited = true;
                 _isOpen = false;
             }
             else
@@ -58,9 +65,15 @@ namespace Idea7.UnitOfWork
                     throw new Exception("Try to commit outside Unit of work.");
                 }
 
-                var task = DoCommitAsync();
+                _isCommited = true;
                 _isOpen = false;
-                return task;
+
+                if (_manager.CanCommit())
+                {
+                    return DoCommitAsync();
+                }
+
+                return Task.FromResult(false);
             }
 
             throw new Exception("Unit of work isn't open.");
