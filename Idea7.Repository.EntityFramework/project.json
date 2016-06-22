@@ -1,7 +1,7 @@
 {
   "version": "1.0.0-*",
   "description": "Idea7.Repository.EntityFramework Class Library",
-  "authors": [ "Sebastian Buöek" ],
+  "authors": [ "Sebastian Bu≈°ek" ],
   "packOptions": {
     "tags": [ "Repository", "Repositories", "Entity Framework Core" ],
     "repository": {

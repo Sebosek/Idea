@@ -1,7 +1,7 @@
 {
   "version": "1.0.0-*",
   "description": "Idea7.Query.EntityFramework Class Library",
-  "authors": [ "Sebastian Bu�ek" ],
+  "authors": [ "Sebastian Bušek" ],
   "packOptions": {
     "tags": [ "Query", "Queries", "Domain query", "Domain queries", "Query object", "Query objects", "Entity Framework Core" ],
     "repository": {
