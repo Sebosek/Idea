@@ -114,7 +114,7 @@ namespace Idea.Repository.EntityFrameworkCore.Tests
             using (new UnitOfWork.EntityFrameworkCore.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
             {
                 var repository = new HeroRepository(_fixture.UowManager);
-                aquaman = repository.Find(WonderWomanKey);
+                aquaman = repository.Find(AquamanKey);
             }
 
             Assert.Null(aquaman);
