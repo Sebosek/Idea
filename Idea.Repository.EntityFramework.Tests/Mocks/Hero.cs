@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
+using Idea.Entity;
 
-using Idea7.Entity;
-
-namespace Idea7.Repository.EntityFramework.Tests.Mocks
+namespace Idea.Repository.EntityFrameworkCore.Tests.Mocks
 {
     public class Hero : Entity<string>
     {

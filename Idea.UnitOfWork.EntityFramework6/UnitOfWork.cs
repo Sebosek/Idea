@@ -1,10 +1,9 @@
 ﻿using System.Data.Entity;
 using System.Threading.Tasks;
-using Idea7.UnitOfWork;
 
 namespace Idea.UnitOfWork.EntityFramework6
 {
-    public class UnitOfWork : Idea7.UnitOfWork.UnitOfWork
+    public class UnitOfWork : Idea.UnitOfWork.UnitOfWork
     {
         private readonly DbContext _context;
 

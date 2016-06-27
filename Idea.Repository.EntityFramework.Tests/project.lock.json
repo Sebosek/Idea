@@ -2583,6 +2583,96 @@
         "runtime": {
           "lib/dotnet/xunit.runner.utility.dotnet.dll": {}
         }
+      },
+      "Idea.Entity/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.2",
+        "dependencies": {
+          "NETStandard.Library": "1.5.0-rc2-24027"
+        },
+        "compile": {
+          "netstandard1.2/Idea.Entity.dll": {}
+        },
+        "runtime": {
+          "netstandard1.2/Idea.Entity.dll": {}
+        }
+      },
+      "Idea.Query/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.2",
+        "dependencies": {
+          "NETStandard.Library": "1.5.0-rc2-24027",
+          "System.Linq.Expressions": "4.0.11-rc2-24027"
+        },
+        "compile": {
+          "netstandard1.2/Idea.Query.dll": {}
+        },
+        "runtime": {
+          "netstandard1.2/Idea.Query.dll": {}
+        }
+      },
+      "Idea.Repository/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.2",
+        "dependencies": {
+          "Idea.Entity": "1.0.0",
+          "Idea.Query": "1.0.0",
+          "NETStandard.Library": "1.5.0-rc2-24027",
+          "System.Linq.Queryable": "4.0.1-rc2-24027"
+        },
+        "compile": {
+          "netstandard1.2/Idea.Repository.dll": {}
+        },
+        "runtime": {
+          "netstandard1.2/Idea.Repository.dll": {}
+        }
+      },
+      "Idea.Repository.EntityFrameworkCore/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.5",
+        "dependencies": {
+          "Idea.Entity": "1.0.0",
+          "Idea.Repository": "1.0.0",
+          "Idea.UnitOfWork.EntityFrameworkCore": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "1.0.0-rc2-final",
+          "NETStandard.Library": "1.5.0-rc2-24027"
+        },
+        "compile": {
+          "netstandard1.5/Idea.Repository.EntityFrameworkCore.dll": {}
+        },
+        "runtime": {
+          "netstandard1.5/Idea.Repository.EntityFrameworkCore.dll": {}
+        }
+      },
+      "Idea.UnitOfWork/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.2",
+        "dependencies": {
+          "Idea.Entity": "1.0.0",
+          "NETStandard.Library": "1.5.0-rc2-24027"
+        },
+        "compile": {
+          "netstandard1.2/Idea.UnitOfWork.dll": {}
+        },
+        "runtime": {
+          "netstandard1.2/Idea.UnitOfWork.dll": {}
+        }
+      },
+      "Idea.UnitOfWork.EntityFrameworkCore/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.5",
+        "dependencies": {
+          "Idea.UnitOfWork": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "1.0.0-rc2-final",
+          "NETStandard.Library": "1.5.0-rc2-24027",
+          "System.ComponentModel.Annotations": "4.1.0-rc2-24027"
+        },
+        "compile": {
+          "netstandard1.5/Idea.UnitOfWork.EntityFrameworkCore.dll": {}
+        },
+        "runtime": {
+          "netstandard1.5/Idea.UnitOfWork.EntityFrameworkCore.dll": {}
+        }
       }
     }
   },
@@ -7591,7 +7681,6 @@
         "lib/dnx451/xunit.runner.reporters.dotnet.dll",
         "lib/dotnet/xunit.runner.reporters.dotnet.dll",
         "lib/net45/xunit.runner.reporters.desktop.dll",
-        "xunit.runner.reporters.2.1.0.nupkg",
         "xunit.runner.reporters.2.1.0.nupkg.sha512",
         "xunit.runner.reporters.nuspec"
       ]
@@ -7615,15 +7704,45 @@
         "xunit.runner.utility.2.1.0.nupkg.sha512",
         "xunit.runner.utility.nuspec"
       ]
+    },
+    "Idea.Entity/1.0.0": {
+      "type": "project",
+      "path": "../Idea.Entity/project.json",
+      "msbuildProject": "../Idea.Entity/Idea.Entity.xproj"
+    },
+    "Idea.Query/1.0.0": {
+      "type": "project",
+      "path": "../Idea.Query/project.json",
+      "msbuildProject": "../Idea.Query/Idea.Query.xproj"
+    },
+    "Idea.Repository/1.0.0": {
+      "type": "project",
+      "path": "../Idea.Repository/project.json",
+      "msbuildProject": "../Idea.Repository/Idea.Repository.xproj"
+    },
+    "Idea.Repository.EntityFrameworkCore/1.0.0": {
+      "type": "project",
+      "path": "../Idea.Repository.EntityFrameworkCore/project.json",
+      "msbuildProject": "../Idea.Repository.EntityFrameworkCore/Idea.Repository.EntityFrameworkCore.xproj"
+    },
+    "Idea.UnitOfWork/1.0.0": {
+      "type": "project",
+      "path": "../Idea.UnitOfWork/project.json",
+      "msbuildProject": "../Idea.UnitOfWork/Idea.UnitOfWork.xproj"
+    },
+    "Idea.UnitOfWork.EntityFrameworkCore/1.0.0": {
+      "type": "project",
+      "path": "../Idea.UnitOfWork.EntityFrameworkCore/project.json",
+      "msbuildProject": "../Idea.UnitOfWork.EntityFrameworkCore/Idea.UnitOfWork.EntityFrameworkCore.xproj"
     }
   },
   "projectFileDependencyGroups": {
     "": [
-      "Idea7.Entity >= 1.0.0-*",
-      "Idea7.Repository >= 1.0.0-*",
-      "Idea7.Repository.EntityFramework >= 1.0.0-*",
-      "Idea7.UnitOfWork >= 1.0.0-*",
-      "Idea7.UnitOfWork.EntityFramework >= 1.0.0-*",
+      "Idea.Entity >= 1.0.0-*",
+      "Idea.Repository >= 1.0.0-*",
+      "Idea.Repository.EntityFrameworkCore >= 1.0.0-*",
+      "Idea.UnitOfWork >= 1.0.0-*",
+      "Idea.UnitOfWork.EntityFrameworkCore >= 1.0.0-*",
       "Microsoft.EntityFrameworkCore.InMemory >= 1.0.0-rc2-final",
       "Microsoft.NETCore.App >= 1.0.0-rc2-3002702",
       "NETStandard.Library >= 1.5.0-rc2-24027",

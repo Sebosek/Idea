@@ -1,5 +1,4 @@
 ﻿using System;
-using Idea7.UnitOfWork;
 
 namespace Idea.UnitOfWork.EntityFramework6
 {

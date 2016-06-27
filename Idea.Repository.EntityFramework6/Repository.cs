@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using Idea7.Entity;
-using Idea7.Query;
-using Idea7.Repository;
-using Idea7.UnitOfWork;
+
+using Idea.Entity;
+using Idea.Query;
+using Idea.UnitOfWork;
 
 namespace Idea.Repository.EntityFramework6
 {
@@ -73,7 +73,7 @@ namespace Idea.Repository.EntityFramework6
                 return;
             }
 
-            var uow = _manager.Current() as Idea7.UnitOfWork.EntityFramework6.UnitOfWork;
+            var uow = _manager.Current() as Idea.UnitOfWork.EntityFramework6.UnitOfWork;
             if (uow == null)
             {
                 throw new Exception("Unable to resolve Entity Framework Unit of work");
