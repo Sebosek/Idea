@@ -1,3 +1,5 @@
-#:C:\Projects\sebastian\vsts\Idea7\Idea7.UnitOfWork.Tests\Idea7.UnitOfWork.Tests.xproj
-C:\Projects\sebastian\vsts\Idea7\Idea7.UnitOfWork.Tests\Idea7.UnitOfWork.Tests.xproj|C:\Projects\sebastian\vsts\Idea7\Idea7.UnitOfWork\Idea7.UnitOfWork.xproj
-C:\Projects\sebastian\vsts\Idea7\Idea7.UnitOfWork\Idea7.UnitOfWork.xproj|C:\Projects\sebastian\vsts\Idea7\Idea7.Entity\Idea7.Entity.xproj
+#:C:\Projects\sebastian\vsts\Idea7\Idea.Query.EntityFrameworkCore\Idea.Query.EntityFrameworkCore.xproj
+C:\Projects\sebastian\vsts\Idea7\Idea.Query.EntityFrameworkCore\Idea.Query.EntityFrameworkCore.xproj|C:\Projects\sebastian\vsts\Idea7\Idea.Entity\Idea.Entity.xproj
+C:\Projects\sebastian\vsts\Idea7\Idea.Query.EntityFrameworkCore\Idea.Query.EntityFrameworkCore.xproj|C:\Projects\sebastian\vsts\Idea7\Idea.UnitOfWork.EntityFrameworkCore\Idea.UnitOfWork.EntityFrameworkCore.xproj
+C:\Projects\sebastian\vsts\Idea7\Idea.UnitOfWork.EntityFrameworkCore\Idea.UnitOfWork.EntityFrameworkCore.xproj|C:\Projects\sebastian\vsts\Idea7\Idea.UnitOfWork\Idea.UnitOfWork.xproj
+C:\Projects\sebastian\vsts\Idea7\Idea.UnitOfWork\Idea.UnitOfWork.xproj|C:\Projects\sebastian\vsts\Idea7\Idea.Entity\Idea.Entity.xproj
