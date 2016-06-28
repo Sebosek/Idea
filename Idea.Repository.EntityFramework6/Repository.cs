@@ -73,7 +73,7 @@ namespace Idea.Repository.EntityFramework6
                 return;
             }
 
-            var uow = _manager.Current() as UnitOfWork.EntityFramework6.UnitOfWork;
+            var uow = _manager.Current() as Idea.UnitOfWork.EntityFramework6.UnitOfWork;
             if (uow == null)
             {
                 throw new Exception("Unable to resolve Entity Framework Unit of work");

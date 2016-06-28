@@ -1,12 +1,10 @@
 ﻿using System;
-
-using Idea7.Repository.EntityFramework.Tests.Mocks;
-using Idea7.UnitOfWork;
-using Idea7.UnitOfWork.EntityFramework;
-
+using Idea.Repository.EntityFrameworkCore.Tests.Mocks;
+using Idea.UnitOfWork;
+using Idea.UnitOfWork.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Idea7.Repository.EntityFramework.Tests
+namespace Idea.Repository.EntityFrameworkCore.Tests
 {
     public class RepositoryFixture : IDisposable
     {

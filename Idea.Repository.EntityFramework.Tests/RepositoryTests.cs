@@ -1,10 +1,8 @@
 ﻿using System;
-
-using Idea7.Repository.EntityFramework.Tests.Mocks;
-
+using Idea.Repository.EntityFrameworkCore.Tests.Mocks;
 using Xunit;
 
-namespace Idea7.Repository.EntityFramework.Tests
+namespace Idea.Repository.EntityFrameworkCore.Tests
 {
     public class RepositoryTests : IClassFixture<RepositoryFixture>
     {
@@ -37,7 +35,7 @@ namespace Idea7.Repository.EntityFramework.Tests
         public void FindBatman_ShouldSuccess()
         {
             Hero batman;
-            using (new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+            using (new UnitOfWork.EntityFrameworkCore.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
             {
                 var repository = new HeroRepository(_fixture.UowManager);
                 batman = repository.Find(BatmanKey);
@@ -51,7 +49,7 @@ namespace Idea7.Repository.EntityFramework.Tests
         public void FindCyborg_ShouldFoundNothing()
         {
             Hero cyborg;
-            using (new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+            using (new UnitOfWork.EntityFrameworkCore.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
             {
                 var repository = new HeroRepository(_fixture.UowManager);
                 cyborg = repository.Find(FlashKey);
@@ -70,7 +68,7 @@ namespace Idea7.Repository.EntityFramework.Tests
                 RealName = "Victor Stone",
                 Origin = "Detroit"
             };
-            using (var uow = new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+            using (var uow = new UnitOfWork.EntityFrameworkCore.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
             {
                 var repository = new HeroRepository(_fixture.UowManager);
                 repository.Create(cyborg);
@@ -80,7 +78,7 @@ namespace Idea7.Repository.EntityFramework.Tests
 
             cyborg = null;
 
-            using (new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+            using (new UnitOfWork.EntityFrameworkCore.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
             {
                 var repository = new HeroRepository(_fixture.UowManager);
                 cyborg = repository.Find(CyborgKey);
@@ -101,9 +99,9 @@ namespace Idea7.Repository.EntityFramework.Tests
                 Origin = "Atlantis"
             };
 
-            using (var uow = new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+            using (var uow = new UnitOfWork.EntityFrameworkCore.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
             {
-                using (var uow2 = new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+                using (var uow2 = new UnitOfWork.EntityFrameworkCore.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
                 {
                     var repository = new HeroRepository(_fixture.UowManager);
                     repository.Create(aquaman);
@@ -113,10 +111,10 @@ namespace Idea7.Repository.EntityFramework.Tests
             }
 
             aquaman = null;
-            using (new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+            using (new UnitOfWork.EntityFrameworkCore.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
             {
                 var repository = new HeroRepository(_fixture.UowManager);
-                aquaman = repository.Find(WonderWomanKey);
+                aquaman = repository.Find(AquamanKey);
             }
 
             Assert.Null(aquaman);
@@ -133,9 +131,9 @@ namespace Idea7.Repository.EntityFramework.Tests
                 Origin = "Unknown"
             };
 
-            using (var uow = new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+            using (var uow = new UnitOfWork.EntityFrameworkCore.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
             {
-                using (var uow2 = new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+                using (var uow2 = new UnitOfWork.EntityFrameworkCore.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
                 {
                     var repository = new HeroRepository(_fixture.UowManager);
                     repository.Create(greenLantern);
@@ -145,7 +143,7 @@ namespace Idea7.Repository.EntityFramework.Tests
             }
 
             greenLantern = null;
-            using (new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+            using (new UnitOfWork.EntityFrameworkCore.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
             {
                 var repository = new HeroRepository(_fixture.UowManager);
                 greenLantern = repository.Find(WonderWomanKey);
@@ -155,7 +153,7 @@ namespace Idea7.Repository.EntityFramework.Tests
         }
 
         [Fact]
-        public void Create_CreateHeroInCommitedUow_InsideCommitedUow_ShouldNotStoreData()
+        public void Create_CreateHeroInCommitedUow_InsideCommitedUow_ShouldStoreData()
         {
             var ww = new Hero
             {
@@ -165,9 +163,9 @@ namespace Idea7.Repository.EntityFramework.Tests
                 Origin = "Themyscira"
             };
 
-            using (var uow = new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+            using (var uow = new UnitOfWork.EntityFrameworkCore.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
             {
-                using (var uow2 = new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+                using (var uow2 = new UnitOfWork.EntityFrameworkCore.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
                 {
                     var repository = new HeroRepository(_fixture.UowManager);
                     repository.Create(ww);
@@ -179,7 +177,7 @@ namespace Idea7.Repository.EntityFramework.Tests
             }
 
             ww = null;
-            using (new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+            using (new UnitOfWork.EntityFrameworkCore.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
             {
                 var repository = new HeroRepository(_fixture.UowManager);
                 ww = repository.Find(WonderWomanKey);
@@ -199,7 +197,7 @@ namespace Idea7.Repository.EntityFramework.Tests
                 RealName = "Victor Stone",
                 Origin = "Detroit"
             };
-            using (var uow = new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+            using (var uow = new UnitOfWork.EntityFrameworkCore.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
             {
                 var repository = new HeroRepository(_fixture.UowManager);
                 repository.Create(cyborg);
@@ -207,7 +205,7 @@ namespace Idea7.Repository.EntityFramework.Tests
 
             cyborg = null;
 
-            using (new UnitOfWork.EntityFramework.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
+            using (new UnitOfWork.EntityFrameworkCore.UnitOfWork(_fixture.DbContextFactory, _fixture.UowManager))
             {
                 var repository = new HeroRepository(_fixture.UowManager);
                 cyborg = repository.Find(CyborgKey);

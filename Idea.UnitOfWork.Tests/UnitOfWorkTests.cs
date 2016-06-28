@@ -1,9 +1,8 @@
 ﻿using System;
-
 using Moq;
 using Xunit;
 
-namespace Idea7.UnitOfWork.Tests
+namespace Idea.UnitOfWork.Tests
 {
     public class UnitOfWorkTests
     {

@@ -43,6 +43,10 @@
       <HintPath>..\packages\Idea.Entity.1.0.0\lib\netstandard1.2\Idea.Entity.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Idea.Query, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Idea.Query.1.0.0\lib\netstandard1.2\Idea.Query.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Idea.UnitOfWork, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Idea.UnitOfWork.1.0.0\lib\netstandard1.2\Idea.UnitOfWork.dll</HintPath>
       <Private>True</Private>

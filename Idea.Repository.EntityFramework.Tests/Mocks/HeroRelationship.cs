@@ -1,6 +1,6 @@
-﻿using Idea7.Entity;
+﻿using Idea.Entity;
 
-namespace Idea7.Repository.EntityFramework.Tests.Mocks
+namespace Idea.Repository.EntityFrameworkCore.Tests.Mocks
 {
     public class HeroRelationship : Entity<string>
     {
