@@ -1,12 +1,12 @@
 {
   "title": "Idea.Repository.EntityFrameworkCore",
-  "version": "1.0.0-*",
+  "version": "1.0.1-*",
   "description": "Idea.Repository.EntityFrameworkCore Class Library",
   "authors": [ "Sebastian Bušek" ],
   "packOptions": {
     "tags": [ "Repository", "Repositories", "Entity Framework Core" ],
     "repository": {
-      "url": "https://github.com/Sebosek/Idea7",
+      "url": "https://github.com/Sebosek/Idea",
       "type": "git"
     },
     "owners": [ "Sebastian Bušek" ]
@@ -20,10 +20,10 @@
   },
 
   "dependencies": {
-    "NETStandard.Library": "1.5.0-rc2-24027",
-    "Microsoft.EntityFrameworkCore": "1.0.0-rc2-final",
-    "Idea.UnitOfWork.EntityFrameworkCore": "1.0.0-*",
-    "Idea.Repository": "1.0.0-*",
-    "Idea.Entity": "1.0.0-*"
+    "NETStandard.Library": "1.6.0",
+    "Microsoft.EntityFrameworkCore": "1.0.0",
+    "Idea.UnitOfWork.EntityFrameworkCore": "1.0.1-*",
+    "Idea.Repository": "1.0.1-*",
+    "Idea.Entity": "1.0.1-*"
   }
 }

@@ -1,6 +1,6 @@
-﻿using Idea7.UnitOfWork;
+﻿using Idea.UnitOfWork;
 
-namespace Idea7.Repository.EntityFramework.Tests.Mocks
+namespace Idea.Repository.EntityFrameworkCore.Tests.Mocks
 {
     public class HeroRepository : Repository<Hero, string>
     {

@@ -1,6 +1,6 @@
 ﻿{
   "version": "1.0.0-*",
-  "description": "Idea7.UnitOfWork.Tests Class Library",
+  "description": "Idea.UnitOfWork.Tests Class Library",
   "authors": [ "Sebastian Bušek" ],
   "packOptions": {
     "tags": [ "Unit of work", "UoW", "Tests", "xUnit" ],
@@ -23,7 +23,7 @@
 
   "dependencies": {
     "dotnet-test-xunit": "1.0.0-rc2-*",
-    "Idea7.UnitOfWork": "1.0.0-*",
+    "Idea.UnitOfWork": "1.0.0-*",
     "Microsoft.NETCore.App": {
       "version": "1.0.0-rc2-3002702",
       "type": "platform"

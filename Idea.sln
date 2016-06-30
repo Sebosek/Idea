@@ -17,14 +17,14 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Idea.Repository.EntityFrame
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{DC64E513-A7A2-437E-A919-C14EE05C08D5}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Idea7.Repository.EntityFramework.Tests", "Idea.Repository.EntityFramework.Tests\Idea7.Repository.EntityFramework.Tests.xproj", "{8DF1975F-8278-4FC7-AFC0-719D2A801BF6}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Idea.Repository.EntityFrameworkCore.Tests", "Idea.Repository.EntityFramework.Tests\Idea.Repository.EntityFrameworkCore.Tests.xproj", "{8DF1975F-8278-4FC7-AFC0-719D2A801BF6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{52D6EC11-65D4-4F36-B9E6-55F632A87547}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Idea7.UnitOfWork.Tests", "Idea.UnitOfWork.Tests\Idea7.UnitOfWork.Tests.xproj", "{BB044356-A4EC-4687-B395-523189D86917}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Idea.UnitOfWork.Tests", "Idea.UnitOfWork.Tests\Idea.UnitOfWork.Tests.xproj", "{BB044356-A4EC-4687-B395-523189D86917}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idea.UnitOfWork.EntityFramework6", "Idea.UnitOfWork.EntityFramework6\Idea.UnitOfWork.EntityFramework6.csproj", "{E450F422-53D5-4529-B610-FA295A894D1A}"
 EndProject

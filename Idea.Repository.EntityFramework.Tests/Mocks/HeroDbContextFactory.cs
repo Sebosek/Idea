@@ -1,8 +1,7 @@
-﻿using Idea7.UnitOfWork.EntityFramework;
-
+﻿using Idea.UnitOfWork.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Idea7.Repository.EntityFramework.Tests.Mocks
+namespace Idea.Repository.EntityFrameworkCore.Tests.Mocks
 {
     public class HeroDbContextFactory : IDbContextFactory
     {

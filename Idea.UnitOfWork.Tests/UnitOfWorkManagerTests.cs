@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace Idea7.UnitOfWork.Tests
+namespace Idea.UnitOfWork.Tests
 {
     public class UnitOfWorkManagerTests
     {
