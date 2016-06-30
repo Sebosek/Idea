@@ -2527,11 +2527,11 @@
           "lib/dotnet/xunit.runner.utility.dotnet.dll": {}
         }
       },
-      "Idea.Entity/1.0.0": {
+      "Idea.Entity/1.0.1": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.2",
         "dependencies": {
-          "NETStandard.Library": "1.5.0-rc2-24027"
+          "NETStandard.Library": "1.6.0"
         },
         "compile": {
           "netstandard1.2/Idea.Entity.dll": {}
@@ -2540,12 +2540,12 @@
           "netstandard1.2/Idea.Entity.dll": {}
         }
       },
-      "Idea.UnitOfWork/1.0.0": {
+      "Idea.UnitOfWork/1.0.1": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.2",
         "dependencies": {
-          "Idea.Entity": "1.0.0",
-          "NETStandard.Library": "1.5.0-rc2-24027"
+          "Idea.Entity": "1.0.1",
+          "NETStandard.Library": "1.6.0"
         },
         "compile": {
           "netstandard1.2/Idea.UnitOfWork.dll": {}
@@ -7576,12 +7576,12 @@
         "xunit.runner.utility.nuspec"
       ]
     },
-    "Idea.Entity/1.0.0": {
+    "Idea.Entity/1.0.1": {
       "type": "project",
       "path": "../Idea.Entity/project.json",
       "msbuildProject": "../Idea.Entity/Idea.Entity.xproj"
     },
-    "Idea.UnitOfWork/1.0.0": {
+    "Idea.UnitOfWork/1.0.1": {
       "type": "project",
       "path": "../Idea.UnitOfWork/project.json",
       "msbuildProject": "../Idea.UnitOfWork/Idea.UnitOfWork.xproj"

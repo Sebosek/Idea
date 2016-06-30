@@ -1,11 +1,11 @@
 {
-  "version": "1.0.0-*",
+  "version": "1.0.1-*",
   "description": "Idea.UnitOfWork Class Library",
   "authors": [ "Sebastian Bušek" ],
   "packOptions": {
     "tags": [ "Unit of work", "UoW" ],
     "repository": {
-      "url": "https://github.com/Sebosek/Idea7",
+      "url": "https://github.com/Sebosek/Idea",
       "type": "git"
     },
     "owners": [ "Sebastian Bušek" ]
@@ -15,7 +15,7 @@
     "netstandard1.2": { }
   },
   "dependencies": {
-    "Idea.Entity": "1.0.0-*",
-    "NETStandard.Library": "1.5.0-rc2-24027"
+    "Idea.Entity": "1.0.1-*",
+    "NETStandard.Library": "1.6.0"
   }
 }

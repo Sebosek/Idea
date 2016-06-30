@@ -1,12 +1,12 @@
 ﻿{
   "title": "Idea.UnitOfWork.EntityFrameworkCore",
-  "version": "1.0.0-*",
+  "version": "1.0.1-*",
   "description": "Idea.UnitOfWork.EntityFrameworkCore Class Library",
   "authors": [ "Sebastian Bušek" ],
   "packOptions": {
     "tags": [ "Unit of work", "UoW", "Entity Framework Core" ],
     "repository": {
-      "url": "https://github.com/Sebosek/Idea7",
+      "url": "https://github.com/Sebosek/Idea",
       "type": "git"
     },
     "owners": [ "Sebastian Bušek" ]
@@ -16,7 +16,7 @@
     "netstandard1.5": {
       "imports": [ "portable-net451+win8" ],
       "dependencies": {
-        "System.ComponentModel.Annotations": "4.1.0-rc2-24027"
+        "System.ComponentModel.Annotations": "4.1.0"
       }
     },
     "net451": {
@@ -26,8 +26,8 @@
     }
   },
   "dependencies": {
-    "NETStandard.Library": "1.5.0-rc2-24027",
-    "Microsoft.EntityFrameworkCore": "1.0.0-rc2-final",
-    "Idea.UnitOfWork": "1.0.0-*"
+    "NETStandard.Library": "1.6.0",
+    "Microsoft.EntityFrameworkCore": "1.0.0",
+    "Idea.UnitOfWork": "1.0.1-*"
   }
 }
