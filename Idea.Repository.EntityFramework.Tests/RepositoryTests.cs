@@ -153,7 +153,7 @@ namespace Idea.Repository.EntityFrameworkCore.Tests
         }
 
         [Fact]
-        public void Create_CreateHeroInCommitedUow_InsideCommitedUow_ShouldNotStoreData()
+        public void Create_CreateHeroInCommitedUow_InsideCommitedUow_ShouldStoreData()
         {
             var ww = new Hero
             {
