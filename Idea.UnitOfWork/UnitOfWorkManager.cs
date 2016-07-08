@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Idea.UnitOfWork
 {
@@ -58,7 +59,11 @@ namespace Idea.UnitOfWork
                 throw new Exception("None Unit of Work is currently open.");
             }
 
-            _stack[_index] = null;
+            var uow = _stack[_index] as UnitOfWork;
+            if (uow != null)
+            {
+                uow.IsOpen = false;
+            }
         }
 
         public IUnitOfWork Current()
@@ -70,6 +75,66 @@ namespace Idea.UnitOfWork
             }
 
             return _stack[index];
+        }
+
+        public void CommitAll()
+        {
+            // get top
+            var top = 0;
+            for (int i = 0; i < Depth; i++)
+            {
+                if (_stack[i] == null) break;
+                top++;
+            }
+
+            // commiting
+            for (int i = top - 1; i >= 0; i--)
+            {
+                if (_stack[i].IsCommited)
+                {
+                    var uow = _stack[i] as UnitOfWork;
+                    if (uow != null)
+                    {
+                        uow.DoCommit();
+                    }
+                }
+            }
+        }
+
+        public async Task CommitAllAsync()
+        {
+            // get top
+            var top = 0;
+            for (int i = 0; i < Depth; i++)
+            {
+                if (_stack[i] == null) break;
+                top++;
+            }
+
+            // commiting
+            for (int i = top - 1; i >= 0; i--)
+            {
+                if (_stack[i].IsCommited)
+                {
+                    var uow = _stack[i] as UnitOfWork;
+                    if (uow != null)
+                    {
+                        await uow.DoCommitAsync();
+                    }
+                }
+            }
+        }
+
+        public void CleanUp()
+        {
+            if (_index > 0) return;
+
+            var i = 0;
+            while (_stack[i] != null)
+            {
+                _stack[i] = null;
+                i++;
+            }
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using System;
+using Idea.UnitOfWork;
 using Xunit;
 
-namespace Idea.UnitOfWork.Tests
+namespace Idea.Tests
 {
     public class UnitOfWorkManagerTests
     {
@@ -17,31 +18,19 @@ namespace Idea.UnitOfWork.Tests
         }
 
         [Fact]
-        public void Add_ShouldSuccess()
+        public void Add_NewUnitOfWork_ShouldSuccess()
         {
             var manager = new UnitOfWorkManager();
             var uow = CreateUnitOfWork();
 
             manager.Add(uow);
-            var current = manager.Current();
 
+            var current = manager.Current();
             Assert.Equal(uow.Id, current.Id);
         }
 
         [Fact]
-        public void Current_ShouldSuccess()
-        {
-            var manager = new UnitOfWorkManager();
-            var uow = CreateUnitOfWork();
-
-            manager.Add(uow);
-            var current = manager.Current();
-
-            Assert.Equal(uow.Id, current.Id);
-        }
-
-        [Fact]
-        public void CurrentEmptyStact_ShouldThrowException()
+        public void Current_EmptyStact_ShouldThrowException()
         {
             var manager = new UnitOfWorkManager();
 
@@ -51,23 +40,22 @@ namespace Idea.UnitOfWork.Tests
         }
 
         [Fact]
-        public void CloseNonEmptyStact_ShouldSuccess()
+        public void Close_NonEmptyStact_ShouldSuccess()
         {
             var manager = new UnitOfWorkManager();
-            var uow = CreateUnitOfWork();
-
+            var uow = new UnitOfWork.UnitOfWork(manager);
             manager.Add(uow);
 
-            var before = manager.Stack[0];
+            var before = ((UnitOfWork.UnitOfWork) manager.Stack[0]).IsOpen;
             manager.Close();
-            var after = manager.Stack[0];
+            var after = ((UnitOfWork.UnitOfWork)manager.Stack[0]).IsOpen;
 
-            Assert.NotNull(before);
-            Assert.Null(after);
+            Assert.True(before);
+            Assert.False(after);
         }
 
         [Fact]
-        public void CloseEmptyStact_ShouldThrowException()
+        public void Close_EmptyStact_ShouldThrowException()
         {
             var manager = new UnitOfWorkManager();
 

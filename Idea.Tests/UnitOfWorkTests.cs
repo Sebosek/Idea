@@ -1,8 +1,10 @@
 ﻿using System;
+using Idea.UnitOfWork;
 using Moq;
 using Xunit;
+using UnitOfWorkObject = Idea.UnitOfWork.UnitOfWork;
 
-namespace Idea.UnitOfWork.Tests
+namespace Idea.Tests
 {
     public class UnitOfWorkTests
     {
@@ -10,7 +12,7 @@ namespace Idea.UnitOfWork.Tests
         public void CreateInstance_ShouldSuccess()
         {
             var manager = CreateManager();
-            var uow = new UnitOfWork(manager);
+            var uow = new UnitOfWorkObject(manager);
 
             Assert.NotNull(uow);
             Assert.True(uow.IsOpen);
@@ -20,7 +22,7 @@ namespace Idea.UnitOfWork.Tests
         public void CreateInstanceCheckAddToManager_ShouldSuccess()
         {
             var manager = CreateManager();
-            var uow = new UnitOfWork(manager);
+            var uow = new UnitOfWorkObject(manager);
 
             Mock.Get(manager).Verify(v => v.Add(It.IsAny<IUnitOfWork>()));
         }
@@ -29,7 +31,7 @@ namespace Idea.UnitOfWork.Tests
         public void Commit_ShouldSuccess()
         {
             var moq = new Mock<IUnitOfWorkManager>();
-            var uow = new UnitOfWork(moq.Object);
+            var uow = new UnitOfWorkObject(moq.Object);
             moq.Setup(m => m.Current()).Returns(uow);
 
             uow.Commit();
@@ -43,9 +45,9 @@ namespace Idea.UnitOfWork.Tests
             var moq = new Mock<IUnitOfWorkManager>();
             moq.Setup(m => m.Add(It.IsAny<IUnitOfWork>())).Verifiable();
 
-            using (var uow = new UnitOfWork(moq.Object))
+            using (var uow = new UnitOfWorkObject(moq.Object))
             {
-                using (var uow2 = new UnitOfWork(moq.Object))
+                using (var uow2 = new UnitOfWorkObject(moq.Object))
                 {
                     moq.Setup(m => m.Current()).Returns(uow2);
 
@@ -62,22 +64,20 @@ namespace Idea.UnitOfWork.Tests
         public void CommitNotOpenedUoW_ShouldThrowException()
         {
             var moq = new Mock<IUnitOfWorkManager>();
-            var uow = new UnitOfWork(moq.Object);
+            var uow = new UnitOfWorkObject(moq.Object);
             moq.Setup(m => m.Current()).Returns(uow);
 
             // do something
             uow.Commit();
 
             Assert.Throws<Exception>(() => uow.Commit());
-            //var ex = Assert.Throws<Exception>(() => uow.Commit());
-            //Assert.Equal("Unit of work isn't open.", ex.Message);
         }
 
         [Fact]
         public void Rollback_ShouldSuccess()
         {
             var moq = new Mock<IUnitOfWorkManager>();
-            var uow = new UnitOfWork(moq.Object);
+            var uow = new UnitOfWorkObject(moq.Object);
             moq.Setup(m => m.Current()).Returns(uow);
 
             uow.Rollback();
@@ -91,15 +91,13 @@ namespace Idea.UnitOfWork.Tests
             var moq = new Mock<IUnitOfWorkManager>();
             moq.Setup(m => m.Add(It.IsAny<IUnitOfWork>())).Verifiable();
 
-            using (var uow = new UnitOfWork(moq.Object))
+            using (var uow = new UnitOfWorkObject(moq.Object))
             {
-                using (var uow2 = new UnitOfWork(moq.Object))
+                using (var uow2 = new UnitOfWorkObject(moq.Object))
                 {
                     moq.Setup(m => m.Current()).Returns(uow2);
 
                     Assert.Throws<Exception>(() => uow.Rollback());
-                    //var ex = Assert.Throws<Exception>(() => uow.Rollback());
-                    //Assert.Equal("Try to rollback outside Unit of work.", ex.Message);
 
                     moq.Setup(m => m.Current()).Returns(uow2);
                 }
@@ -112,22 +110,20 @@ namespace Idea.UnitOfWork.Tests
         public void RollbackNotOpenedUoW_ShouldThrowException()
         {
             var moq = new Mock<IUnitOfWorkManager>();
-            var uow = new UnitOfWork(moq.Object);
+            var uow = new UnitOfWorkObject(moq.Object);
             moq.Setup(m => m.Current()).Returns(uow);
 
             // do something
             uow.Rollback();
 
             Assert.Throws<Exception>(() => uow.Rollback());
-            //var ex = Assert.Throws<Exception>(() => uow.Rollback());
-            //Assert.Equal("Unit of work isn't open.", ex.Message);
         }
 
         [Fact]
         public void EqualsEqualedUow_ShouldSuccess()
         {
             var manager = CreateManager();
-            var uow = new UnitOfWork(manager);
+            var uow = new UnitOfWorkObject(manager);
             var moq = new Mock<IUnitOfWork>();
             moq.SetupGet(g => g.Id).Returns(uow.Id);
 
@@ -138,8 +134,8 @@ namespace Idea.UnitOfWork.Tests
         public void EqualsNonequleUow_ShouldReturnFalse()
         {
             var manager = CreateManager();
-            var uow = new UnitOfWork(manager);
-            var uow2 = new UnitOfWork(manager);
+            var uow = new UnitOfWorkObject(manager);
+            var uow2 = new UnitOfWorkObject(manager);
 
             Assert.False(uow.Equals(uow2));
         }

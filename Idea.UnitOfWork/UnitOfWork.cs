@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Idea.UnitOfWork
@@ -20,15 +19,19 @@ namespace Idea.UnitOfWork
             _isOpen = true;
         }
 
-        protected internal bool IsOpen => _isOpen;
+        protected internal bool IsOpen
+        {
+            get { return _isOpen; }
+            set { _isOpen = value; }
+        }
 
         public string Id { get; }
         public bool IsCommited => _isCommited;
 
-        protected virtual void DoCommit() { }
-        protected virtual Task DoCommitAsync() { return Task.FromResult(false); }
-        protected virtual void DoRollback() { }
-        protected virtual Task DoRollbackAsync() { return Task.FromResult(false); }
+        protected internal virtual void DoCommit() { }
+        protected internal virtual Task DoCommitAsync() { return Task.FromResult(false); }
+        protected internal virtual void DoRollback() { }
+        protected internal virtual Task DoRollbackAsync() { return Task.FromResult(false); }
 
         public void Commit()
         {
@@ -40,13 +43,13 @@ namespace Idea.UnitOfWork
                     throw new Exception("Try to commit outside Unit of work.");
                 }
 
-                if (_manager.CanCommit())
-                {
-                    DoCommit();
-                }
-
                 _isCommited = true;
                 _isOpen = false;
+
+                if (_manager.CanCommit())
+                {
+                    _manager.CommitAll();
+                }
             }
             else
             {
@@ -69,7 +72,7 @@ namespace Idea.UnitOfWork
 
                 if (_manager.CanCommit())
                 {
-                    return DoCommitAsync();
+                    return _manager.CommitAllAsync();
                 }
 
                 return Task.FromResult(false);
@@ -126,6 +129,7 @@ namespace Idea.UnitOfWork
             }
 
             _manager.Close();
+            _manager.CleanUp();
         }
 
         public override bool Equals(object obj)
