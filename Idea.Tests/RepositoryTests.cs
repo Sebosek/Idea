@@ -201,6 +201,166 @@ namespace Idea.Tests
         }
 
         [Fact]
+        public async Task UpdateAsync_TrilevelSeparateUpdates_CommitedAll_ShouldSuccess()
+        {
+            const string exupery = "Saint-Exupéry";
+            const string steinbect = "Steinbeck";
+
+            using (var uow = _factory.Create())
+            {
+                using (var uow2 = _factory.Create())
+                {
+                    using (var uow3 = _factory.Create())
+                    {
+                        var author = await _authorRepository.FindAsync(AuthorSeed.ID_STEINBECK);
+                        author.Lastname = steinbect;
+
+                        await _authorRepository.UpdateAsync(author);
+                        await uow3.CommitAsync();
+                    }
+
+                    using (var uow3 = _factory.Create())
+                    {
+                        var author = await _authorRepository.FindAsync(AuthorSeed.ID_SAINT_EXUPERI);
+                        author.Lastname = exupery;
+
+                        await _authorRepository.UpdateAsync(author);
+                        await uow3.CommitAsync();
+                    }
+
+                    await uow2.CommitAsync();
+                }
+
+                await uow.CommitAsync();
+            }
+
+            using (var uow = _factory.Create())
+            {
+                var s = await _authorRepository.FindAsync(AuthorSeed.ID_STEINBECK);
+                var e = await _authorRepository.FindAsync(AuthorSeed.ID_SAINT_EXUPERI);
+
+                Assert.Equal(steinbect, s.Lastname);
+                Assert.Equal(exupery, e.Lastname);
+            }
+        }
+
+        [Fact]
+        public async Task UpdateAsync_TrilevelSeparateUpdates_CommitedOutsidesOnly_ShouldNotSaveChanges()
+        {
+            const string clark = "Clark";
+            const string bullshit = "X";
+
+            using (var uow = _factory.Create())
+            {
+                using (var uow2 = _factory.Create())
+                {
+                    using (var uow3 = _factory.Create())
+                    {
+                        var author = await _authorRepository.FindAsync(AuthorSeed.ID_CLARK);
+                        author.Lastname = clark;
+
+                        await _authorRepository.UpdateAsync(author);
+                    }
+
+                    using (var uow3 = _factory.Create())
+                    {
+                        var author = await _authorRepository.FindAsync(AuthorSeed.ID_WILDE);
+                        author.Lastname = bullshit;
+
+                        await _authorRepository.UpdateAsync(author);
+                        await uow3.CommitAsync();
+                    }
+                }
+
+                await uow.CommitAsync();
+            }
+
+            using (var uow = _factory.Create())
+            {
+                var author = await _authorRepository.FindAsync(AuthorSeed.ID_WILDE);
+
+                Assert.NotEqual(bullshit, author.Lastname);
+            }
+        }
+
+        [Fact]
+        public async Task UpdateAsync_DoublelevelSeparateUpdates_CommitedOnlyOneUow_ShouldNotStoreData()
+        {
+            const string bullshit = "X";
+            const string adams = "Adams";
+
+            using (var uow = _factory.Create())
+            {
+                using (var uow2 = _factory.Create())
+                {
+                    var author = await _authorRepository.FindAsync(AuthorSeed.ID_WILDE);
+                    author.Lastname = bullshit;
+
+                    await _authorRepository.UpdateAsync(author);
+                }
+
+                using (var uow2 = _factory.Create())
+                {
+                    var author = await _authorRepository.FindAsync(AuthorSeed.ID_ADAMS);
+                    author.Lastname = adams;
+
+                    await _authorRepository.UpdateAsync(author);
+                    await uow2.CommitAsync();
+                }
+
+                await uow.CommitAsync();
+            }
+
+            using (var uow = _factory.Create())
+            {
+                var w = await _authorRepository.FindAsync(AuthorSeed.ID_WILDE);
+                var a = await _authorRepository.FindAsync(AuthorSeed.ID_ADAMS);
+
+                Assert.Equal(adams, a.Lastname);
+                Assert.NotEqual(bullshit, w.Lastname);
+            }
+        }
+
+        [Fact]
+        public async Task UpdateAsync_DoublelevelSeparateUpdates_CommitAllUows_ShouldSuccess()
+        {
+            const string clark = "Clark";
+            const string hamingway = "Hamingway";
+
+            using (var uow = _factory.Create())
+            {
+                using (var uow2 = _factory.Create())
+                {
+                    var author = await _authorRepository.FindAsync(AuthorSeed.ID_CLARK);
+                    author.Lastname = clark;
+
+                    await _authorRepository.UpdateAsync(author);
+                    await uow2.CommitAsync();
+                }
+
+                using (var uow2 = _factory.Create())
+                {
+                    var author = await _authorRepository.FindAsync(AuthorSeed.ID_HAMINGWAY);
+                    author.Lastname = hamingway;
+
+                    await _authorRepository.UpdateAsync(author);
+                    await uow2.CommitAsync();
+                }
+
+                await uow.CommitAsync();
+            }
+
+            using (var uow = _factory.Create())
+            {
+                var c = await _authorRepository.FindAsync(AuthorSeed.ID_CLARK);
+                var h = await _authorRepository.FindAsync(AuthorSeed.ID_HAMINGWAY);
+
+                Assert.Equal(clark, c.Lastname);
+                Assert.Equal(hamingway, h.Lastname);
+            }
+        }
+
+        [Fact]
         public async Task UpdateAsync_ValidDataNotCommited_ShouldSuccess()
         {
             using (var uow = _factory.Create())

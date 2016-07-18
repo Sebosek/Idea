@@ -24,5 +24,10 @@ namespace Idea.UnitOfWork.EntityFrameworkCore
         {
             await _context.SaveChangesAsync();
         }
+
+        public void Release()
+        {
+            _context.Dispose();
+        }
     }
 }

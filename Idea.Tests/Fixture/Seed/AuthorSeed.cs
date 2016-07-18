@@ -10,6 +10,12 @@ namespace Idea.Tests.Fixture.Seed
         public static int ID_MURAKAMI = 1002;
         public static int ID_COELHO = 1003;
         public static int ID_PALAHNIUK = 1004;
+        public static int ID_CLARK = 1005;
+        public static int ID_HAMINGWAY = 1006;
+        public static int ID_STEINBECK = 1007;
+        public static int ID_SAINT_EXUPERI = 1008;
+        public static int ID_WILDE = 1009;
+        public static int ID_ADAMS = 1010;
         public static int NEW_ID_MITCHELL = 1100;
         public static int NEW_ID_KING = 1101;
         public static int NEW_ID_TSUTSUI = 1102;
@@ -86,6 +92,48 @@ namespace Idea.Tests.Fixture.Seed
             Id = NEW_ID_KAHNEMAN,
             Firstname = "Daniel",
             Lastname = "Kahneman"
+        };
+
+        public static Author CLARK = new Author
+        {
+            Id = ID_CLARK,
+            Firstname = "Arthur",
+            Lastname = "C"
+        };
+
+        public static Author HAMINGWAY = new Author
+        {
+            Id = ID_HAMINGWAY,
+            Firstname = "Ernest",
+            Lastname = "H"
+        };
+
+        public static Author STEINBECK = new Author
+        {
+            Id = ID_STEINBECK,
+            Firstname = "John",
+            Lastname = "S"
+        };
+
+        public static Author SAINT_EXUPERI = new Author
+        {
+            Id = ID_SAINT_EXUPERI,
+            Firstname = "Antoine",
+            Lastname = "S"
+        };
+
+        public static Author WILDE = new Author
+        {
+            Id = ID_WILDE,
+            Firstname = "Oscar",
+            Lastname = "Wilde"
+        };
+
+        public static Author ADAMS = new Author
+        {
+            Id = ID_ADAMS,
+            Firstname = "Douglas",
+            Lastname = "A"
         };
     }
 }

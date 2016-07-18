@@ -22,7 +22,7 @@ namespace Idea.Tests.Fixture
             var options = new DbContextOptionsBuilder();
             options.UseInMemoryDatabase();
 
-            _manager = new UnitOfWorkManager();
+            _manager = new UnitOfWorkManager(new UnitOfWork.EntityFrameworkCore.UnitOfWorkGenerationFactory());
             _context = new TestDbContext(options.Options);
             _factory = new Factory.DbContextFactory(options.Options);
 
@@ -38,7 +38,13 @@ namespace Idea.Tests.Fixture
                 , AuthorSeed.MURAKAMI
                 , AuthorSeed.COELHO
                 , AuthorSeed.PALAHNIUK
-                , AuthorSeed.NESBO);
+                , AuthorSeed.NESBO
+                , AuthorSeed.CLARK
+                , AuthorSeed.HAMINGWAY
+                , AuthorSeed.STEINBECK
+                , AuthorSeed.SAINT_EXUPERI
+                , AuthorSeed.WILDE
+                , AuthorSeed.ADAMS);
 
             Context.Categories.AddRange(
                   CategorySeed.NOVEL

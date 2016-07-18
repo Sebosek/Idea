@@ -11,7 +11,7 @@ namespace Idea.Tests
         [Fact]
         public void CreateInstance_ShouldSucess()
         {
-            var manager = new UnitOfWorkManager();
+            var manager = new UnitOfWorkManager(new UnitOfWorkGenerationFactory());
 
             Assert.NotNull(manager);
             Assert.IsAssignableFrom<IUnitOfWorkManager>(manager);
@@ -20,7 +20,7 @@ namespace Idea.Tests
         [Fact]
         public void Add_NewUnitOfWork_ShouldSuccess()
         {
-            var manager = new UnitOfWorkManager();
+            var manager = new UnitOfWorkManager(new UnitOfWorkGenerationFactory());
             var uow = CreateUnitOfWork();
 
             manager.Add(uow);
@@ -32,7 +32,7 @@ namespace Idea.Tests
         [Fact]
         public void Current_EmptyStact_ShouldThrowException()
         {
-            var manager = new UnitOfWorkManager();
+            var manager = new UnitOfWorkManager(new UnitOfWorkGenerationFactory());
 
             Exception ex = Assert.Throws<Exception>(() => manager.Current());
 
@@ -40,24 +40,9 @@ namespace Idea.Tests
         }
 
         [Fact]
-        public void Close_NonEmptyStact_ShouldSuccess()
-        {
-            var manager = new UnitOfWorkManager();
-            var uow = new UnitOfWork.UnitOfWork(manager);
-            manager.Add(uow);
-
-            var before = ((UnitOfWork.UnitOfWork) manager.Stack[0]).IsOpen;
-            manager.Close();
-            var after = ((UnitOfWork.UnitOfWork)manager.Stack[0]).IsOpen;
-
-            Assert.True(before);
-            Assert.False(after);
-        }
-
-        [Fact]
         public void Close_EmptyStact_ShouldThrowException()
         {
-            var manager = new UnitOfWorkManager();
+            var manager = new UnitOfWorkManager(new UnitOfWorkGenerationFactory());
 
             Exception ex = Assert.Throws<Exception>(() => manager.Close());
 

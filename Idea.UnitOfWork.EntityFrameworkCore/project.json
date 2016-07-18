@@ -1,6 +1,6 @@
 ﻿{
   "title": "Idea.UnitOfWork.EntityFrameworkCore",
-  "version": "1.0.1-*",
+  "version": "1.0.2-*",
   "description": "Idea.UnitOfWork.EntityFrameworkCore Class Library",
   "authors": [ "Sebastian Bušek" ],
   "packOptions": {
@@ -28,6 +28,6 @@
   "dependencies": {
     "NETStandard.Library": "1.6.0",
     "Microsoft.EntityFrameworkCore": "1.0.0",
-    "Idea.UnitOfWork": "1.0.1-*"
+    "Idea.UnitOfWork": "1.0.*"
   }
 }

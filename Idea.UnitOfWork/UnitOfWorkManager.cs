@@ -5,43 +5,50 @@ namespace Idea.UnitOfWork
 {
     public class UnitOfWorkManager : IUnitOfWorkManager
     {
-        private const int Depth = 32;
+        internal const int DEPTH = 32;
 
+        private readonly IUnitOfWorkGenerationFactory _factory;
         private string _id;
-        private int _index;
-        
-        private readonly IUnitOfWork[] _stack;
+        private int _generation;
 
-        protected internal IUnitOfWork[] Stack => _stack;
+        private readonly IUnitOfWorkGeneration[] _stack;
 
-        public UnitOfWorkManager()
+        public UnitOfWorkManager(IUnitOfWorkGenerationFactory factory)
         {
-            _index = 0;
-            _stack = new IUnitOfWork[Depth];
+            _factory = factory;
+            _generation = 0;
+            _stack = new IUnitOfWorkGeneration[DEPTH];
             _id = Guid.NewGuid().ToString();
         }
-        
+
         public void Add(IUnitOfWork uow)
         {
-            if (_index >= Depth)
+            if (_generation >= DEPTH)
             {
                 throw new Exception("Reached maximum Unit of work depth!");
             }
 
-            _stack[_index++] = uow;
+            var current = _generation;
+            if (_stack[current] == null)
+            {
+                _stack[current] = _factory.Create();
+            }
+
+            _stack[current].Add(uow);
+            _generation++;
         }
 
         public bool CanCommit()
         {
-            if (_index > 1)
+            if (_generation > 1)
             {
                 return false;
             }
 
-            int i = _index;
-            while (_stack[i] != null && i < Depth)
+            int i = _generation;
+            while (i < DEPTH && _stack[i] != null)
             {
-                if (!_stack[i].IsCommited)
+                if (!_stack[i].CanCommit())
                 {
                     return false;
                 }
@@ -53,35 +60,41 @@ namespace Idea.UnitOfWork
 
         public void Close()
         {
-            _index--;
-            if (_index < 0)
+            var current = _generation - 1;
+            if (current < 0)
             {
                 throw new Exception("None Unit of Work is currently open.");
             }
 
-            var uow = _stack[_index] as UnitOfWork;
-            if (uow != null)
+            _stack[current].CloseCurrent();
+            if (!_stack[current].AllClosed)
             {
-                uow.IsOpen = false;
+                return;
+            }
+
+            _generation--;
+            if (_generation < 0)
+            {
+                throw new Exception("None Unit of Work is currently open.");
             }
         }
 
         public IUnitOfWork Current()
         {
-            var index = _index - 1;
+            var index = _generation - 1;
             if (index < 0 || _stack[index] == null)
             {
                 throw new Exception("None Unit of Work is currently open.");
             }
 
-            return _stack[index];
+            return _stack[index].Current();
         }
 
         public void CommitAll()
         {
             // get top
             var top = 0;
-            for (int i = 0; i < Depth; i++)
+            for (int i = 0; i < DEPTH; i++)
             {
                 if (_stack[i] == null) break;
                 top++;
@@ -90,14 +103,7 @@ namespace Idea.UnitOfWork
             // commiting
             for (int i = top - 1; i >= 0; i--)
             {
-                if (_stack[i].IsCommited)
-                {
-                    var uow = _stack[i] as UnitOfWork;
-                    if (uow != null)
-                    {
-                        uow.DoCommit();
-                    }
-                }
+                _stack[i].Commit();
             }
         }
 
@@ -105,7 +111,7 @@ namespace Idea.UnitOfWork
         {
             // get top
             var top = 0;
-            for (int i = 0; i < Depth; i++)
+            for (int i = 0; i < DEPTH; i++)
             {
                 if (_stack[i] == null) break;
                 top++;
@@ -114,24 +120,18 @@ namespace Idea.UnitOfWork
             // commiting
             for (int i = top - 1; i >= 0; i--)
             {
-                if (_stack[i].IsCommited)
-                {
-                    var uow = _stack[i] as UnitOfWork;
-                    if (uow != null)
-                    {
-                        await uow.DoCommitAsync();
-                    }
-                }
+                await _stack[i].CommitAsync();
             }
         }
 
         public void CleanUp()
         {
-            if (_index > 0) return;
+            if (_generation > 0) return;
 
             var i = 0;
             while (_stack[i] != null)
             {
+                _stack[i].CleanUp();
                 _stack[i] = null;
                 i++;
             }
