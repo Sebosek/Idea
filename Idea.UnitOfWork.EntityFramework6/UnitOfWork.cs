@@ -20,9 +20,14 @@ namespace Idea.UnitOfWork.EntityFramework6
             _context.SaveChanges();
         }
 
-        protected override Task DoCommitAsync()
+        protected override async Task DoCommitAsync()
         {
-            return _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+        }
+
+        public void Release()
+        {
+            _context.Dispose();
         }
     }
 }

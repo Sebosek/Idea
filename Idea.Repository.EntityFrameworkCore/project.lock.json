@@ -671,7 +671,7 @@
           "netstandard1.2/Idea.UnitOfWork.dll": {}
         }
       },
-      "Idea.UnitOfWork.EntityFrameworkCore/1.0.1": {
+      "Idea.UnitOfWork.EntityFrameworkCore/1.0.2": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -1881,7 +1881,7 @@
           "netstandard1.2/Idea.UnitOfWork.dll": {}
         }
       },
-      "Idea.UnitOfWork.EntityFrameworkCore/1.0.1": {
+      "Idea.UnitOfWork.EntityFrameworkCore/1.0.2": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.5",
         "dependencies": {
@@ -4991,7 +4991,7 @@
       "path": "../Idea.UnitOfWork/project.json",
       "msbuildProject": "../Idea.UnitOfWork/Idea.UnitOfWork.xproj"
     },
-    "Idea.UnitOfWork.EntityFrameworkCore/1.0.1": {
+    "Idea.UnitOfWork.EntityFrameworkCore/1.0.2": {
       "type": "project",
       "path": "../Idea.UnitOfWork.EntityFrameworkCore/project.json",
       "msbuildProject": "../Idea.UnitOfWork.EntityFrameworkCore/Idea.UnitOfWork.EntityFrameworkCore.xproj"
@@ -4999,9 +4999,9 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Idea.Entity >= 1.0.1-*",
-      "Idea.Repository >= 1.0.1-*",
-      "Idea.UnitOfWork.EntityFrameworkCore >= 1.0.1-*",
+      "Idea.Entity >= 1.0.*",
+      "Idea.Repository >= 1.0.*",
+      "Idea.UnitOfWork.EntityFrameworkCore >= 1.0.*",
       "Microsoft.EntityFrameworkCore >= 1.0.0",
       "NETStandard.Library >= 1.6.0"
     ],

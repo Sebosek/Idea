@@ -17,42 +17,45 @@ namespace Idea.Repository.EntityFramework6
         private DbSet<TEntity> _database;
         private DbContext _context;
 
+        protected DbSet<TEntity> Database => _database;
+        protected DbContext Context => _context;
+
         public Repository(IUnitOfWorkManager manager)
         {
             _manager = manager;
         }
 
-        public virtual long Count(IQueryObject<TEntity> query)
+        public long Count(IQueryObject<TEntity> query)
         {
             ResolveUnitOfWork();
             return query.Count(_database.AsQueryable());
         }
 
-        public virtual IEnumerable<TEntity> Fetch(IQueryObject<TEntity> query)
+        public IEnumerable<TEntity> Fetch(IQueryObject<TEntity> query)
         {
             ResolveUnitOfWork();
             return query.Fetch(_database.AsQueryable());
         }
 
-        public virtual TEntity FetchOne(IQueryObject<TEntity> query)
+        public TEntity FetchOne(IQueryObject<TEntity> query)
         {
             ResolveUnitOfWork();
             return query.FetchOne(_database.AsQueryable());
         }
 
-        public virtual TEntity Find(TKey id)
+        public TEntity Find(TKey id)
         {
             ResolveUnitOfWork();
-            return _database.Find(id);
+            return _database.SingleOrDefault(s => s.Id.Equals(id));
         }
 
-        public virtual void Create(TEntity entity)
+        public void Create(TEntity entity)
         {
             ResolveUnitOfWork();
             _database.Add(entity);
         }
 
-        public virtual void Update(TEntity entity)
+        public void Update(TEntity entity)
         {
             ResolveUnitOfWork();
 
@@ -60,33 +63,16 @@ namespace Idea.Repository.EntityFramework6
             _context.Entry(entity).State = EntityState.Modified;
         }
 
-        public virtual void Delete(TEntity entity)
+        public void Delete(TEntity entity)
         {
             ResolveUnitOfWork();
             _database.Remove(entity);
         }
 
-        public void ResolveUnitOfWork()
-        {
-            if (_context != null && _database != null)
-            {
-                return;
-            }
-
-            var uow = _manager.Current() as Idea.UnitOfWork.EntityFramework6.UnitOfWork;
-            if (uow == null)
-            {
-                throw new Exception("Unable to resolve Entity Framework Unit of work");
-            }
-
-            _context = uow.DbContext;
-            _database = _context.Set<TEntity>();
-        }
-
         public Task<TEntity> FindAsync(TKey id)
         {
             ResolveUnitOfWork();
-            return _database.FindAsync(id);
+            return _database.SingleOrDefaultAsync(s => s.Id.Equals(id));
         }
 
         public Task CreateAsync(TEntity entity)
@@ -134,6 +120,18 @@ namespace Idea.Repository.EntityFramework6
         {
             ResolveUnitOfWork();
             return Task.FromResult(query.FetchOne(_database.AsQueryable()));
+        }
+
+        protected void ResolveUnitOfWork()
+        {
+            var uow = _manager.Current() as UnitOfWork.EntityFramework6.UnitOfWork;
+            if (uow == null)
+            {
+                throw new Exception("Unable to resolve Entity Framework Unit of work");
+            }
+
+            _context = uow.DbContext;
+            _database = _context.Set<TEntity>();
         }
     }
 }

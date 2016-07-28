@@ -39,20 +39,20 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Idea.Entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Idea.Entity.1.0.0\lib\netstandard1.2\Idea.Entity.dll</HintPath>
+    <Reference Include="Idea.Entity, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Idea.Entity.1.0.1\lib\netstandard1.2\Idea.Entity.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Idea.Query, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Idea.Query.1.0.0\lib\netstandard1.2\Idea.Query.dll</HintPath>
+    <Reference Include="Idea.Query, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Idea.Query.1.0.1\lib\netstandard1.2\Idea.Query.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Idea.Repository, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Idea.Repository.1.0.0\lib\netstandard1.2\Idea.Repository.dll</HintPath>
+    <Reference Include="Idea.Repository, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Idea.Repository.1.0.1\lib\netstandard1.2\Idea.Repository.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Idea.UnitOfWork, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Idea.UnitOfWork.1.0.0\lib\netstandard1.2\Idea.UnitOfWork.dll</HintPath>
+    <Reference Include="Idea.UnitOfWork, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Idea.UnitOfWork.1.0.2\lib\netstandard1.2\Idea.UnitOfWork.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Idea.Repository.EntityFramework6.1.0.2.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
