@@ -107,7 +107,10 @@ namespace Idea.UnitOfWork
             // commiting
             for (int i = top - 1; i >= 0; i--)
             {
-                _stack[i].Commit();
+                if (_stack[i].CanCommit())
+                {
+                    _stack[i].Commit();
+                }
             }
         }
 
