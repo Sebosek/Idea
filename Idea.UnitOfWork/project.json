@@ -15,7 +15,7 @@
     "netstandard1.2": { }
   },
   "dependencies": {
-    "Idea.Entity": "1.0.1-*",
+    "Idea.Entity": "1.0.*",
     "NETStandard.Library": "1.6.0"
   }
 }

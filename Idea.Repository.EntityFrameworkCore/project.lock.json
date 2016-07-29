@@ -645,8 +645,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.2",
         "dependencies": {
-          "Idea.Entity": "1.0.1",
-          "Idea.Query": "1.0.1",
+          "Idea.Entity": "1.0.0",
+          "Idea.Query": "1.0.0",
           "NETStandard.Library": "1.6.0",
           "System.Linq.Queryable": "4.0.1"
         },
@@ -661,7 +661,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.2",
         "dependencies": {
-          "Idea.Entity": "1.0.1",
+          "Idea.Entity": "1.0.0",
           "NETStandard.Library": "1.6.0"
         },
         "compile": {
@@ -1855,8 +1855,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.2",
         "dependencies": {
-          "Idea.Entity": "1.0.1",
-          "Idea.Query": "1.0.1",
+          "Idea.Entity": "1.0.0",
+          "Idea.Query": "1.0.0",
           "NETStandard.Library": "1.6.0",
           "System.Linq.Queryable": "4.0.1"
         },
@@ -1871,7 +1871,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v1.2",
         "dependencies": {
-          "Idea.Entity": "1.0.1",
+          "Idea.Entity": "1.0.0",
           "NETStandard.Library": "1.6.0"
         },
         "compile": {

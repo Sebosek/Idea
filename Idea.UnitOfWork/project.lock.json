@@ -2546,7 +2546,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Idea.Entity >= 1.0.1-*",
+      "Idea.Entity >= 1.0.*",
       "NETStandard.Library >= 1.6.0"
     ],
     ".NETStandard,Version=v1.2": []

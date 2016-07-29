@@ -47,7 +47,7 @@ if($files)
     foreach ($file in $files) {
         $filecontent = Get-Content $file.FullName -encoding UTF8 -Raw | ConvertFrom-Json
         $filecontent.version = $NewVersion
-        $filecontent | ConvertTo-Json | set-content $file.FullName -encoding UTF8
+        $filecontent | ConvertTo-Json -Depth 5 | set-content $file.FullName -encoding UTF8
         Write-Verbose "$file.FullName - version applied"
     }
 }
