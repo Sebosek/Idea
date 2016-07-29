@@ -5,9 +5,6 @@
 # ----------------------------------------------------------------
 # This script would then apply semantic version to your assemblies.
 
-# Enable -Verbose option
-[CmdletBinding()]
-
 # Make sure path to source code directory is available
 if (-not $Env:BUILD_SOURCESDIRECTORY)
 {
