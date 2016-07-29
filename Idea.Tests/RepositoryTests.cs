@@ -48,6 +48,28 @@ namespace Idea.Tests
         }
 
         [Fact]
+        public async Task CreateAsync_CreateAndRead_ShouldSuccess()
+        {
+            using (var uow = _factory.Create())
+            {
+                using (var uow2 = _factory.Create())
+                {
+                    var coelho = await _authorRepository.FindAsync(AuthorSeed.ID_COELHO);
+                }
+
+                await _authorRepository.CreateAsync(AuthorSeed.WYNDHAM);
+                await uow.CommitAsync();
+            }
+
+            using (var uow = _factory.Create())
+            {
+                var author = await _authorRepository.FindAsync(AuthorSeed.NEW_ID_WYNDHAM);
+
+                Assert.NotNull(author);
+            }
+        }
+
+        [Fact]
         public async Task CreateAsync_ValidDataCommited_ShouldSuccess()
         {
             using (var uow = _factory.Create())

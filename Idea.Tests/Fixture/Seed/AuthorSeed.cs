@@ -20,6 +20,7 @@ namespace Idea.Tests.Fixture.Seed
         public static int NEW_ID_KING = 1101;
         public static int NEW_ID_TSUTSUI = 1102;
         public static int NEW_ID_KAHNEMAN = 1103;
+        public static int NEW_ID_WYNDHAM = 1104;
         public static int REMOVE_ID_NESBO = 1200;
 
         public static Author ROWLING = new Author
@@ -134,6 +135,13 @@ namespace Idea.Tests.Fixture.Seed
             Id = ID_ADAMS,
             Firstname = "Douglas",
             Lastname = "A"
+        };
+
+        public static Author WYNDHAM = new Author
+        {
+            Id = NEW_ID_WYNDHAM,
+            Firstname = "John",
+            Lastname = "Wyndham"
         };
     }
 }

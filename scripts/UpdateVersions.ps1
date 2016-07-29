@@ -32,7 +32,7 @@ $WorkingDirectory = $Env:BUILD_SOURCESDIRECTORY
 # Get build VSO variables
 $MajorVersion = 1
 $MinorVersion = 0
-$PatchVersion = 2
+$PatchVersion = 3
 $BuildVersion = $Env:BUILD_BUILDNUMBER
 
 $NewVersion = "$MajorVersion.$MinorVersion.$PatchVersion.$BuildVersion"

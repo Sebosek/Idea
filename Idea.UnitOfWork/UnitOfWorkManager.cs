@@ -45,13 +45,17 @@ namespace Idea.UnitOfWork
                 return false;
             }
 
+            var previous = true;
+
             int i = _generation;
             while (i < DEPTH && _stack[i] != null)
             {
-                if (!_stack[i].CanCommit())
+                if (!previous)
                 {
                     return false;
                 }
+
+                previous = _stack[i].CanCommit();
                 i++;
             }
 
@@ -120,7 +124,10 @@ namespace Idea.UnitOfWork
             // commiting
             for (int i = top - 1; i >= 0; i--)
             {
-                await _stack[i].CommitAsync();
+                if (_stack[i].CanCommit())
+                {
+                    await _stack[i].CommitAsync();
+                }
             }
         }
 
