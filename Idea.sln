@@ -20,6 +20,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{52D6EC11-65D4-4F36-B9E6-55F632A87547}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		scripts\UpdateVersions.ps1 = scripts\UpdateVersions.ps1
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idea.UnitOfWork.EntityFramework6", "Idea.UnitOfWork.EntityFramework6\Idea.UnitOfWork.EntityFramework6.csproj", "{E450F422-53D5-4529-B610-FA295A894D1A}"
