@@ -3260,7 +3260,7 @@
           "netstandard1.5/Idea.Repository.EntityFrameworkCore.dll": {}
         }
       },
-      "Idea.UnitOfWork/1.0.2": {
+      "Idea.UnitOfWork/1.0.4": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.2",
         "dependencies": {
@@ -8884,7 +8884,7 @@
       "path": "../Idea.Repository.EntityFrameworkCore/project.json",
       "msbuildProject": "../Idea.Repository.EntityFrameworkCore/Idea.Repository.EntityFrameworkCore.xproj"
     },
-    "Idea.UnitOfWork/1.0.2": {
+    "Idea.UnitOfWork/1.0.4": {
       "type": "project",
       "path": "../Idea.UnitOfWork/project.json",
       "msbuildProject": "../Idea.UnitOfWork/Idea.UnitOfWork.xproj"

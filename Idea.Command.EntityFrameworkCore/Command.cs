@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 
 using Idea.Entity;
 using Microsoft.EntityFrameworkCore;
 using EFUnitOfWork = Idea.UnitOfWork.EntityFrameworkCore.UnitOfWork;
 
-namespace Idea.Query.EntityFrameworkCore
+namespace Idea.Command.EntityFrameworkCore
 {
-    public abstract class Query<TEntity, TKey>
+    public abstract class CommandQuery<TEntity, TKey>
         where TEntity : IEntity<TKey>
     {
         protected DbContext Context { get; private set; }
 
-        protected abstract IQueryable<TEntity> CreateQuery();
+        protected abstract IQueryable<TEntity> ProcessCommand();
 
-        public IReadOnlyCollection<TEntity> Execute(EFUnitOfWork uow)
+        public void Execute(EFUnitOfWork uow)
         {
             if (uow == null)
             {
@@ -24,7 +22,7 @@ namespace Idea.Query.EntityFrameworkCore
             }
 
             Context = uow.DbContext;
-            return new ReadOnlyCollection<TEntity>(CreateQuery().ToList());
+            ProcessCommand();
         }
     }
 }
