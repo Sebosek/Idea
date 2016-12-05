@@ -1,6 +1,6 @@
 ﻿{
   "title": "Idea.Entity",
-  "version": "1.0.1-*",
+  "version": "1.0.2-*",
   "description": "Idea.Entity Class Library",
   "authors": [ "Sebastian Bušek" ],
   "packOptions": {

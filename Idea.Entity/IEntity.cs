@@ -6,6 +6,6 @@ namespace Idea.Entity
     {
         TKey Id { get; }
         DateTime Created { get; }
-        DateTime? Storno { get; }
+        DateTime? Canceled { get; }
     }
 }
