@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 
 using Idea.Entity;
+using Idea.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using EFUnitOfWork = Idea.UnitOfWork.EntityFrameworkCore.UnitOfWork;
 
@@ -16,14 +17,20 @@ namespace Idea.Query.EntityFrameworkCore
 
         protected abstract IQueryable<TEntity> CreateQuery();
 
-        public IReadOnlyCollection<TEntity> Execute(EFUnitOfWork uow)
+        public IReadOnlyCollection<TEntity> Execute(IUnitOfWork uow)
         {
             if (uow == null)
             {
-                throw new Exception("Unable to resolve Entity Framework Unit of work");
+                throw new Exception("Unable to resolve Entity Framework Unit of work.");
             }
 
-            Context = uow.DbContext;
+            var input = uow as EFUnitOfWork;
+            if (input == null)
+            {
+                throw new Exception("Given Unit of work can not be used in Entity Framework Query.");
+            }
+
+            Context = input.DbContext;
             return new ReadOnlyCollection<TEntity>(CreateQuery().ToList());
         }
     }

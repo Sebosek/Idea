@@ -1,6 +1,6 @@
 {
   "title": "Idea.Query.EntityFrameworkCore",
-  "version": "1.0.1-*",
+  "version": "1.0.3-*",
   "description": "Idea.Query.EntityFrameworkCore Class Library",
   "authors": [ "Sebastian Bušek" ],
   "packOptions": {
