@@ -1,5 +1,5 @@
 {
-  "version": "1.0.4-*",
+  "version": "1.0.5-*",
   "description": "Idea.UnitOfWork Class Library",
   "authors": [ "Sebastian Bušek" ],
   "packOptions": {
@@ -16,6 +16,6 @@
   },
   "dependencies": {
     "Idea.Entity": "1.0.*",
-    "NETStandard.Library": "1.6.0"
+    "NETStandard.Library": "1.6.1"
   }
 }

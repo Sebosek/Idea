@@ -1,6 +1,6 @@
 ﻿{
   "title": "Idea.Entity",
-  "version": "1.0.2-*",
+  "version": "1.0.3-*",
   "description": "Idea.Entity Class Library",
   "authors": [ "Sebastian Bušek" ],
   "packOptions": {
@@ -13,7 +13,7 @@
   },
 
   "dependencies": {
-    "NETStandard.Library": "1.6.0"
+    "NETStandard.Library": "1.6.1"
   },
 
   "frameworks": {

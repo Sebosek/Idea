@@ -3,26 +3,26 @@
 
   "dependencies": {
     "Microsoft.NETCore.App": {
-      "version": "1.0.0",
+      "version": "1.1.0",
       "type": "platform"
     },
-    "NETStandard.Library": "1.6.0",
+    "NETStandard.Library": "1.6.1",
     "xunit": "2.1.0",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "Moq": "4.6.25-alpha",
     "Microsoft.AspNetCore.TestHost": "1.0.0",
-    "Idea.Entity": "1.0.1-*",
-    "Idea.Repository": "1.0.1-*",
+    "Idea.Entity": "1.0.*",
+    "Idea.Repository": "1.0.*",
     "Idea.UnitOfWork": "1.0.*",
     "Idea.UnitOfWork.EntityFrameworkCore": "1.0.*",
-    "Idea.Repository.EntityFrameworkCore": "1.0.1-*",
-    "Idea.Query": "1.0.1-*",
-    "Microsoft.EntityFrameworkCore.InMemory": "1.0.0",
+    "Idea.Repository.EntityFrameworkCore": "1.0.*",
+    "Idea.Query": "1.0.*",
+    "Microsoft.EntityFrameworkCore.InMemory": "1.1.0",
     "System.Diagnostics.TraceSource": "4.0.0"
   },
 
   "frameworks": {
-    "netcoreapp1.0": {
+    "netcoreapp1.1": {
       "imports": [
         "dotnet5.6",
         "dotnet5.4",

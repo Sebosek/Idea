@@ -1,6 +1,6 @@
 {
   "title": "Idea.Repository",
-  "version": "1.0.1-*",
+  "version": "1.0.2-*",
   "description": "Idea.Repository Class Library",
   "authors": [ "Sebastian Bušek" ],
   "packOptions": {
@@ -19,7 +19,7 @@
   "dependencies": {
     "Idea.Entity": "1.0.*",
     "Idea.Query": "1.0.*",
-    "NETStandard.Library": "1.6.0",
+    "NETStandard.Library": "1.6.1",
     "System.Linq.Queryable": "4.0.1"
   }
 }
