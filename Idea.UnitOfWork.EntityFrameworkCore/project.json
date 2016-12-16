@@ -1,6 +1,6 @@
 ﻿{
   "title": "Idea.UnitOfWork.EntityFrameworkCore",
-  "version": "1.0.3-*",
+  "version": "1.0.4-*",
   "description": "Idea.UnitOfWork.EntityFrameworkCore Class Library",
   "authors": [ "Sebastian Bušek" ],
   "packOptions": {

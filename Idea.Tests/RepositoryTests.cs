@@ -1,28 +1,30 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Idea.Tests.Fixture;
 using Idea.Tests.Fixture.Seed;
 using Idea.Tests.Repository;
 using Idea.Tests.Stumb.Query;
 using Idea.UnitOfWork;
 using Idea.UnitOfWork.EntityFrameworkCore;
+
 using Xunit;
 
 namespace Idea.Tests
 {
     [Collection("Database collection")]
+    [SuppressMessage("ReSharper", "InconsistentNaming", Justification = "Unit tests")]
     public class RepositoryTests
     {
-        private readonly DbFixture _fixture;
         private readonly IAuthorRepository _authorRepository;
         private readonly IUnitOfWorkFactory _factory;
 
         public RepositoryTests(DbFixture fixture)
         {
-            _fixture = fixture;
-            _authorRepository = new AuthorRepository(_fixture.UowManager);
-            _factory = new UnitOfWorkFactory(_fixture.DbContextFactory, _fixture.UowManager);
+            _authorRepository = new AuthorRepository(fixture.UowManager);
+            _factory = new UnitOfWorkFactory<TestDbContext>(fixture.DbContextFactory, fixture.UowManager);
         }
 
         [Fact]

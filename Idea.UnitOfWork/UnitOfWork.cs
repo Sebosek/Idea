@@ -19,19 +19,15 @@ namespace Idea.UnitOfWork
             _isOpen = true;
         }
 
+        public string Id { get; }
+
+        public bool IsCommited => _isCommited;
+
         protected internal bool IsOpen
         {
             get { return _isOpen; }
             set { _isOpen = value; }
         }
-
-        public string Id { get; }
-        public bool IsCommited => _isCommited;
-
-        protected internal virtual void DoCommit() { }
-        protected internal virtual Task DoCommitAsync() { return Task.FromResult(false); }
-        protected internal virtual void DoRollback() { }
-        protected internal virtual Task DoRollbackAsync() { return Task.FromResult(false); }
 
         public void Commit()
         {
@@ -142,5 +138,13 @@ namespace Idea.UnitOfWork
         {
             return Id.GetHashCode();
         }
+
+        protected internal virtual void DoCommit() { }
+
+        protected internal virtual Task DoCommitAsync() { return Task.FromResult(false); }
+
+        protected internal virtual void DoRollback() { }
+
+        protected internal virtual Task DoRollbackAsync() { return Task.FromResult(false); }
     }
 }

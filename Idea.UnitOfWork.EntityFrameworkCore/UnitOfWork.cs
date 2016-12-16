@@ -1,16 +1,19 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Idea.UnitOfWork.EntityFrameworkCore
 {
-    public class UnitOfWork : Idea.UnitOfWork.UnitOfWork
+    public class UnitOfWork<TDbContext> : Idea.UnitOfWork.UnitOfWork
+        where TDbContext : DbContext
     {
         private readonly DbContext _context;
 
-        public UnitOfWork(IDbContextFactory factory, IUnitOfWorkManager manager)
+        public UnitOfWork(IDbContextFactory<TDbContext> factory, IUnitOfWorkManager manager)
             : base(manager)
         {
-            _context = factory.Create();
+            var builder = new DbContextFactoryOptions();
+            _context = factory.Create(builder);
         }
 
         public DbContext DbContext => _context;

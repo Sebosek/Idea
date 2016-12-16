@@ -5,16 +5,17 @@ namespace Idea.UnitOfWork
 {
     public class UnitOfWorkGeneration : IUnitOfWorkGeneration
     {
-        protected static int RANGE = 32;
+        private static int RANGE = 32;
 
         private int _height;
         private int _index;
         private IUnitOfWork[] _stack;
+        
+        public bool AllClosed => _index == 0;
 
         protected int Index => _index;
-        protected IUnitOfWork[] Stack => _stack;
 
-        public bool AllClosed => _index == 0;
+        protected IUnitOfWork[] Stack => _stack;
 
         public UnitOfWorkGeneration()
         {
@@ -37,6 +38,7 @@ namespace Idea.UnitOfWork
                 {
                     return true;
                 }
+
                 i++;
             }
 
@@ -56,6 +58,7 @@ namespace Idea.UnitOfWork
                         uow.DoCommit();
                     }
                 }
+
                 i++;
             }
         }
@@ -73,6 +76,7 @@ namespace Idea.UnitOfWork
                         await uow.DoCommitAsync();
                     }
                 }
+
                 i++;
             }
         }

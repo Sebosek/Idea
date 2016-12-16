@@ -2,7 +2,7 @@
 
 namespace Idea.UnitOfWork.EntityFrameworkCore
 {
-    public interface IDbContextFactory
+    public interface __IDbContextFactory
     {
         DbContext Create();
     }

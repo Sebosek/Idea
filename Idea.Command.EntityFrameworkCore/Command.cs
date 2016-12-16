@@ -2,19 +2,21 @@
 using System.Linq;
 
 using Idea.Entity;
+using Idea.UnitOfWork.EntityFrameworkCore;
+
 using Microsoft.EntityFrameworkCore;
-using EFUnitOfWork = Idea.UnitOfWork.EntityFrameworkCore.UnitOfWork;
 
 namespace Idea.Command.EntityFrameworkCore
 {
-    public abstract class CommandQuery<TEntity, TKey>
+    public abstract class CommandQuery<TDbContext, TEntity, TKey>
         where TEntity : IEntity<TKey>
+        where TDbContext : DbContext
     {
         protected DbContext Context { get; private set; }
 
         protected abstract IQueryable<TEntity> ProcessCommand();
 
-        public void Execute(EFUnitOfWork uow)
+        public void Execute(UnitOfWork<TDbContext> uow)
         {
             if (uow == null)
             {

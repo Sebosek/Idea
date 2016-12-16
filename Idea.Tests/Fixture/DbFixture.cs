@@ -1,9 +1,11 @@
 ﻿using System;
+
 using Idea.Tests.Entity;
 using Idea.Tests.Fixture.Seed;
 using Idea.UnitOfWork;
-using Idea.UnitOfWork.EntityFrameworkCore;
+
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Idea.Tests.Fixture
 {
@@ -11,11 +13,13 @@ namespace Idea.Tests.Fixture
     {
         private TestDbContext _context;
         private IUnitOfWorkManager _manager;
-        private IDbContextFactory _factory;
+        private IDbContextFactory<TestDbContext> _factory;
 
         public TestDbContext Context => _context;
+
         public IUnitOfWorkManager UowManager => _manager;
-        public IDbContextFactory DbContextFactory => _factory;
+
+        public IDbContextFactory<TestDbContext> DbContextFactory => _factory;
 
         public DbFixture()
         {
@@ -24,7 +28,7 @@ namespace Idea.Tests.Fixture
 
             _manager = new UnitOfWorkManager(new UnitOfWork.EntityFrameworkCore.UnitOfWorkGenerationFactory());
             _context = new TestDbContext(options.Options);
-            _factory = new Factory.DbContextFactory(options.Options);
+            _factory = new Factory.DbContextFactory();
 
             SeedData();
             Context.SaveChanges();

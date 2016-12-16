@@ -1,20 +1,16 @@
-﻿using Idea.UnitOfWork.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Idea.Tests.Factory
 {
-    public class DbContextFactory : IDbContextFactory
+    public class DbContextFactory : IDbContextFactory<TestDbContext>
     {
-        private readonly DbContextOptions _options;
-
-        public DbContextFactory(DbContextOptions options)
+        public TestDbContext Create(DbContextFactoryOptions options)
         {
-            _options = options;
-        }
+            var o = new DbContextOptionsBuilder();
+            o.UseInMemoryDatabase();
 
-        public DbContext Create()
-        {
-            return new TestDbContext(_options);
+            return new TestDbContext(o.Options);
         }
     }
 }

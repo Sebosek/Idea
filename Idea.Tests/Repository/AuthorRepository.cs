@@ -4,7 +4,7 @@ using Idea.UnitOfWork;
 
 namespace Idea.Tests.Repository
 {
-    public class AuthorRepository : Repository<Author, int>, IAuthorRepository
+    public class AuthorRepository : Repository<TestDbContext, Author, int>, IAuthorRepository
     {
         public AuthorRepository(IUnitOfWorkManager manager) : base(manager)
         { }

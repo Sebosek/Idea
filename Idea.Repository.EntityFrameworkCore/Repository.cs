@@ -2,27 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Idea.Entity;
 using Idea.Query;
 using Idea.UnitOfWork;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Idea.Repository.EntityFrameworkCore
 {
-    public class Repository<TEntity, TKey> : IRepository<TEntity, TKey>
+    public class Repository<TDbContext, TEntity, TKey> : IRepository<TEntity, TKey>
         where TEntity : class, IEntity<TKey>
+        where TDbContext : DbContext
     {
         private readonly IUnitOfWorkManager _manager;
-        private DbSet<TEntity> _database;
-        private DbContext _context;
 
-        protected DbSet<TEntity> Database => _database;
-        protected DbContext Context => _context;
+        private DbSet<TEntity> _database;
+
+        private DbContext _context;
 
         public Repository(IUnitOfWorkManager manager)
         {
             _manager = manager;
         }
+
+        protected DbSet<TEntity> Database => _database;
+
+        protected DbContext Context => _context;
 
         public long Count(IQueryObject<TEntity> query)
         {
@@ -45,7 +51,7 @@ namespace Idea.Repository.EntityFrameworkCore
         public TEntity Find(TKey id)
         {
             ResolveUnitOfWork();
-            return _database.SingleOrDefault(s => s.Id.Equals(id));
+            return _database.Find(id);
         }
 
         public void Create(TEntity entity)
@@ -71,7 +77,7 @@ namespace Idea.Repository.EntityFrameworkCore
         public Task<TEntity> FindAsync(TKey id)
         {
             ResolveUnitOfWork();
-            return _database.SingleOrDefaultAsync(s => s.Id.Equals(id));
+            return _database.FindAsync(id);
         }
 
         public Task CreateAsync(TEntity entity)
@@ -123,7 +129,7 @@ namespace Idea.Repository.EntityFrameworkCore
 
         protected void ResolveUnitOfWork()
         {
-            var uow = _manager.Current() as UnitOfWork.EntityFrameworkCore.UnitOfWork;
+            var uow = _manager.Current() as UnitOfWork.EntityFrameworkCore.UnitOfWork<TDbContext>;
             if (uow == null)
             {
                 throw new Exception("Unable to resolve Entity Framework Unit of work");

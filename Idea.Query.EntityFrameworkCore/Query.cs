@@ -5,13 +5,15 @@ using System.Linq;
 
 using Idea.Entity;
 using Idea.UnitOfWork;
+using Idea.UnitOfWork.EntityFrameworkCore;
+
 using Microsoft.EntityFrameworkCore;
-using EFUnitOfWork = Idea.UnitOfWork.EntityFrameworkCore.UnitOfWork;
 
 namespace Idea.Query.EntityFrameworkCore
 {
-    public abstract class Query<TEntity, TKey>
+    public abstract class Query<TDbContext, TEntity, TKey>
         where TEntity : IEntity<TKey>
+        where TDbContext : DbContext
     {
         protected DbContext Context { get; private set; }
 
@@ -24,7 +26,7 @@ namespace Idea.Query.EntityFrameworkCore
                 throw new Exception("Unable to resolve Entity Framework Unit of work.");
             }
 
-            var input = uow as EFUnitOfWork;
+            var input = uow as UnitOfWork<TDbContext>;
             if (input == null)
             {
                 throw new Exception("Given Unit of work can not be used in Entity Framework Query.");
