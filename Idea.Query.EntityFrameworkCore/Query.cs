@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 
 using Idea.Entity;
+using Idea.Query.EntityFrameworkCore.Interfaces;
 using Idea.UnitOfWork;
 using Idea.UnitOfWork.EntityFrameworkCore;
 
@@ -11,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Idea.Query.EntityFrameworkCore
 {
-    public abstract class Query<TDbContext, TEntity, TKey>
+    public abstract class Query<TDbContext, TEntity, TKey> : IQuery<TDbContext, TEntity, TKey>
         where TEntity : IEntity<TKey>
         where TDbContext : DbContext
     {
