@@ -46,8 +46,8 @@
       <HintPath>..\..\packages\Idea.UnitOfWork.EntityFramework6.1.0.3\lib\net451\Idea.Query.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Idea.SmartQuery, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Idea.SmartQuery.1.0.0\lib\net452\Idea.SmartQuery.dll</HintPath>
+    <Reference Include="Idea.SmartQuery, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Idea.SmartQuery.1.0.1\lib\net452\Idea.SmartQuery.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Idea.UnitOfWork, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
