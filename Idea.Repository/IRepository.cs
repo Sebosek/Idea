@@ -2,7 +2,7 @@
 
 namespace Idea.Repository
 {
-    public interface IRepository<TEntity, in TKey> : IQueryExecuter<TEntity>
+    public interface IRepository<TEntity, in TKey>
     {
         TEntity Find(TKey id);
         void Create(TEntity entity);

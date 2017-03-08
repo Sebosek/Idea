@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Threading.Tasks;
 
 using Idea.Tests.Fixture;
 using Idea.Tests.Fixture.Seed;
 using Idea.Tests.Repository;
-using Idea.Tests.Stumb.Query;
 using Idea.UnitOfWork;
 using Idea.UnitOfWork.EntityFrameworkCore;
 
@@ -454,87 +452,6 @@ namespace Idea.Tests
             using (_factory.Create())
             {
                 await Assert.ThrowsAsync<ArgumentNullException>(() => _authorRepository.DeleteAsync(null));
-            }
-        }
-
-        [Fact]
-        public async Task FetchAsync_WithoutIncludes_ShouldSuccess()
-        {
-            using (_factory.Create())
-            {
-                var data = await _authorRepository.FetchAsync(new AllAuthors());
-
-                Assert.NotEmpty(data);
-            }
-        }
-
-        [Fact]
-        public async Task FetchAsync_WithIncludes_ShouldSuccess()
-        {
-            using (_factory.Create())
-            {
-                var data = await _authorRepository.FetchAsync(new AllAuthorsWithIncludes());
-
-                Assert.NotEmpty(data.SelectMany(s => s.AuthorBooks));
-            }
-        }
-
-        [Fact]
-        public async Task FetchOneAsync_WithValidFilter_ShouldSuccess()
-        {
-            using (_factory.Create())
-            {
-                var author = await _authorRepository.FetchOneAsync(new AuthorByMurakamiId());
-
-                Assert.NotNull(author);
-            }
-        }
-
-        [Fact]
-        public async Task GetData_WithInvalidFilter_ShouldSuccess()
-        {
-            using (_factory.Create())
-            {
-                var author = await _authorRepository.FetchOneAsync(new NoAuthorAtAll());
-                var data = await _authorRepository.FetchAsync(new NoAuthorAtAll());
-
-                Assert.Null(author);
-                Assert.Empty(data);
-            }
-        }
-
-        [Fact]
-        public async Task GetAsync_WithValidFilterAndIncludes_ShouldSuccess()
-        {
-            using (_factory.Create())
-            {
-                var data = await _authorRepository.FetchOneAsync(new AuthorByMurakamiIdWithIncludes());
-
-                Assert.NotNull(data);
-                Assert.Equal(2, data.AuthorBooks.Count);
-            }
-        }
-
-        [Fact]
-        public async Task GetAsync_WithValidFilterAndPaging_ShouldSuccess()
-        {
-            using (_factory.Create())
-            {
-                var data = await _authorRepository.FetchAsync(new AllAuthorsOrderedByLastnameWithPagingAndSorting());
-
-                Assert.Equal(AuthorSeed.ID_TOLKIEN, data.Last().Id);
-            }
-        }
-
-        [Fact]
-        public async Task GetAsync_WithValidFilterAndPagingAndIncludes_ShouldSuccess()
-        {
-            using (_factory.Create())
-            {
-                var data = await _authorRepository.FetchAsync(new AllAuthorsOrderedByLastnameWithPagingAndSorting());
-
-                Assert.Equal(AuthorSeed.ID_TOLKIEN, data.Last().Id);
-                Assert.NotEmpty(data.Last().AuthorBooks);
             }
         }
     }

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Idea.UnitOfWork.EntityFramework6</id>
+        <version>1.0.3</version>
+        <authors>Sebastian Bušek</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Unit of work for Entity framework 6</description>
+        <dependencies>
+            <dependency id="EntityFramework" version="6.1.3" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Release\Idea.Entity.dll" target="lib\net451\Idea.Entity.dll" />
+        <file src="bin\Release\Idea.Query.dll" target="lib\net451\Idea.Query.dll" />
+        <file src="bin\Release\Idea.UnitOfWork.dll" target="lib\net451\Idea.UnitOfWork.dll" />
+        <file src="bin\Release\Idea.UnitOfWork.EntityFramework6.dll" target="lib\net451\Idea.UnitOfWork.EntityFramework6.dll" />
+    </files>
+</package>

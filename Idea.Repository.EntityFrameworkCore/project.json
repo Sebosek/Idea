@@ -1,29 +1,28 @@
 {
-  "title": "Idea.Repository.EntityFrameworkCore",
-  "version": "1.0.3-*",
-  "description": "Idea.Repository.EntityFrameworkCore Class Library",
-  "authors": [ "Sebastian Bušek" ],
-  "packOptions": {
-    "tags": [ "Repository", "Repositories", "Entity Framework Core" ],
-    "repository": {
-      "url": "https://github.com/Sebosek/Idea",
-      "type": "git"
+    "title": "Idea.Repository.EntityFrameworkCore",
+    "version": "1.0.5-*",
+    "description": "Idea.Repository.EntityFrameworkCore Class Library",
+    "authors": [ "Sebastian Bušek" ],
+    "packOptions": {
+        "tags": [ "Repository", "Repositories", "Entity Framework Core" ],
+        "repository": {
+            "url": "https://github.com/Sebosek/Idea",
+            "type": "git"
+        },
+        "owners": [ "Sebastian Bušek" ]
     },
-    "owners": [ "Sebastian Bušek" ]
-  },
 
-  "frameworks": {
-    "netstandard1.5": {
-      "imports": [ "portable-net451+win8" ]
+    "frameworks": {
+        "netstandard1.5": {
+            "imports": [ "portable-net451+win8" ]
+        }
     },
-    "net451": { }
-  },
 
-  "dependencies": {
-    "NETStandard.Library": "1.6.1",
-    "Microsoft.EntityFrameworkCore": "1.1.0",
-    "Idea.UnitOfWork.EntityFrameworkCore": "1.0.*",
-    "Idea.Repository": "1.0.*",
-    "Idea.Entity": "1.0.*"
-  }
+    "dependencies": {
+        "NETStandard.Library": "1.6.1",
+        "Microsoft.EntityFrameworkCore": "1.1.1",
+        "Idea.UnitOfWork.EntityFrameworkCore": "1.0.*",
+        "Idea.Repository": "1.0.*",
+        "Idea.Entity": "1.0.*"
+    }
 }

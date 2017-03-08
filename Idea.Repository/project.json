@@ -1,25 +1,24 @@
 {
-  "title": "Idea.Repository",
-  "version": "1.0.2-*",
-  "description": "Idea.Repository Class Library",
-  "authors": [ "Sebastian Bušek" ],
-  "packOptions": {
-    "tags": [ "Repository", "Repositories" ],
-    "repository": {
-      "url": "https://github.com/Sebosek/Idea",
-      "type": "git"
+    "title": "Idea.Repository",
+    "version": "1.0.3-*",
+    "description": "Idea.Repository Class Library",
+    "authors": [ "Sebastian Bušek" ],
+    "packOptions": {
+        "tags": [ "Repository", "Repositories" ],
+        "repository": {
+            "url": "https://github.com/Sebosek/Idea",
+            "type": "git"
+        },
+        "owners": [ "Sebastian Bušek" ]
     },
-    "owners": [ "Sebastian Bušek" ]
-  },
 
-  "frameworks": {
-    "netstandard1.2": { }
-  },
+    "frameworks": {
+        "netstandard1.2": {}
+    },
 
-  "dependencies": {
-    "Idea.Entity": "1.0.*",
-    "Idea.Query": "1.0.*",
-    "NETStandard.Library": "1.6.1",
-    "System.Linq.Queryable": "4.0.1"
-  }
+    "dependencies": {
+        "Idea.Entity": "1.0.*",
+        "NETStandard.Library": "1.6.1",
+        "System.Linq.Queryable": "4.3.0"
+    }
 }

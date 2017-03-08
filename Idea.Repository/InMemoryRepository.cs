@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Idea.Entity;
-using Idea.Query;
 
 namespace Idea.Repository
 {
@@ -14,36 +13,6 @@ namespace Idea.Repository
         where TEntity : class, IEntity<TKey>
     {
         public abstract IList<TEntity> Data { get; }
-
-        public long Count(IQueryObject<TEntity> query)
-        {
-            return query.Count(Data.AsQueryable());
-        }
-
-        public IEnumerable<TEntity> Fetch(IQueryObject<TEntity> query)
-        {
-            return query.Fetch(Data.AsQueryable());
-        }
-
-        public TEntity FetchOne(IQueryObject<TEntity> query)
-        {
-            return query.FetchOne(Data.AsQueryable());
-        }
-
-        public Task<long> CountAsync(IQueryObject<TEntity> query)
-        {
-            return Task.FromResult(query.Count(Data.AsQueryable()));
-        }
-
-        public Task<IEnumerable<TEntity>> FetchAsync(IQueryObject<TEntity> query)
-        {
-            return Task.FromResult(query.Fetch(Data.AsQueryable()));
-        }
-
-        public Task<TEntity> FetchOneAsync(IQueryObject<TEntity> query)
-        {
-            return Task.FromResult(query.FetchOne(Data.AsQueryable()));
-        }
 
         public TEntity Find(TKey id)
         {

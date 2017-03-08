@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 using Idea.Entity;
-using Idea.Query;
 using Idea.UnitOfWork;
 
 using Microsoft.EntityFrameworkCore;
@@ -29,24 +26,6 @@ namespace Idea.Repository.EntityFrameworkCore
         protected DbSet<TEntity> Database => _database;
 
         protected DbContext Context => _context;
-
-        public long Count(IQueryObject<TEntity> query)
-        {
-            ResolveUnitOfWork();
-            return query.Count(_database.AsQueryable());
-        }
-
-        public IEnumerable<TEntity> Fetch(IQueryObject<TEntity> query)
-        {
-            ResolveUnitOfWork();
-            return query.Fetch(_database.AsQueryable());
-        }
-
-        public TEntity FetchOne(IQueryObject<TEntity> query)
-        {
-            ResolveUnitOfWork();
-            return query.FetchOne(_database.AsQueryable());
-        }
 
         public TEntity Find(TKey id)
         {
@@ -107,24 +86,6 @@ namespace Idea.Repository.EntityFrameworkCore
                 ResolveUnitOfWork();
                 _database.Remove(entity);
             });
-        }
-
-        public Task<long> CountAsync(IQueryObject<TEntity> query)
-        {
-            ResolveUnitOfWork();
-            return Task.FromResult(query.Count(_database.AsQueryable()));
-        }
-
-        public Task<IEnumerable<TEntity>> FetchAsync(IQueryObject<TEntity> query)
-        {
-            ResolveUnitOfWork();
-            return Task.FromResult(query.Fetch(_database.AsQueryable()));
-        }
-
-        public Task<TEntity> FetchOneAsync(IQueryObject<TEntity> query)
-        {
-            ResolveUnitOfWork();
-            return Task.FromResult(query.FetchOne(_database.AsQueryable()));
         }
 
         protected void ResolveUnitOfWork()
