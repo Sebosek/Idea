@@ -40,7 +40,7 @@ namespace Idea.SmartQuery.EntityFrameworkCore
         protected abstract IQueryable<TEntity> CreateQuery();
 
         protected virtual IQueryable<TMapEntity> Map<TMapEntity>()
-            where TMapEntity : Entity<TKey>
+            where TMapEntity : class, IEntity<TKey>
         {
             return Context.Set<TMapEntity>();
         }
