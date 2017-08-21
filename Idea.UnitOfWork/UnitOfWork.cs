@@ -5,9 +5,16 @@ namespace Idea.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
+        private const string NOT_OPEN_UOW = "No unit of work is currently open.";
+
+        private const string WRONG_UOW = "Try to commit outside Unit of work.";
+
         private readonly IUnitOfWorkManager _manager;
+
         private bool _isDisposed;
+
         private bool _isOpen;
+
         private bool _isCommited;
 
         public UnitOfWork(IUnitOfWorkManager manager)
@@ -25,98 +32,66 @@ namespace Idea.UnitOfWork
 
         protected internal bool IsOpen
         {
-            get { return _isOpen; }
-            set { _isOpen = value; }
+            get => _isOpen;
+            set => _isOpen = value;
         }
 
         public void Commit()
         {
-            if (IsOpen)
-            {
-                var last = _manager.Current();
-                if (!last.Equals(this))
-                {
-                    throw new Exception("Try to commit outside Unit of work.");
-                }
+            CheckOpenedUow();
+            CheckCurrentUow();
 
-                _isCommited = true;
-                _isOpen = false;
+            _isCommited = true;
+            _isOpen = false;
 
-                if (_manager.CanCommit())
-                {
-                    _manager.CommitAll();
-                }
-            }
-            else
+            if (_manager.CanCommit())
             {
-                throw new Exception("Unit of work isn't open.");
+                _manager.CommitAll();
             }
         }
 
         public Task CommitAsync()
         {
-            if (IsOpen)
+            CheckOpenedUow();
+            CheckCurrentUow();
+
+            _isCommited = true;
+            _isOpen = false;
+
+            if (_manager.CanCommit())
             {
-                var last = _manager.Current();
-                if (!last.Equals(this))
-                {
-                    throw new Exception("Try to commit outside Unit of work.");
-                }
-
-                _isCommited = true;
-                _isOpen = false;
-
-                if (_manager.CanCommit())
-                {
-                    return _manager.CommitAllAsync();
-                }
-
-                return Task.FromResult(false);
+                return _manager.CommitAllAsync();
             }
 
-            throw new Exception("Unit of work isn't open.");
+            return Task.FromResult(false);
         }
 
         public void Rollback()
         {
-            if (IsOpen)
-            {
-                var last = _manager.Current();
-                if (!last.Equals(this))
-                {
-                    throw new Exception("Try to rollback outside Unit of work.");
-                }
+            CheckOpenedUow();
+            CheckCurrentUow();
 
-                DoRollback();
-                _isOpen = false;
-            }
-            else
-            {
-                throw new Exception("Unit of work isn't open.");
-            }
+            DoRollback();
+            _isOpen = false;
         }
 
         public Task RollbackAsync()
         {
-            if (IsOpen)
-            {
-                var last = _manager.Current();
-                if (!last.Equals(this))
-                {
-                    throw new Exception("Try to rollback outside Unit of work.");
-                }
+            CheckOpenedUow();
+            CheckCurrentUow();
 
-                var task = DoRollbackAsync();
-                _isOpen = false;
-                return task;
-            }
-
-            throw new Exception("Unit of work isn't open.");
+            var task = DoRollbackAsync();
+            _isOpen = false;
+            return task;
         }
 
         public void Dispose()
         {
-            if (_isDisposed) return;
+            if (_isDisposed)
+            {
+                return;
+            }
+
             _isDisposed = true;
 
             if (IsOpen)
@@ -146,5 +121,22 @@ namespace Idea.UnitOfWork
         protected internal virtual void DoRollback() { }
 
         protected internal virtual Task DoRollbackAsync() { return Task.FromResult(false); }
+
+        private void CheckOpenedUow()
+        {
+            if (!IsOpen)
+            {
+                throw new Exception(NOT_OPEN_UOW);
+            }
+        }
+
+        private void CheckCurrentUow()
+        {
+            var last = _manager.Current();
+            if (!last.Equals(this))
+            {
+                throw new Exception(WRONG_UOW);
+            }
+        }
     }
 }

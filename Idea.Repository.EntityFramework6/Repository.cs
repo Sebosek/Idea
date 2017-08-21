@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 
 using Idea.Entity;
@@ -26,7 +25,7 @@ namespace Idea.Repository.EntityFramework6
         public TEntity Find(TKey id)
         {
             ResolveUnitOfWork();
-            return _database.SingleOrDefault(s => s.Id.Equals(id));
+            return _database.Find(id);
         }
 
         public void Create(TEntity entity)
@@ -52,7 +51,7 @@ namespace Idea.Repository.EntityFramework6
         public Task<TEntity> FindAsync(TKey id)
         {
             ResolveUnitOfWork();
-            return _database.SingleOrDefaultAsync(s => s.Id.Equals(id));
+            return _database.FindAsync(id);
         }
 
         public Task CreateAsync(TEntity entity)

@@ -1,37 +1,36 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Idea.Entity", "Idea.Entity\Idea.Entity.xproj", "{B8215BF6-922C-4E49-8545-35F6D4B5FAF6}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Idea.UnitOfWork", "Idea.UnitOfWork\Idea.UnitOfWork.xproj", "{0B3301D0-1C14-45D1-919E-F0DD856DDED9}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Idea.UnitOfWork.EntityFrameworkCore", "Idea.UnitOfWork.EntityFrameworkCore\Idea.UnitOfWork.EntityFrameworkCore.xproj", "{45FEC76C-D012-4B1E-B2DC-42E216C5C9BB}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Idea.Repository", "Idea.Repository\Idea.Repository.xproj", "{309C4CD8-3056-4F49-996B-EB9C6BB60783}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Idea.Repository.EntityFrameworkCore", "Idea.Repository.EntityFrameworkCore\Idea.Repository.EntityFrameworkCore.xproj", "{4AB775D7-AECE-489E-981D-A5ABC9710584}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{DC64E513-A7A2-437E-A919-C14EE05C08D5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{52D6EC11-65D4-4F36-B9E6-55F632A87547}"
 	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
 		scripts\UpdateVersions.ps1 = scripts\UpdateVersions.ps1
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C2B08D53-AA3A-4110-81CA-43BD0A83DB99}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Idea.Entity", "Idea.Entity\Idea.Entity.csproj", "{B8215BF6-922C-4E49-8545-35F6D4B5FAF6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Idea.UnitOfWork", "Idea.UnitOfWork\Idea.UnitOfWork.csproj", "{0B3301D0-1C14-45D1-919E-F0DD856DDED9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Idea.UnitOfWork.EntityFrameworkCore", "Idea.UnitOfWork.EntityFrameworkCore\Idea.UnitOfWork.EntityFrameworkCore.csproj", "{45FEC76C-D012-4B1E-B2DC-42E216C5C9BB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Idea.Repository", "Idea.Repository\Idea.Repository.csproj", "{309C4CD8-3056-4F49-996B-EB9C6BB60783}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Idea.Repository.EntityFrameworkCore", "Idea.Repository.EntityFrameworkCore\Idea.Repository.EntityFrameworkCore.csproj", "{4AB775D7-AECE-489E-981D-A5ABC9710584}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idea.UnitOfWork.EntityFramework6", "Idea.UnitOfWork.EntityFramework6\Idea.UnitOfWork.EntityFramework6.csproj", "{E450F422-53D5-4529-B610-FA295A894D1A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idea.Repository.EntityFramework6", "Idea.Repository.EntityFramework6\Idea.Repository.EntityFramework6.csproj", "{CFA7C43C-5F74-4537-9884-7DDAFF3F40F1}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Idea.Tests", "Idea.Tests\Idea.Tests.xproj", "{C06BF4E0-9F0D-41B7-92A8-0F820B15C557}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Idea.Tests", "Idea.Tests\Idea.Tests.csproj", "{C06BF4E0-9F0D-41B7-92A8-0F820B15C557}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C2B08D53-AA3A-4110-81CA-43BD0A83DB99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Idea.SmartQuery", "Idea.SmartQuery\Idea.SmartQuery\Idea.SmartQuery.csproj", "{FCE09DB2-87C7-49B6-92CE-629D16F17D3E}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Idea.SmartQuery", "Idea.SmartQuery\Idea.SmartQuery\Idea.SmartQuery.xproj", "{FCE09DB2-87C7-49B6-92CE-629D16F17D3E}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Idea.SmartQuery.EntityFrameworkCore", "Idea.SmartQuery.EntityFrameworkCore\Idea.SmartQuery.EntityFrameworkCore\Idea.SmartQuery.EntityFrameworkCore.xproj", "{4B615FE0-0364-4378-A5E2-543860185025}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Idea.SmartQuery.EntityFrameworkCore", "Idea.SmartQuery.EntityFrameworkCore\Idea.SmartQuery.EntityFrameworkCore\Idea.SmartQuery.EntityFrameworkCore.csproj", "{4B615FE0-0364-4378-A5E2-543860185025}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idea.SmartQuery.EntityFramework6", "Idea.SmartQuery.EntityFramework6\Idea.SmartQuery.EntityFramework6\Idea.SmartQuery.EntityFramework6.csproj", "{0C207738-1865-4680-AE59-2FAE1586844E}"
 EndProject

@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Idea.SmartQuery.EntityFrameworkCore Class Library</Description>
+    <AssemblyTitle>Idea.SmartQuery</AssemblyTitle>
+    <VersionPrefix>1.0.2</VersionPrefix>
+    <Authors>Sebastian Bušek</Authors>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <AssemblyName>Idea.SmartQuery.EntityFrameworkCore</AssemblyName>
+    <PackageId>Idea.SmartQuery.EntityFrameworkCore</PackageId>
+    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Idea.SmartQuery\Idea.SmartQuery\Idea.SmartQuery.csproj" />
+    <ProjectReference Include="..\..\Idea.UnitOfWork.EntityFrameworkCore\Idea.UnitOfWork.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -86,7 +86,7 @@ namespace Idea.UnitOfWork
             _index--;
             if (_index < 0)
             {
-                throw new Exception("None Unit of Work is currently open.");
+                throw new Exception("Current Unit of Work in under zero index.");
             }
 
             var uow = _stack[_index] as UnitOfWork;

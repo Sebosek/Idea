@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Idea.Entity Class Library</Description>
+    <AssemblyTitle>Idea.Entity</AssemblyTitle>
+    <VersionPrefix>1.0.3</VersionPrefix>
+    <Authors>Sebastian Bušek</Authors>
+    <TargetFramework>netstandard1.2</TargetFramework>
+    <AssemblyName>Idea.Entity</AssemblyName>
+    <PackageId>Idea.Entity</PackageId>
+    <PackageTags>Entity;Base entity</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Sebosek/Idea</RepositoryUrl>
+    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+  </PropertyGroup>
+
+</Project>
