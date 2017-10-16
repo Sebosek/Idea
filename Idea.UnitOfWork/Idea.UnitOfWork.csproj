@@ -2,15 +2,14 @@
 
   <PropertyGroup>
     <Description>Idea.UnitOfWork Class Library</Description>
-    <VersionPrefix>1.0.6</VersionPrefix>
+    <VersionPrefix>1.0.7</VersionPrefix>
     <Authors>Sebastian Bušek</Authors>
     <TargetFramework>netstandard1.2</TargetFramework>
     <AssemblyName>Idea.UnitOfWork</AssemblyName>
     <PackageId>Idea.UnitOfWork</PackageId>
-    <PackageTags>Unit of work;UoW</PackageTags>
+    <PackageTags>Unit of work; UoW</PackageTags>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Sebosek/Idea</RepositoryUrl>
-    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>

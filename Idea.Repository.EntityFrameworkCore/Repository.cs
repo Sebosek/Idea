@@ -61,11 +61,8 @@ namespace Idea.Repository.EntityFrameworkCore
 
         public Task CreateAsync(TEntity entity)
         {
-            return Task.Factory.StartNew(() =>
-            {
-                ResolveUnitOfWork();
-                _database.Add(entity);
-            });
+            ResolveUnitOfWork();
+            return _database.AddAsync(entity);
         }
 
         public Task UpdateAsync(TEntity entity)

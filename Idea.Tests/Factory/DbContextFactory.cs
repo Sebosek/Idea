@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace Idea.Tests.Factory
 {
-    public class DbContextFactory : IDbContextFactory<TestDbContext>
+    public class DbContextFactory : IDesignTimeDbContextFactory<TestDbContext>
     {
-        public TestDbContext Create(DbContextFactoryOptions options)
+        public TestDbContext CreateDbContext(string[] args)
         {
             var o = new DbContextOptionsBuilder();
-            o.UseInMemoryDatabase();
+            o.UseInMemoryDatabase("UnitTest");
 
             return new TestDbContext(o.Options);
         }

@@ -6,7 +6,9 @@ namespace Idea.Tests.Repository
 {
     public class AuthorRepository : Repository<TestDbContext, Author, int>, IAuthorRepository
     {
-        public AuthorRepository(IUnitOfWorkManager manager) : base(manager)
-        { }
+        public AuthorRepository(IUnitOfWorkManager manager)
+            : base(manager)
+        {
+        }
     }
 }

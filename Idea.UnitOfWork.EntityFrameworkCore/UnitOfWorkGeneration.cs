@@ -2,7 +2,7 @@
 
 namespace Idea.UnitOfWork.EntityFrameworkCore
 {
-    public class UnitOfWorkGeneration<TDbContext> : Idea.UnitOfWork.UnitOfWorkGeneration
+    public class UnitOfWorkGeneration<TDbContext> : UnitOfWorkGeneration
         where TDbContext : DbContext
     {
         protected override void Release(IUnitOfWork uow)

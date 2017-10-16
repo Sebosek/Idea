@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace Idea.UnitOfWork.EntityFrameworkCore
 {
     public class UnitOfWorkFactory<TDbContext> : IUnitOfWorkFactory
         where TDbContext : DbContext
     {
-        private readonly IDbContextFactory<TDbContext> _factory;
+        private readonly IDesignTimeDbContextFactory<TDbContext> _factory;
         private readonly IUnitOfWorkManager _manager;
 
-        public UnitOfWorkFactory(IDbContextFactory<TDbContext> factory, IUnitOfWorkManager manager)
+        public UnitOfWorkFactory(IDesignTimeDbContextFactory<TDbContext> factory, IUnitOfWorkManager manager)
         {
             _factory = factory;
             _manager = manager;

@@ -5,7 +5,7 @@ using Idea.Tests.Fixture.Seed;
 using Idea.UnitOfWork;
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace Idea.Tests.Fixture
 {
@@ -13,20 +13,20 @@ namespace Idea.Tests.Fixture
     {
         private TestDbContext _context;
         private IUnitOfWorkManager _manager;
-        private IDbContextFactory<TestDbContext> _factory;
+        private IDesignTimeDbContextFactory<TestDbContext> _factory;
 
         public TestDbContext Context => _context;
 
         public IUnitOfWorkManager UowManager => _manager;
 
-        public IDbContextFactory<TestDbContext> DbContextFactory => _factory;
+        public IDesignTimeDbContextFactory<TestDbContext> DbContextFactory => _factory;
 
         public DbFixture()
         {
             var options = new DbContextOptionsBuilder();
-            options.UseInMemoryDatabase();
+            options.UseInMemoryDatabase("UnitTest");
 
-            _manager = new UnitOfWorkManager(new UnitOfWork.EntityFrameworkCore.UnitOfWorkGenerationFactory());
+            _manager = new UnitOfWorkManager(new UnitOfWorkGenerationFactory());
             _context = new TestDbContext(options.Options);
             _factory = new Factory.DbContextFactory();
 

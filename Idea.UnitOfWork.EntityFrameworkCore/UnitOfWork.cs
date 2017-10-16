@@ -1,36 +1,26 @@
 ﻿using System.Threading.Tasks;
+
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Idea.UnitOfWork.EntityFrameworkCore
 {
-    public class UnitOfWork<TDbContext> : Idea.UnitOfWork.UnitOfWork
+    public class UnitOfWork<TDbContext> : UnitOfWork
         where TDbContext : DbContext
     {
-        private readonly DbContext _context;
-
-        public UnitOfWork(IDbContextFactory<TDbContext> factory, IUnitOfWorkManager manager)
+        public UnitOfWork(IDesignTimeDbContextFactory<TDbContext> factory, IUnitOfWorkManager manager)
             : base(manager)
         {
-            var builder = new DbContextFactoryOptions();
-            _context = factory.Create(builder);
+            DbContext = factory.CreateDbContext(new string[0]);
         }
 
-        public DbContext DbContext => _context;
+        public DbContext DbContext { get; }
 
-        protected override void DoCommit()
-        {
-            _context.SaveChanges();
-        }
+        public void Release() => DbContext.Dispose();
 
-        protected override async Task DoCommitAsync()
-        {
-            await _context.SaveChangesAsync();
-        }
+        protected override void DoCommit() => DbContext.SaveChanges();
 
-        public void Release()
-        {
-            _context.Dispose();
-        }
+        protected override async Task DoCommitAsync() => await DbContext.SaveChangesAsync();
     }
 }

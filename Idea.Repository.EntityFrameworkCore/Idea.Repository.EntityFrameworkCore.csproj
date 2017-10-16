@@ -3,16 +3,15 @@
   <PropertyGroup>
     <Description>Idea.Repository.EntityFrameworkCore Class Library</Description>
     <AssemblyTitle>Idea.Repository.EntityFrameworkCore</AssemblyTitle>
-    <VersionPrefix>1.0.5</VersionPrefix>
+    <VersionPrefix>1.0.7</VersionPrefix>
     <Authors>Sebastian Bušek</Authors>
-    <TargetFramework>netstandard1.5</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Idea.Repository.EntityFrameworkCore</AssemblyName>
     <PackageId>Idea.Repository.EntityFrameworkCore</PackageId>
-    <PackageTags>Repository;Repositories;Entity Framework Core</PackageTags>
+    <PackageTags>Repository; Repositories; Entity Framework Core</PackageTags>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Sebosek/Idea</RepositoryUrl>
-    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
-    <PackageTargetFallback>$(PackageTargetFallback);portable-net451+win8</PackageTargetFallback>
+    <NetStandardImplicitPackageVersion>2.0</NetStandardImplicitPackageVersion>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
@@ -28,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.0" />
   </ItemGroup>
 
 </Project>

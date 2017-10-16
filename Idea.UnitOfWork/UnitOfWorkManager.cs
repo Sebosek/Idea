@@ -8,17 +8,16 @@ namespace Idea.UnitOfWork
         internal const int DEPTH = 32;
 
         private readonly IUnitOfWorkGenerationFactory _factory;
-        private string _id;
-        private int _generation;
 
         private readonly IUnitOfWorkGeneration[] _stack;
+
+        private int _generation;
 
         public UnitOfWorkManager(IUnitOfWorkGenerationFactory factory)
         {
             _factory = factory;
             _generation = 0;
             _stack = new IUnitOfWorkGeneration[DEPTH];
-            _id = Guid.NewGuid().ToString();
         }
 
         public void Add(IUnitOfWork uow)
@@ -46,8 +45,8 @@ namespace Idea.UnitOfWork
             }
 
             var previous = true;
+            var i = _generation;
 
-            int i = _generation;
             while (i < DEPTH && _stack[i] != null)
             {
                 if (!previous)
@@ -98,14 +97,18 @@ namespace Idea.UnitOfWork
         {
             // get top
             var top = 0;
-            for (int i = 0; i < DEPTH; i++)
+            for (var i = 0; i < DEPTH; i++)
             {
-                if (_stack[i] == null) break;
+                if (_stack[i] == null)
+                {
+                    break;
+                }
+
                 top++;
             }
 
-            // commiting
-            for (int i = top - 1; i >= 0; i--)
+            // committing
+            for (var i = top - 1; i >= 0; i--)
             {
                 if (_stack[i].CanCommit())
                 {
@@ -118,14 +121,18 @@ namespace Idea.UnitOfWork
         {
             // get top
             var top = 0;
-            for (int i = 0; i < DEPTH; i++)
+            for (var i = 0; i < DEPTH; i++)
             {
-                if (_stack[i] == null) break;
+                if (_stack[i] == null)
+                {
+                    break;
+                }
+
                 top++;
             }
 
-            // commiting
-            for (int i = top - 1; i >= 0; i--)
+            // committing
+            for (var i = top - 1; i >= 0; i--)
             {
                 if (_stack[i].CanCommit())
                 {
@@ -136,7 +143,10 @@ namespace Idea.UnitOfWork
 
         public void CleanUp()
         {
-            if (_generation > 0) return;
+            if (_generation > 0)
+            {
+                return;
+            }
 
             var i = 0;
             while (_stack[i] != null)
