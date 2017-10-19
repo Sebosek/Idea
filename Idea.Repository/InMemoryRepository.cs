@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Idea.Entity;
@@ -35,6 +37,16 @@ namespace Idea.Repository
             Data.Remove(entity);
         }
 
+        public IReadOnlyCollection<TEntity> Get<TOrderBy>(
+            Expression<Func<TEntity, bool>> filter,
+            Expression<Func<TEntity, TOrderBy>> order,
+            int skip,
+            int take,
+            params Expression<Func<TEntity, object>>[] includes)
+        {
+            return Data.AsQueryable().Where(filter).OrderBy(order).Skip(skip).Take(take).ToList();
+        }
+
         public Task<TEntity> FindAsync(TKey id)
         {
             return Task.FromResult<TEntity>(Data.SingleOrDefault(s => s.Id.Equals(id)));
@@ -57,6 +69,12 @@ namespace Idea.Repository
         public Task DeleteAsync(TEntity entity)
         {
             return Task.Factory.StartNew(() => Data.Remove(entity));
+        }
+
+        public Task<IReadOnlyCollection<TEntity>> GetAsync<TOrderBy>(Expression<Func<TEntity, bool>> filter, Expression<Func<TEntity, TOrderBy>> order, int skip, int take, params Expression<Func<TEntity, object>>[] includes)
+        {
+            return Task.FromResult(
+                Data.AsQueryable().Where(filter).OrderBy(order).Skip(skip).Take(take) as IReadOnlyCollection<TEntity>);
         }
     }
 }

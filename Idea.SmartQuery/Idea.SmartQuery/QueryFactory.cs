@@ -13,5 +13,12 @@ namespace Idea.SmartQuery
         {
             return (TQuery)Activator.CreateInstance(typeof(TQuery), reader);
         }
+
+        public TQuery CreateQuery<TQuery, TEntity, TKey>()
+            where TQuery : class, IQuery<TEntity, TKey>
+            where TEntity : IEntity<TKey>
+        {
+            return (TQuery)Activator.CreateInstance(typeof(TQuery));
+        }
     }
 }

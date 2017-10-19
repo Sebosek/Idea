@@ -2,7 +2,7 @@
 
 namespace Idea.SmartQuery.QueryData
 {
-    internal class GetById<T> : IQueryData
+    public class GetById<T> : IQueryData
     {
         public T Id { get; }
 

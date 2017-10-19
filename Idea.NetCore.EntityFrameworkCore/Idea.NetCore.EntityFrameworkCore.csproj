@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Idea.Entity\Idea.Entity.csproj" />
+    <ProjectReference Include="..\Idea.Repository.EntityFrameworkCore\Idea.Repository.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Idea.Repository\Idea.Repository.csproj" />
+    <ProjectReference Include="..\Idea.SmartQuery.EntityFrameworkCore\Idea.SmartQuery.EntityFrameworkCore\Idea.SmartQuery.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Idea.SmartQuery\Idea.SmartQuery\Idea.SmartQuery.csproj" />
+    <ProjectReference Include="..\Idea.UnitOfWork.EntityFrameworkCore\Idea.UnitOfWork.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Idea.UnitOfWork\Idea.UnitOfWork.csproj" />
+  </ItemGroup>
+
+</Project>

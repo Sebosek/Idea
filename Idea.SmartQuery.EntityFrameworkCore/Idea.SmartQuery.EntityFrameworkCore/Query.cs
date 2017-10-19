@@ -21,14 +21,17 @@ namespace Idea.SmartQuery.EntityFrameworkCore
             Reader = reader;
         }
 
+        protected Query()
+        {
+        }
+
         protected IQueryReader<IQueryData> Reader { get; }
 
         protected DbContext Context { get; private set; }
 
         public IReadOnlyCollection<TEntity> Execute(IUnitOfWork uow)
         {
-            var input = uow as UnitOfWork<TDbContext>;
-            if (input == null)
+            if (!(uow is UnitOfWork<TDbContext> input))
             {
                 throw new ArgumentException("Given Unit of work can not be used in Entity Framework Query.");
             }

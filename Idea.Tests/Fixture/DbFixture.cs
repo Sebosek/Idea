@@ -11,15 +11,13 @@ namespace Idea.Tests.Fixture
 {
     public class DbFixture : IDisposable
     {
-        private TestDbContext _context;
+        private readonly TestDbContext _context;
+
         private IUnitOfWorkManager _manager;
-        private IDesignTimeDbContextFactory<TestDbContext> _factory;
 
         public TestDbContext Context => _context;
 
         public IUnitOfWorkManager UowManager => _manager;
-
-        public IDesignTimeDbContextFactory<TestDbContext> DbContextFactory => _factory;
 
         public DbFixture()
         {
@@ -28,7 +26,6 @@ namespace Idea.Tests.Fixture
 
             _manager = new UnitOfWorkManager(new UnitOfWorkGenerationFactory());
             _context = new TestDbContext(options.Options);
-            _factory = new Factory.DbContextFactory();
 
             SeedData();
             Context.SaveChanges();
@@ -105,7 +102,6 @@ namespace Idea.Tests.Fixture
 
         public void Dispose()
         {
-            _factory = null;
             _manager = null;
             _context.Dispose();
         }

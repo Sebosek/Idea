@@ -22,7 +22,7 @@ namespace Idea.Tests
         public RepositoryTests(DbFixture fixture)
         {
             _authorRepository = new AuthorRepository(fixture.UowManager);
-            _factory = new UnitOfWorkFactory<TestDbContext>(fixture.DbContextFactory, fixture.UowManager);
+            _factory = new UnitOfWorkFactory<TestDbContext>(fixture.Context, fixture.UowManager);
         }
 
         [Fact]

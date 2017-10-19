@@ -1,18 +1,16 @@
 ﻿using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Idea.UnitOfWork.EntityFrameworkCore
 {
     public class UnitOfWork<TDbContext> : UnitOfWork
         where TDbContext : DbContext
     {
-        public UnitOfWork(IDesignTimeDbContextFactory<TDbContext> factory, IUnitOfWorkManager manager)
+        public UnitOfWork(TDbContext context, IUnitOfWorkManager manager)
             : base(manager)
         {
-            DbContext = factory.CreateDbContext(new string[0]);
+            DbContext = context;
         }
 
         public DbContext DbContext { get; }

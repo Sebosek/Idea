@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Idea.Entity;
@@ -48,6 +51,19 @@ namespace Idea.Repository.EntityFramework6
             _database.Remove(entity);
         }
 
+        public IReadOnlyCollection<TEntity> Get<TOrderBy>(
+            Expression<Func<TEntity, bool>> filter,
+            Expression<Func<TEntity, TOrderBy>> order,
+            int skip,
+            int take,
+            params Expression<Func<TEntity, object>>[] includes)
+        {
+            ResolveUnitOfWork();
+            var query = _database.Where(filter).OrderBy(order).Skip(skip).Take(take);
+
+            return includes.Aggregate(query, (current, i) => current.Include(i)).ToList();
+        }
+
         public Task<TEntity> FindAsync(TKey id)
         {
             ResolveUnitOfWork();
@@ -81,6 +97,22 @@ namespace Idea.Repository.EntityFramework6
                 ResolveUnitOfWork();
                 _database.Remove(entity);
             });
+        }
+
+        public Task<IReadOnlyCollection<TEntity>> GetAsync<TOrderBy>(
+            Expression<Func<TEntity, bool>> filter,
+            Expression<Func<TEntity, TOrderBy>> order,
+            int skip,
+            int take,
+            params Expression<Func<TEntity, object>>[] includes)
+        {
+            return Task<IReadOnlyCollection<TEntity>>.Factory.StartNew(() =>
+                {
+                    ResolveUnitOfWork();
+                    var query = _database.Where(filter).OrderBy(order).Skip(skip).Take(take);
+
+                    return includes.Aggregate(query, (current, i) => current.Include(i)).ToList();
+                });
         }
 
         protected void ResolveUnitOfWork()
