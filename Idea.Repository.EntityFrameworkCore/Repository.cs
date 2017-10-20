@@ -110,12 +110,12 @@ namespace Idea.Repository.EntityFrameworkCore
             params Expression<Func<TEntity, object>>[] includes)
         {
             return Task<IReadOnlyCollection<TEntity>>.Factory.StartNew(() =>
-                {
-                    ResolveUnitOfWork();
-                    var query = _database.Where(filter).OrderBy(order).Skip(skip).Take(take);
-                    
-                    return includes.Aggregate(query, (current, i) => current.Include(i)).ToList();
-                });
+            {
+                ResolveUnitOfWork();
+                var query = _database.Where(filter).OrderBy(order).Skip(skip).Take(take);
+
+                return includes.Aggregate(query, (current, i) => current.Include(i)).ToList();
+            });
         }
 
         protected void ResolveUnitOfWork()

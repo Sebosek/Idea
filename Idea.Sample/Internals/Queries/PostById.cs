@@ -21,7 +21,7 @@ namespace Idea.Sample.Internals.Queries
         {
             if (Reader.Read() is GetById<Guid> data)
             {
-                return Map<Post>().Where(w => w.Id == data.Id).Include(i => i.Tags).ThenInclude(i => i.Tag);
+                return Map<Post>().Where(w => w.Id == data.Id).Include(i => i.PostTags).ThenInclude(i => i.Tag);
             }
 
             return new EnumerableQuery<Post>(new Post[0]);

@@ -9,6 +9,6 @@ namespace Idea.Sample.Internals.Entities
     {
         public string Value { get; set; }
 
-        public virtual ICollection<PostTag> Posts { get; set; }
+        public List<PostTag> PostTags { get; set; }
     }
 }

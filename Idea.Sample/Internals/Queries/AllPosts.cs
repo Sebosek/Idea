@@ -13,7 +13,7 @@ namespace Idea.Sample.Internals.Queries
     {
         protected override IQueryable<Post> CreateQuery()
         {
-            return Map<Post>().Include(i => i.Tags).ThenInclude(i => i.Tag);
+            return Map<Post>().Include(i => i.PostTags).ThenInclude(i => i.Tag);
         }
     }
 }

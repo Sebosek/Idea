@@ -11,6 +11,6 @@ namespace Idea.Sample.Internals.Entities
 
         public string Owner { get; set; }
 
-        public virtual ICollection<Post> Posts { get; set; }
+        public List<Post> Posts { get; set; }
     }
 }

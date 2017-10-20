@@ -18,7 +18,7 @@ namespace Idea.Sample.Internals.Configurations
                 configuration
                     .CreateMap<PostEntity, PostRead>()
                     .ForMember(d => d.Tags, o => o.ResolveUsing(s =>
-                        s.Tags.Select(e => e.TagId)));
+                        s.PostTags.Select(e => e.TagId)));
 
                 configuration.CreateMap<Post, PostEntity>().ReverseMap();
             };

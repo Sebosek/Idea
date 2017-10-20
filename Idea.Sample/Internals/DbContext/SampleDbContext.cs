@@ -39,8 +39,8 @@ namespace Idea.Sample.Internals.DbContext
                 {
                     k.PostId, k.TagId
                 });
-                pt.HasOne(o => o.Post).WithMany(m => m.Tags).HasForeignKey(k => k.PostId);
-                pt.HasOne(o => o.Tag).WithMany(m => m.Posts).HasForeignKey(k => k.TagId);
+                pt.HasOne(o => o.Post).WithMany(m => m.PostTags).HasForeignKey(k => k.PostId);
+                pt.HasOne(o => o.Tag).WithMany(m => m.PostTags).HasForeignKey(k => k.TagId);
             });
 
             modelBuilder.Entity<Post>(post =>

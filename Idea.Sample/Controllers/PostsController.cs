@@ -53,7 +53,7 @@ namespace Idea.Sample.Controllers
         {
             using (_uowFactory.Create())
             {
-                var data = await _postRepository.GetAllAsync(i => i.Tags);
+                var data = await _postRepository.GetAllAsync(i => i.PostTags);
                 return _mapper.Map<IEnumerable<PostRead>>(data);
             }
         }
@@ -63,7 +63,7 @@ namespace Idea.Sample.Controllers
         {
             using (_uowFactory.Create())
             {
-                var data = await _postRepository.GetAsync(w => w.Id == id, i => i.Tags);
+                var data = await _postRepository.GetAsync(w => w.Id == id, i => i.PostTags);
                 if (data.Any())
                 {
                     var entity = data.First();

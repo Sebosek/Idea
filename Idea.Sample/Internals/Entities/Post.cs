@@ -11,6 +11,6 @@ namespace Idea.Sample.Internals.Entities
 
         public string Content { get; set; }
 
-        public virtual ICollection<PostTag> Tags { get; set; }
+        public List<PostTag> PostTags { get; set; }
     }
 }
