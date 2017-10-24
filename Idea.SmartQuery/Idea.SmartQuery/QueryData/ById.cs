@@ -2,11 +2,11 @@
 
 namespace Idea.SmartQuery.QueryData
 {
-    public class GetById<T> : IQueryData
+    public class ById<T> : IQueryData
     {
         public T Id { get; }
 
-        public GetById(T id)
+        public ById(T id)
         {
             Id = id;
         }

@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using Idea.Entity;
 using Idea.UnitOfWork;
 
 namespace Idea.SmartQuery.Interfaces
 {
-    public interface IQuery<out TEntity, TKey>
+    public interface IQuery<TEntity, TKey>
         where TEntity : IEntity<TKey>
     {
-        IReadOnlyCollection<TEntity> Execute(IUnitOfWork uow);
+        Task<IReadOnlyCollection<TEntity>> ExecuteAsync(IUnitOfWork uow);
     }
 }

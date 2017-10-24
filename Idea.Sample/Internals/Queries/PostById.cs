@@ -11,20 +11,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Idea.Sample.Internals.Queries
 {
-    public class PostById : Query<SampleDbContext, Post, Guid>
+    public class PostById : Query<ById<Guid>, SampleDbContext, Post, Guid>
     {
-        public PostById(IQueryReader<GetById<Guid>> reader) : base(reader)
+        public PostById(IQueryReader<ById<Guid>> reader) : base(reader)
         {
         }
 
         protected override IQueryable<Post> CreateQuery()
         {
-            if (Reader.Read() is GetById<Guid> data)
-            {
-                return Map<Post>().Where(w => w.Id == data.Id).Include(i => i.PostTags).ThenInclude(i => i.Tag);
-            }
+            var data = Reader.Read();
 
-            return new EnumerableQuery<Post>(new Post[0]);
+            return Map<Post>().Where(w => w.Id == data.Id).Include(i => i.PostTags).ThenInclude(i => i.Tag);
         }
     }
 }

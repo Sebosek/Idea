@@ -31,45 +31,6 @@ namespace Idea.Repository.EntityFrameworkCore
 
         protected DbContext Context => _context;
 
-        public TEntity Find(TKey id)
-        {
-            ResolveUnitOfWork();
-            return _database.Find(id);
-        }
-
-        public void Create(TEntity entity)
-        {
-            ResolveUnitOfWork();
-            _database.Add(entity);
-        }
-
-        public void Update(TEntity entity)
-        {
-            ResolveUnitOfWork();
-
-            _database.Attach(entity);
-            _context.Entry(entity).State = EntityState.Modified;
-        }
-
-        public void Delete(TEntity entity)
-        {
-            ResolveUnitOfWork();
-            _database.Remove(entity);
-        }
-
-        public IReadOnlyCollection<TEntity> Get<TOrderBy>(
-            Expression<Func<TEntity, bool>> filter,
-            Expression<Func<TEntity, TOrderBy>> order,
-            int skip,
-            int take,
-            params Expression<Func<TEntity, object>>[] includes)
-        {
-            ResolveUnitOfWork();
-            var query = _database.Where(filter).OrderBy(order).Skip(skip).Take(take);
-
-            return includes.Aggregate(query, (current, i) => current.Include(i)).ToList();
-        }
-
         public Task<TEntity> FindAsync(TKey id)
         {
             ResolveUnitOfWork();
@@ -99,22 +60,6 @@ namespace Idea.Repository.EntityFrameworkCore
             {
                 ResolveUnitOfWork();
                 _database.Remove(entity);
-            });
-        }
-
-        public Task<IReadOnlyCollection<TEntity>> GetAsync<TOrderBy>(
-            Expression<Func<TEntity, bool>> filter,
-            Expression<Func<TEntity, TOrderBy>> order,
-            int skip,
-            int take,
-            params Expression<Func<TEntity, object>>[] includes)
-        {
-            return Task<IReadOnlyCollection<TEntity>>.Factory.StartNew(() =>
-            {
-                ResolveUnitOfWork();
-                var query = _database.Where(filter).OrderBy(order).Skip(skip).Take(take);
-
-                return includes.Aggregate(query, (current, i) => current.Include(i)).ToList();
             });
         }
 

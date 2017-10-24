@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 using Idea.Entity;
+using Idea.SmartQuery.EntityFrameworkCore.Extensions;
 using Idea.SmartQuery.Interfaces;
 using Idea.UnitOfWork;
-using Idea.UnitOfWork.EntityFrameworkCore;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -16,28 +15,40 @@ namespace Idea.SmartQuery.EntityFrameworkCore
         where TEntity : IEntity<TKey>
         where TDbContext : DbContext
     {
-        protected Query(IQueryReader<IQueryData> reader)
+        protected DbContext Context { get; private set; }
+
+        public async Task<IReadOnlyCollection<TEntity>> ExecuteAsync(IUnitOfWork uow)
+        {
+            Context = uow.ToEntityFrameworkUnitOfWork<TDbContext>().DbContext;
+
+            return await CreateQuery().ToListAsync();
+        }
+
+        protected abstract IQueryable<TEntity> CreateQuery();
+
+        protected virtual IQueryable<TMapEntity> Map<TMapEntity>()
+            where TMapEntity : class, IEntity<TKey> => Context.Set<TMapEntity>();
+    }
+
+    public abstract class Query<TQueryData, TDbContext, TEntity, TKey> : IQuery<TEntity, TKey>
+        where TQueryData : IQueryData
+        where TEntity : IEntity<TKey>
+        where TDbContext : DbContext
+    {
+        protected Query(IQueryReader<TQueryData> reader)
         {
             Reader = reader;
         }
 
-        protected Query()
-        {
-        }
-
-        protected IQueryReader<IQueryData> Reader { get; }
+        protected IQueryReader<TQueryData> Reader { get; }
 
         protected DbContext Context { get; private set; }
 
-        public IReadOnlyCollection<TEntity> Execute(IUnitOfWork uow)
+        public async Task<IReadOnlyCollection<TEntity>> ExecuteAsync(IUnitOfWork uow)
         {
-            if (!(uow is UnitOfWork<TDbContext> input))
-            {
-                throw new ArgumentException("Given Unit of work can not be used in Entity Framework Query.");
-            }
+            Context = uow.ToEntityFrameworkUnitOfWork<TDbContext>().DbContext;
 
-            Context = input.DbContext;
-            return new ReadOnlyCollection<TEntity>(CreateQuery().ToList());
+            return await CreateQuery().ToListAsync();
         }
 
         protected abstract IQueryable<TEntity> CreateQuery();

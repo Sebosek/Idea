@@ -6,18 +6,22 @@ using System.Threading.Tasks;
 using AutoMapper;
 
 using Idea.Repository;
-using Idea.Repository.Extensions;
+using Idea.Sample.Internals.DbContext;
+using Idea.Sample.Internals.Entities;
 using Idea.Sample.Internals.Models;
 using Idea.Sample.Internals.Queries;
 using Idea.SmartQuery;
+using Idea.SmartQuery.EntityFrameworkCore;
 using Idea.SmartQuery.Interfaces;
 using Idea.SmartQuery.QueryData;
 using Idea.UnitOfWork;
 
 using Microsoft.AspNetCore.Mvc;
 
+using Post = Idea.Sample.Internals.Models.Post;
 using PostEntity = Idea.Sample.Internals.Entities.Post;
 using TagEntity = Idea.Sample.Internals.Entities.Tag;
+using PostTagEntity = Idea.Sample.Internals.Entities.PostTag;
 
 namespace Idea.Sample.Controllers
 {
@@ -32,69 +36,71 @@ namespace Idea.Sample.Controllers
 
         private readonly IRepository<PostEntity, Guid> _postRepository;
 
-        private readonly IRepository<TagEntity, Guid> _tagRepository;
+        private readonly IRepository<PostTagEntity, Guid> _postTagRepository;
 
         public PostsController(
             IMapper mapper,
             IQueryFactory queryFactory,
             IUnitOfWorkFactory uowFactory, 
             IRepository<PostEntity, Guid> postRepository,
-            IRepository<TagEntity, Guid> tagRepository)
+            IRepository<PostTagEntity, Guid> postTagRepository)
         {
             _mapper = mapper;
             _uowFactory = uowFactory;
             _queryFactory = queryFactory;
             _postRepository = postRepository;
-            _tagRepository = tagRepository;
+            _postTagRepository = postTagRepository;
         }
         
         [HttpGet]
         public async Task<IEnumerable<PostRead>> GetAsync()
         {
-            using (_uowFactory.Create())
+            using (var uow = _uowFactory.Create())
             {
-                var data = await _postRepository.GetAllAsync(i => i.PostTags);
+                var query = new CommonQuery<SampleDbContext, PostEntity, Guid>(i => i.PostTags);
+                var data = await query.ExecuteAsync(uow);
                 return _mapper.Map<IEnumerable<PostRead>>(data);
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "PostGetAsync")]
         public async Task<IActionResult> GetAsync(Guid id)
         {
-            using (_uowFactory.Create())
+            using (var uow = _uowFactory.Create())
             {
-                var data = await _postRepository.GetAsync(w => w.Id == id, i => i.PostTags);
-                if (data.Any())
+                var query = new CommonQuery<SampleDbContext, PostEntity, Guid>(w => w.Id == id, i => i.PostTags);
+                var data = await query.ExecuteAsync(uow);
+                if (!data.Any())
                 {
-                    var entity = data.First();
-                    return new JsonResult(_mapper.Map<PostRead>(entity));
+                    return new NotFoundResult();
                 }
 
-                return new NotFoundResult();
+                var entity = data.First();
+                return new JsonResult(_mapper.Map<PostRead>(entity));
             }
         }
 
         [HttpGet("{id}/all")]
-        public Task<IActionResult> GetAllDetailsAsync(Guid id)
+        public async Task<IActionResult> GetAllDetailsAsync(Guid id)
         {
             using (var uow = _uowFactory.Create())
             {
                 var query = _queryFactory
                     .CreateQuery<PostById, PostEntity, Guid>(
-                        new QueryReader<IQueryData>(() => new GetById<Guid>(id)));
-                var data = query.Execute(uow);
+                        new QueryReader<IQueryData>(() => new ById<Guid>(id)));
+                var data = await query.ExecuteAsync(uow);
                 if (!data.Any())
                 {
-                    return Task.FromResult<IActionResult>(new NotFoundResult());
+                    return new NotFoundResult();
                 }
 
                 var entity = data.First();
-                return Task.FromResult<IActionResult>(new JsonResult(_mapper.Map<PostRead>(entity)));
+                return new JsonResult(_mapper.Map<PostRead>(entity));
             }
         }
         
         [HttpPost]
-        public async Task Post([FromBody] Post data)
+        public async Task<IActionResult> Post([FromBody] Post data)
         {
             var record = _mapper.Map<PostEntity>(data);
 
@@ -102,22 +108,38 @@ namespace Idea.Sample.Controllers
             {
                 await _postRepository.CreateAsync(record);
                 await uow.CommitAsync();
+
+                return CreatedAtRoute("PostGetAsync", new { record.Id }, new { record.Id });
             }
         }
         
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, [FromBody] Post data)
+        public async Task<IActionResult> Put(Guid id, [FromBody] Post model)
         {
             using (var uow = _uowFactory.Create())
             {
-                var tags = await _tagRepository.GetAsync(w => data.Tags.Contains(w.Id));
-                if (!tags.Select(s => s.Id).All(data.Tags.Contains))
+                var query = new CommonQuery<SampleDbContext, TagEntity, Guid>(w => model.Tags.Contains(w.Id));
+                var tags = await query.ExecuteAsync(uow);
+                if (!tags.Select(s => s.Id).All(model.Tags.Contains))
                 {
                     return new BadRequestResult();
                 }
 
-                var entity = await _postRepository.FindAsync(id);
-                _mapper.Map(data, entity);
+                var post = _queryFactory.CreateQuery<PostById, PostEntity, Guid>(
+                    new QueryReader<ById<Guid>>(() => new ById<Guid>(id)));
+
+                var posts = await post.ExecuteAsync(uow);
+                if (!posts.Any())
+                {
+                    return new NotFoundResult();
+                }
+
+                var entity = posts.First();
+                var connection = tags.Select(s => new PostTag { PostId = id, TagId = s.Id }).ToList();
+
+                _mapper.Map(model, entity);
+                entity.PostTags.ForEach(async a => await _postTagRepository.DeleteAsync(a));
+                entity.PostTags = connection;
 
                 await _postRepository.UpdateAsync(entity);
                 await uow.CommitAsync();

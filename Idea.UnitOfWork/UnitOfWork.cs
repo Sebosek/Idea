@@ -36,20 +36,6 @@ namespace Idea.UnitOfWork
             set => _isOpen = value;
         }
 
-        public void Commit()
-        {
-            CheckOpenedUow();
-            CheckCurrentUow();
-
-            _isCommited = true;
-            _isOpen = false;
-
-            if (_manager.CanCommit())
-            {
-                _manager.CommitAll();
-            }
-        }
-
         public Task CommitAsync()
         {
             CheckOpenedUow();
@@ -64,15 +50,6 @@ namespace Idea.UnitOfWork
             }
 
             return Task.FromResult(false);
-        }
-
-        public void Rollback()
-        {
-            CheckOpenedUow();
-            CheckCurrentUow();
-
-            DoRollback();
-            _isOpen = false;
         }
 
         public Task RollbackAsync()
@@ -105,8 +82,7 @@ namespace Idea.UnitOfWork
 
         public override bool Equals(object obj)
         {
-            var argument = obj as IUnitOfWork;
-            return argument != null && Id.Equals(argument.Id);
+            return obj is IUnitOfWork argument && Id.Equals(argument.Id);
         }
 
         public override int GetHashCode()
@@ -121,6 +97,15 @@ namespace Idea.UnitOfWork
         protected internal virtual void DoRollback() { }
 
         protected internal virtual Task DoRollbackAsync() { return Task.FromResult(false); }
+
+        private void Rollback()
+        {
+            CheckOpenedUow();
+            CheckCurrentUow();
+
+            DoRollback();
+            _isOpen = false;
+        }
 
         private void CheckOpenedUow()
         {

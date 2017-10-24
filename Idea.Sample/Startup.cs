@@ -4,6 +4,7 @@ using System.Linq;
 using Idea.NetCore.EntityFrameworkCore;
 using Idea.Sample.Internals.DbContext;
 using Idea.Sample.Internals.Extensions;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -33,7 +34,7 @@ namespace Idea.Sample
             var connections = ConnectionStrings(Configuration);
 
             services
-                .AddIdea<SampleDbContext>(o => o.UseNpgsql(connections["Idea"]))
+                .AddIdeaEntityFrameworkCore<SampleDbContext>(o => o.UseNpgsql(connections["idea"]))
                 .AddSample()
                 .AddMvc();
         }

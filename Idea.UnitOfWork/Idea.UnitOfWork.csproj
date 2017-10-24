@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Idea.UnitOfWork Class Library</Description>
-    <VersionPrefix>1.0.7</VersionPrefix>
+    <VersionPrefix>1.1.0</VersionPrefix>
     <Authors>Sebastian Bušek</Authors>
     <TargetFramework>netstandard1.2</TargetFramework>
     <AssemblyName>Idea.UnitOfWork</AssemblyName>

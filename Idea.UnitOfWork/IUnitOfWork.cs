@@ -6,11 +6,11 @@ namespace Idea.UnitOfWork
     public interface IUnitOfWork : IDisposable
     {
         string Id { get; }
-        bool IsCommited { get; }
 
-        void Commit();
+        bool IsCommited { get; }
+        
         Task CommitAsync();
-        void Rollback();
+        
         Task RollbackAsync();
     }
 }

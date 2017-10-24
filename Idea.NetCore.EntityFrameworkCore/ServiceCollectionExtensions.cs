@@ -11,7 +11,7 @@ namespace Idea.NetCore.EntityFrameworkCore
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddIdea<TDbContext>(this IServiceCollection services, Action<DbContextOptionsBuilder> options)
+        public static IServiceCollection AddIdeaEntityFrameworkCore<TDbContext>(this IServiceCollection services, Action<DbContextOptionsBuilder> options)
             where TDbContext : DbContext
         {
             services.AddDbContext<TDbContext>(options, ServiceLifetime.Transient);

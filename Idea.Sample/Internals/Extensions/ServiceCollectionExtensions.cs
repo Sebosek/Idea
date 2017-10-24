@@ -16,9 +16,9 @@ namespace Idea.Sample.Internals.Extensions
         {
             services.AddSingleton(AutomapperConfiguration.Configuration());
 
-            services.AddScoped<IRepository<Blog, Guid>, Repository<SampleDbContext, Blog, Guid>>();
             services.AddScoped<IRepository<Post, Guid>, Repository<SampleDbContext, Post, Guid>>();
             services.AddScoped<IRepository<Tag, Guid>, Repository<SampleDbContext, Tag, Guid>>();
+            services.AddScoped<IRepository<PostTag, Guid>, Repository<SampleDbContext, PostTag, Guid>>();
 
             return services;
         }
