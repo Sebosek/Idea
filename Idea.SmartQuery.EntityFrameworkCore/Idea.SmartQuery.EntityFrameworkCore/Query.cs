@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore;
 namespace Idea.SmartQuery.EntityFrameworkCore
 {
     public abstract class Query<TDbContext, TEntity, TKey> : IQuery<TEntity, TKey>
-        where TEntity : IEntity<TKey>
         where TDbContext : DbContext
+        where TEntity : class, IEntity<TKey>
     {
         protected DbContext Context { get; private set; }
 
@@ -26,14 +26,13 @@ namespace Idea.SmartQuery.EntityFrameworkCore
 
         protected abstract IQueryable<TEntity> CreateQuery();
 
-        protected virtual IQueryable<TMapEntity> Map<TMapEntity>()
-            where TMapEntity : class, IEntity<TKey> => Context.Set<TMapEntity>();
+        protected virtual IQueryable<TEntity> Map() => Context.Set<TEntity>();
     }
 
-    public abstract class Query<TQueryData, TDbContext, TEntity, TKey> : IQuery<TEntity, TKey>
-        where TQueryData : IQueryData
-        where TEntity : IEntity<TKey>
+    public abstract class Query<TDbContext, TQueryData, TEntity, TKey> : IQuery<TEntity, TKey>
         where TDbContext : DbContext
+        where TQueryData : IQueryData
+        where TEntity : class, IEntity<TKey>
     {
         protected Query(IQueryReader<TQueryData> reader)
         {
@@ -53,7 +52,6 @@ namespace Idea.SmartQuery.EntityFrameworkCore
 
         protected abstract IQueryable<TEntity> CreateQuery();
 
-        protected virtual IQueryable<TMapEntity> Map<TMapEntity>()
-            where TMapEntity : class, IEntity<TKey> => Context.Set<TMapEntity>();
+        protected virtual IQueryable<TEntity> Map() => Context.Set<TEntity>();
     }
 }

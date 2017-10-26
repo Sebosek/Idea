@@ -7,7 +7,10 @@ using AutoMapper;
 using Idea.Repository;
 using Idea.Sample.Internals.DbContext;
 using Idea.Sample.Internals.Models;
+using Idea.SmartQuery;
 using Idea.SmartQuery.EntityFrameworkCore;
+using Idea.SmartQuery.Interfaces;
+using Idea.SmartQuery.QueryData;
 using Idea.UnitOfWork;
 
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +23,7 @@ namespace Idea.Sample.Controllers
     public class TagsController : Controller
     {
         private readonly IMapper _mapper;
+        private readonly IQueryFactory _queryFactory;
 
         private readonly IUnitOfWorkFactory _uowFactory;
 
@@ -27,10 +31,12 @@ namespace Idea.Sample.Controllers
 
         public TagsController(
             IMapper mapper,
+            IQueryFactory queryFactory,
             IUnitOfWorkFactory uowFactory, 
             IRepository<TagEntity, Guid> tagRepository)
         {
             _mapper = mapper;
+            _queryFactory = queryFactory;
             _uowFactory = uowFactory;
             _tagRepository = tagRepository;
         }
@@ -40,7 +46,10 @@ namespace Idea.Sample.Controllers
         {
             using (var uow = _uowFactory.Create())
             {
-                var query = new CommonQuery<SampleDbContext, TagEntity, Guid>(i => i.PostTags);
+                var cc = new GenericConditions<TagEntity, Guid>(i => i.PostTags);
+                var query = _queryFactory.CreateQuery<GenericQuery<SampleDbContext, TagEntity, Guid>, TagEntity, Guid>(
+                    new QueryReader<GenericConditions<TagEntity, Guid>>(() => cc));
+                
                 var data = await query.ExecuteAsync(uow);
                 return _mapper.Map<IEnumerable<TagRead>>(data);
             }

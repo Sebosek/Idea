@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Idea.Sample.Internals.Queries
 {
-    public class PostById : Query<ById<Guid>, SampleDbContext, Post, Guid>
+    public class PostById : Query<SampleDbContext, ById<Guid>, Post, Guid>
     {
         public PostById(IQueryReader<ById<Guid>> reader) : base(reader)
         {
@@ -21,7 +21,7 @@ namespace Idea.Sample.Internals.Queries
         {
             var data = Reader.Read();
 
-            return Map<Post>().Where(w => w.Id == data.Id).Include(i => i.PostTags).ThenInclude(i => i.Tag);
+            return Map().Where(w => w.Id == data.Id).Include(i => i.PostTags).ThenInclude(i => i.Tag);
         }
     }
 }

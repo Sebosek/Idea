@@ -21,14 +21,5 @@ namespace Idea.SmartQuery.EntityFrameworkCore.Extensions
 
             return input;
         }
-
-        public static void CheckEntityFrameworkUnitOfWork<TDbContext>(this IUnitOfWork uow)
-            where TDbContext : DbContext
-        {
-            if (!(uow is UnitOfWork<TDbContext> input))
-            {
-                throw new ArgumentException(MESSAGE);
-            }
-        }
     }
 }

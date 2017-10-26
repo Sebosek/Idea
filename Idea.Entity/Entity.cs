@@ -6,7 +6,7 @@ namespace Idea.Entity
     {
         public Entity()
         {
-            Created = DateTime.Now;
+            Created = DateTime.UtcNow;
         }
 
         public TKey Id { get; set; }

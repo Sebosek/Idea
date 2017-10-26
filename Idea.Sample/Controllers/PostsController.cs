@@ -57,7 +57,10 @@ namespace Idea.Sample.Controllers
         {
             using (var uow = _uowFactory.Create())
             {
-                var query = new CommonQuery<SampleDbContext, PostEntity, Guid>(i => i.PostTags);
+                var cc = new GenericConditions<PostEntity, Guid>(i => i.PostTags);
+                var query = _queryFactory.CreateQuery<GenericQuery<SampleDbContext, PostEntity, Guid>, PostEntity, Guid>(
+                    new QueryReader<GenericConditions<PostEntity, Guid>>(() => cc));
+
                 var data = await query.ExecuteAsync(uow);
                 return _mapper.Map<IEnumerable<PostRead>>(data);
             }
@@ -68,7 +71,10 @@ namespace Idea.Sample.Controllers
         {
             using (var uow = _uowFactory.Create())
             {
-                var query = new CommonQuery<SampleDbContext, PostEntity, Guid>(w => w.Id == id, i => i.PostTags);
+                var cc = new GenericConditions<PostEntity, Guid>(w => w.Id == id, i => i.PostTags);
+                var query = _queryFactory.CreateQuery<GenericQuery<SampleDbContext, PostEntity, Guid>, PostEntity, Guid>(
+                    new QueryReader<GenericConditions<PostEntity, Guid>>(() => cc));
+               
                 var data = await query.ExecuteAsync(uow);
                 if (!data.Any())
                 {
@@ -118,7 +124,10 @@ namespace Idea.Sample.Controllers
         {
             using (var uow = _uowFactory.Create())
             {
-                var query = new CommonQuery<SampleDbContext, TagEntity, Guid>(w => model.Tags.Contains(w.Id));
+                var cc = new GenericConditions<TagEntity, Guid>(w => model.Tags.Contains(w.Id));
+                var query = _queryFactory.CreateQuery<GenericQuery<SampleDbContext, TagEntity, Guid>, TagEntity, Guid>(
+                    new QueryReader<GenericConditions<TagEntity, Guid>>(() => cc));
+
                 var tags = await query.ExecuteAsync(uow);
                 if (!tags.Select(s => s.Id).All(model.Tags.Contains))
                 {

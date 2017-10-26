@@ -2,10 +2,10 @@
 
 namespace Idea.Entity
 {
-    public interface IEntity<out TKey>
+    public interface IEntity<TKey>
     {
-        TKey Id { get; }
-        DateTime Created { get; }
-        DateTime? Canceled { get; }
+        TKey Id { get; set; }
+        DateTime Created { get; set; }
+        DateTime? Canceled { get; set; }
     }
 }
