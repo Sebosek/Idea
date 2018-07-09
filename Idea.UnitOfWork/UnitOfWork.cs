@@ -1,65 +1,58 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+using Idea.UnitOfWork.Exceptions;
+
 namespace Idea.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
         private const string NOT_OPEN_UOW = "No unit of work is currently open.";
 
-        private const string WRONG_UOW = "Try to commit outside Unit of work.";
+        private const string WRONG_UOW = "Attempt to commit the outer unit of work.";
 
         private readonly IUnitOfWorkManager _manager;
 
         private bool _isDisposed;
 
-        private bool _isOpen;
-
-        private bool _isCommited;
-
         public UnitOfWork(IUnitOfWorkManager manager)
         {
-            Id = Guid.NewGuid().ToString();
+            Id = Guid.NewGuid();
 
             _manager = manager;
             _manager.Add(this);
-            _isOpen = true;
+            IsOpen = true;
         }
 
-        public string Id { get; }
+        public Guid Id { get; protected internal set; }
 
-        public bool IsCommited => _isCommited;
+        public bool IsCommited { get; protected internal set; }
 
-        protected internal bool IsOpen
-        {
-            get => _isOpen;
-            set => _isOpen = value;
-        }
+        protected internal bool IsOpen { get; set; }
 
         public Task CommitAsync()
         {
             CheckOpenedUow();
             CheckCurrentUow();
 
-            _isCommited = true;
-            _isOpen = false;
+            IsCommited = true;
+            IsOpen = false;
 
             if (_manager.CanCommit())
             {
                 return _manager.CommitAllAsync();
             }
 
-            return Task.FromResult(false);
+            return Task.CompletedTask;
         }
 
-        public Task RollbackAsync()
+        public async Task RollbackAsync()
         {
             CheckOpenedUow();
             CheckCurrentUow();
 
-            var task = DoRollbackAsync();
-            _isOpen = false;
-            return task;
+            await DoRollbackAsync();
+            IsOpen = false;
         }
 
         public void Dispose()
@@ -73,7 +66,7 @@ namespace Idea.UnitOfWork
 
             if (IsOpen)
             {
-                Rollback();
+                RollbackAsync().GetAwaiter().GetResult();
             }
 
             _manager.Close();
@@ -90,28 +83,19 @@ namespace Idea.UnitOfWork
             return Id.GetHashCode();
         }
 
-        protected internal virtual void DoCommit() { }
+        protected virtual Task DoCommitAsync() => Task.CompletedTask;
 
-        protected internal virtual Task DoCommitAsync() { return Task.FromResult(false); }
+        protected virtual Task DoRollbackAsync() => Task.CompletedTask;
 
-        protected internal virtual void DoRollback() { }
+        protected internal Task InternalCommitAsync() => DoCommitAsync();
 
-        protected internal virtual Task DoRollbackAsync() { return Task.FromResult(false); }
-
-        private void Rollback()
-        {
-            CheckOpenedUow();
-            CheckCurrentUow();
-
-            DoRollback();
-            _isOpen = false;
-        }
+        protected internal Task InternalRollbackAsync() => DoRollbackAsync();
 
         private void CheckOpenedUow()
         {
             if (!IsOpen)
             {
-                throw new Exception(NOT_OPEN_UOW);
+                throw new NoOpenedUnitOfWorkException(NOT_OPEN_UOW);
             }
         }
 
@@ -120,7 +104,7 @@ namespace Idea.UnitOfWork
             var last = _manager.Current();
             if (!last.Equals(this))
             {
-                throw new Exception(WRONG_UOW);
+                throw new CommitOuterUnitOfWorkException(WRONG_UOW);
             }
         }
     }

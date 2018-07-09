@@ -1,23 +1,33 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Generic;
+
+using Microsoft.EntityFrameworkCore;
 
 namespace Idea.UnitOfWork.EntityFrameworkCore
 {
-    public class UnitOfWorkFactory<TDbContext> : IUnitOfWorkFactory
-        where TDbContext : DbContext
+    public class UnitOfWorkFactory<TDbContext, TKey> : IUnitOfWorkFactory
+        where TDbContext : DbContext, IModelContext
     {
-        private readonly TDbContext _context;
+        private readonly IDataProvider _provider;
+
+        private readonly IEnumerable<IEntityExpand<TKey>> _expands;
+
+        private readonly IDbContextFactory<TDbContext> _factory;
 
         private readonly IUnitOfWorkManager _manager;
-
-        public UnitOfWorkFactory(TDbContext context, IUnitOfWorkManager manager)
+        
+        public UnitOfWorkFactory(IDbContextFactory<TDbContext> factory, IUnitOfWorkManager manager, IDataProvider provider, IEnumerable<IEntityExpand<TKey>> expands)
         {
-            _context = context;
+            _factory = factory;
             _manager = manager;
+            _provider = provider;
+            _expands = expands;
         }
 
-        public IUnitOfWork Create()
-        {
-            return new UnitOfWork<TDbContext>(_context, _manager);
-        }
+        public IUnitOfWork Create() => CreateUnitOfWork();
+
+        public IDataProvider DataProvider() => _provider;
+
+        private UnitOfWork<TDbContext, TKey> CreateUnitOfWork() =>
+            new UnitOfWork<TDbContext, TKey>(_factory.CreateDbContext(), _manager, _expands ?? new IEntityExpand<TKey>[0]);
     }
 }

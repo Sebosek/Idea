@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Idea.Entity;
@@ -14,7 +11,7 @@ namespace Idea.Repository.EntityFrameworkCore
 {
     public class Repository<TDbContext, TEntity, TKey> : IRepository<TEntity, TKey>
         where TEntity : class, IEntity<TKey>
-        where TDbContext : DbContext
+        where TDbContext : ModelContext<TKey>
     {
         private readonly IUnitOfWorkManager _manager;
 
@@ -48,7 +45,7 @@ namespace Idea.Repository.EntityFrameworkCore
             return Task.Factory.StartNew(() =>
             {
                 ResolveUnitOfWork();
-
+                
                 _database.Attach(entity);
                 _context.Entry(entity).State = EntityState.Modified;
             });
@@ -65,12 +62,12 @@ namespace Idea.Repository.EntityFrameworkCore
 
         protected void ResolveUnitOfWork()
         {
-            if (!(_manager.Current() is UnitOfWork<TDbContext> uow))
+            if (!(_manager.Current() is UnitOfWork<TDbContext, TKey> uow))
             {
                 throw new Exception("Unable to resolve Entity Framework Unit of work");
             }
 
-            _context = uow.DbContext;
+            _context = uow.ModelContext;
             _database = _context.Set<TEntity>();
         }
     }

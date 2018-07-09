@@ -1,5 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+
+using Idea.UnitOfWork.Exceptions;
 
 namespace Idea.UnitOfWork
 {
@@ -8,33 +9,34 @@ namespace Idea.UnitOfWork
         private static int RANGE = 32;
 
         private int _height;
-        private int _index;
-        private IUnitOfWork[] _stack;
-        
-        public bool AllClosed => _index == 0;
-
-        protected int Index => _index;
-
-        protected IUnitOfWork[] Stack => _stack;
 
         public UnitOfWorkGeneration()
         {
-            _index = 0;
-            _stack = new IUnitOfWork[RANGE];
+            Index = 0;
+            Stack = new UnitOfWork[RANGE];
         }
 
-        public void Add(IUnitOfWork uow)
+        public bool AllClosed => Index == 0;
+
+        protected internal int Index { get; private set; }
+
+        protected internal UnitOfWork[] Stack { get; }
+
+        public void Add(UnitOfWork uow)
         {
-            _stack[_height++] = uow;
-            _index++;
+            Stack[_height++] = uow;
+            Index++;
         }
 
         public bool CanCommit()
         {
+            // Need to check if any of unit of works was commited.
+            // With that check, we know that one or more generation wasn't skipped on the vertical axis.
+
             var i = 0;
-            while (i < RANGE && _stack[i] != null)
+            while (i < RANGE && Stack[i] != null)
             {
-                if (_stack[i].IsCommited)
+                if (Stack[i].IsCommited)
                 {
                     return true;
                 }
@@ -45,36 +47,14 @@ namespace Idea.UnitOfWork
             return false;
         }
 
-        public void Commit()
-        {
-            var i = 0;
-            while (i < RANGE && _stack[i] != null)
-            {
-                if (_stack[i].IsCommited)
-                {
-                    var uow = _stack[i] as UnitOfWork;
-                    if (uow != null)
-                    {
-                        uow.DoCommit();
-                    }
-                }
-
-                i++;
-            }
-        }
-
         public async Task CommitAsync()
         {
             var i = 0;
-            while (i < RANGE && _stack[i] != null)
+            while (i < RANGE && Stack[i] != null)
             {
-                if (_stack[i].IsCommited)
+                if (Stack[i].IsCommited)
                 {
-                    var uow = _stack[i] as UnitOfWork;
-                    if (uow != null)
-                    {
-                        await uow.DoCommitAsync();
-                    }
+                    await Stack[i].InternalCommitAsync();
                 }
 
                 i++;
@@ -83,35 +63,38 @@ namespace Idea.UnitOfWork
 
         public void CloseCurrent()
         {
-            _index--;
-            if (_index < 0)
-            {
-                throw new Exception("Current Unit of Work in under zero index.");
-            }
+            CheckEmpty();
 
-            var uow = _stack[_index] as UnitOfWork;
-            if (uow != null)
-            {
-                uow.IsOpen = false;
-            }
+            Stack[--Index].IsOpen = false;
         }
 
-        public IUnitOfWork Current()
+        public UnitOfWork Current()
         {
-            return _stack[_height - 1];
+            return Stack[_height - 1];
+
+            ////CheckEmpty();
+            ////return Stack[--Index];
         }
 
         public void CleanUp()
         {
             var j = 0;
-            while (j < RANGE && _stack[j] != null)
+            while (j < RANGE && Stack[j] != null)
             {
-                Release(_stack[j]);
-                _stack[j] = null;
+                Release(Stack[j]);
+                Stack[j] = null;
                 j++;
             }
         }
 
         protected virtual void Release(IUnitOfWork uow) { }
+
+        private void CheckEmpty()
+        {
+            if (Index == 0)
+            {
+                throw new NoUnitOfWorkInGenerationException("No unit of work is in a generation.");
+            }
+        }
     }
 }

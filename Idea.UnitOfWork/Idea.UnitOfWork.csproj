@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <Description>Idea.UnitOfWork Class Library</Description>
-    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionPrefix>2.0.0</VersionPrefix>
     <Authors>Sebastian Bušek</Authors>
-    <TargetFramework>netstandard1.2</TargetFramework>
+    <TargetFramework>netstandard1.6</TargetFramework>
     <AssemblyName>Idea.UnitOfWork</AssemblyName>
     <PackageId>Idea.UnitOfWork</PackageId>
     <PackageTags>Unit of work; UoW</PackageTags>

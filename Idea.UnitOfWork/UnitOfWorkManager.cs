@@ -1,30 +1,34 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+using Idea.UnitOfWork.Exceptions;
+
 namespace Idea.UnitOfWork
 {
     public class UnitOfWorkManager : IUnitOfWorkManager
     {
-        internal const int DEPTH = 32;
-
         private readonly IUnitOfWorkGenerationFactory _factory;
 
-        private readonly IUnitOfWorkGeneration[] _stack;
-
         private int _generation;
+
+        private readonly IUnitOfWorkGeneration[] _stack;
 
         public UnitOfWorkManager(IUnitOfWorkGenerationFactory factory)
         {
             _factory = factory;
             _generation = 0;
-            _stack = new IUnitOfWorkGeneration[DEPTH];
+            _stack = new IUnitOfWorkGeneration[Depth];
         }
 
-        public void Add(IUnitOfWork uow)
+        protected internal IUnitOfWorkGeneration[] Stack => _stack;
+
+        protected internal static int Depth => 32;
+
+        public void Add(UnitOfWork uow)
         {
-            if (_generation >= DEPTH)
+            if (_generation >= Depth)
             {
-                throw new Exception("Reached maximum Unit of work depth!");
+                throw new ReachedMaximumDepthException("Reached maximum unit of work depth.");
             }
 
             var current = _generation;
@@ -47,7 +51,7 @@ namespace Idea.UnitOfWork
             var previous = true;
             var i = _generation;
 
-            while (i < DEPTH && _stack[i] != null)
+            while (i < Depth && _stack[i] != null)
             {
                 if (!previous)
                 {
@@ -82,7 +86,7 @@ namespace Idea.UnitOfWork
             }
         }
 
-        public IUnitOfWork Current()
+        public UnitOfWork Current()
         {
             var index = _generation - 1;
             if (index < 0 || _stack[index] == null)
@@ -93,35 +97,11 @@ namespace Idea.UnitOfWork
             return _stack[index].Current();
         }
 
-        public void CommitAll()
-        {
-            // get top
-            var top = 0;
-            for (var i = 0; i < DEPTH; i++)
-            {
-                if (_stack[i] == null)
-                {
-                    break;
-                }
-
-                top++;
-            }
-
-            // committing
-            for (var i = top - 1; i >= 0; i--)
-            {
-                if (_stack[i].CanCommit())
-                {
-                    _stack[i].Commit();
-                }
-            }
-        }
-
         public async Task CommitAllAsync()
         {
             // get top
             var top = 0;
-            for (var i = 0; i < DEPTH; i++)
+            for (var i = 0; i < Depth; i++)
             {
                 if (_stack[i] == null)
                 {

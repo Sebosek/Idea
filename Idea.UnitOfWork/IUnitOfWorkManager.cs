@@ -4,12 +4,16 @@ namespace Idea.UnitOfWork
 {
     public interface IUnitOfWorkManager
     {
-        void Add(IUnitOfWork uow);
+        void Add(UnitOfWork uow);
+
         void Close();
-        IUnitOfWork Current();
+
+        UnitOfWork Current();
+
         bool CanCommit();
+
         Task CommitAllAsync();
-        void CommitAll();
+
         void CleanUp();
     }
 }

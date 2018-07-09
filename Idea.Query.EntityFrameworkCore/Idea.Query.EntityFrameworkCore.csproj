@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Idea.Query.EntityFrameworkCore Class Library</Description>
+    <AssemblyTitle>Idea.Query.EntityFrameworkCore</AssemblyTitle>
+    <VersionPrefix>2.0.0</VersionPrefix>
+    <Authors>Sebastian Bušek</Authors>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Idea.Query.EntityFrameworkCore</AssemblyName>
+    <PackageId>Idea.Query.EntityFrameworkCore</PackageId>
+    <NetStandardImplicitPackageVersion>2.0</NetStandardImplicitPackageVersion>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Idea.UnitOfWork.EntityFrameworkCore\Idea.UnitOfWork.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+</Project>

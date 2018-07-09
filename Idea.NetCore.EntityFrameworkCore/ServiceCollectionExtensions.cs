@@ -1,26 +1,48 @@
 ﻿using System;
 
-using Idea.SmartQuery;
-using Idea.SmartQuery.Interfaces;
+using Idea.Entity;
+using Idea.Repository;
+using Idea.Repository.EntityFrameworkCore;
 using Idea.UnitOfWork;
+using Idea.UnitOfWork.EntityFrameworkCore;
+using Idea.UnitOfWork.Expands;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+
+using UnitOfWorkGenerationFactory = Idea.UnitOfWork.UnitOfWorkGenerationFactory;
 
 namespace Idea.NetCore.EntityFrameworkCore
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddIdeaEntityFrameworkCore<TDbContext>(this IServiceCollection services, Action<DbContextOptionsBuilder> options)
-            where TDbContext : DbContext
-        {
-            services.AddDbContext<TDbContext>(options, ServiceLifetime.Transient);
-            services.AddScoped<IUnitOfWorkManager, UnitOfWorkManager>();
-            services.AddScoped<IUnitOfWorkGenerationFactory, UnitOfWorkGenerationFactory>();
-            services.AddScoped<IUnitOfWorkFactory, UnitOfWork.EntityFrameworkCore.UnitOfWorkFactory<TDbContext>>();
-            services.AddScoped<IQueryFactory, QueryFactory>();
+        public static IServiceCollection AddIdea<TDbContext, TKey>(
+            this IServiceCollection services,
+            Action<DbContextOptionsBuilder> options)
+            where TDbContext : DbContext, IModelContext =>
+            services
+                .AddDbContext<TDbContext>(options)
+                .AddScoped<IDbContextFactory<TDbContext>>(_ => new DbContextFactory<TDbContext>(options))
+                .AddScoped<IUnitOfWorkManager, UnitOfWorkManager>()
+                .AddScoped<IUnitOfWorkGenerationFactory, UnitOfWorkGenerationFactory>()
+                .AddScoped<IUnitOfWorkFactory, UnitOfWorkFactory<TDbContext, TKey>>()
+                .AddScoped<IDataProvider, DataProvider<TDbContext>>()
+                .AddScoped<IRepositoryFactory, RepositoryFactory>()
+                .AddIdentityIdentifier<DefaultIdentityIdentifier<TKey>, TKey>()
+                .AddEntityExpand<DateTimeEntityExpand<TKey>, TKey>()
+                .AddEntityExpand<IdentityExpand<TKey>, TKey>();
 
-            return services;
-        }
+        public static IServiceCollection AddRepository<TDbContext, TEntity, TKey>(this IServiceCollection services)
+            where TEntity : class, IEntity<TKey> 
+            where TDbContext : ModelContext<TKey> =>
+            services.AddScoped<IRepository<TEntity, TKey>, Repository<TDbContext, TEntity, TKey>>();
+
+        public static IServiceCollection AddEntityExpand<TEntityExpand, TKey>(this IServiceCollection services)
+            where TEntityExpand : class, IEntityExpand<TKey> =>
+            services.AddTransient<IEntityExpand<TKey>, TEntityExpand>();
+
+        public static IServiceCollection AddIdentityIdentifier<TIdentity, TKey>(this IServiceCollection services)
+            where TIdentity : class, IIdentityIdentifier<TKey> =>
+            services.AddTransient<IIdentityIdentifier<TKey>, TIdentity>();
     }
 }

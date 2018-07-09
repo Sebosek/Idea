@@ -1,13 +1,13 @@
 ﻿using Idea.Tests.Entity;
+using Idea.UnitOfWork.EntityFrameworkCore;
+using Idea.UnitOfWork.EntityFrameworkCore.Enums;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Idea.Tests
 {
-    public class TestDbContext : DbContext
+    public class TestDbContext : ModelContext<int>
     {
-        public TestDbContext()
-        { }
-
         public TestDbContext(DbContextOptions options) : base(options)
         { }
 
@@ -20,29 +20,29 @@ namespace Idea.Tests
         public DbSet<BookAuthor> BooksAuthors { get; set; }
 
         public DbSet<BookCategory> BooksCategories { get; set; }
-        
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+
+        public override RemoveStrategy AppliedRemoveStrategy() => RemoveStrategy.Drop;
+
+        protected override void DbModel(ModelBuilder builder)
         {
-            modelBuilder.Entity<Book>().Property(p => p.Title).IsRequired();
-            modelBuilder.Entity<Book>().HasIndex(i => i.Title).IsUnique();
-            modelBuilder.Entity<Book>().HasKey(k => k.Id);
+            builder.Entity<Book>().Property(p => p.Title).IsRequired();
+            builder.Entity<Book>().HasIndex(i => i.Title).IsUnique();
+            builder.Entity<Book>().HasKey(k => k.Id);
 
-            modelBuilder.Entity<Author>().Property(p => p.Firstname).IsRequired();
-            modelBuilder.Entity<Author>().Property(p => p.Lastname).IsRequired();
-            modelBuilder.Entity<Author>().HasKey(k => k.Id);
+            builder.Entity<Author>().Property(p => p.Firstname).IsRequired();
+            builder.Entity<Author>().Property(p => p.Lastname).IsRequired();
+            builder.Entity<Author>().HasKey(k => k.Id);
 
-            modelBuilder.Entity<Category>().Property(p => p.Name).IsRequired();
-            modelBuilder.Entity<Category>().HasKey(k => k.Id);
+            builder.Entity<Category>().Property(p => p.Name).IsRequired();
+            builder.Entity<Category>().HasKey(k => k.Id);
 
-            modelBuilder.Entity<BookAuthor>().HasKey(k => k.Id);
-            modelBuilder.Entity<BookAuthor>().HasOne(o => o.Author).WithMany(m => m.AuthorBooks).HasForeignKey(k => k.AuthorId);
-            modelBuilder.Entity<BookAuthor>().HasOne(o => o.Book).WithMany(m => m.BookAuthors).HasForeignKey(k => k.BookId);
+            builder.Entity<BookAuthor>().HasKey(k => k.Id);
+            builder.Entity<BookAuthor>().HasOne(o => o.Author).WithMany(m => m.AuthorBooks).HasForeignKey(k => k.AuthorId);
+            builder.Entity<BookAuthor>().HasOne(o => o.Book).WithMany(m => m.BookAuthors).HasForeignKey(k => k.BookId);
 
-            modelBuilder.Entity<BookCategory>().HasKey(k => k.Id);
-            modelBuilder.Entity<BookCategory>().HasOne(o => o.Category).WithMany(m => m.CategoryBooks).HasForeignKey(k => k.CategoryId);
-            modelBuilder.Entity<BookCategory>().HasOne(o => o.Book).WithMany(m => m.BookCategories).HasForeignKey(k => k.BookId);
-
-            base.OnModelCreating(modelBuilder);
+            builder.Entity<BookCategory>().HasKey(k => k.Id);
+            builder.Entity<BookCategory>().HasOne(o => o.Category).WithMany(m => m.CategoryBooks).HasForeignKey(k => k.CategoryId);
+            builder.Entity<BookCategory>().HasOne(o => o.Book).WithMany(m => m.BookCategories).HasForeignKey(k => k.BookId);
         }
     }
 }

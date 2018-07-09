@@ -5,7 +5,7 @@ namespace Idea.UnitOfWork
 {
     public interface IUnitOfWork : IDisposable
     {
-        string Id { get; }
+        Guid Id { get; }
 
         bool IsCommited { get; }
         

@@ -8,21 +8,25 @@ using Idea.Tests.Repository;
 using Idea.UnitOfWork;
 using Idea.UnitOfWork.EntityFrameworkCore;
 
+using Moq;
+
 using Xunit;
 
 namespace Idea.Tests
 {
     [Collection("Database collection")]
-    [SuppressMessage("ReSharper", "InconsistentNaming", Justification = "Unit tests")]
+    [SuppressMessage("ReSharper", "InconsistentNaming", Justification = "Unit tests name convetion")]
     public class RepositoryTests
     {
         private readonly IAuthorRepository _authorRepository;
-        private readonly IUnitOfWorkFactory _factory;
 
+        private readonly IUnitOfWorkFactory _factory;
+        
         public RepositoryTests(DbFixture fixture)
         {
             _authorRepository = new AuthorRepository(fixture.UowManager);
-            _factory = new UnitOfWorkFactory<TestDbContext>(fixture.Context, fixture.UowManager);
+
+            _factory = new UnitOfWorkFactory<TestDbContext, int>(fixture.DbContextFactory, fixture.UowManager, null, null);
         }
 
         [Fact]
@@ -52,16 +56,18 @@ namespace Idea.Tests
         {
             using (var uow = _factory.Create())
             {
-                using (var uow2 = _factory.Create())
+                using (_factory.Create())
                 {
-                    var coelho = await _authorRepository.FindAsync(AuthorSeed.ID_COELHO);
+                    var author = await _authorRepository.FindAsync(AuthorSeed.NEW_ID_WYNDHAM);
+
+                    Assert.Null(author);
                 }
 
                 await _authorRepository.CreateAsync(AuthorSeed.WYNDHAM);
                 await uow.CommitAsync();
             }
 
-            using (var uow = _factory.Create())
+            using (_factory.Create())
             {
                 var author = await _authorRepository.FindAsync(AuthorSeed.NEW_ID_WYNDHAM);
 
@@ -78,7 +84,7 @@ namespace Idea.Tests
                 await uow.CommitAsync();
             }
 
-            using (var uow = _factory.Create())
+            using (_factory.Create())
             {
                 var author = await _authorRepository.FindAsync(AuthorSeed.NEW_ID_MITCHELL);
 
@@ -89,12 +95,12 @@ namespace Idea.Tests
         [Fact]
         public async Task CreateAsync_ValidDataNotCommited_ShouldNotSaveData()
         {
-            using (var uow = _factory.Create())
+            using (_factory.Create())
             {
                 await _authorRepository.CreateAsync(AuthorSeed.KING);
             }
 
-            using (var uow = _factory.Create())
+            using (_factory.Create())
             {
                 var author = await _authorRepository.FindAsync(AuthorSeed.NEW_ID_KING);
 
@@ -105,7 +111,7 @@ namespace Idea.Tests
         [Fact]
         public async Task CreateAsync_NullArgument_ShouldThrowException()
         {
-            using (var uow = _factory.Create())
+            using (_factory.Create())
             {
                 await Assert.ThrowsAsync<ArgumentNullException>(() => _authorRepository.CreateAsync(null));
             }
@@ -114,7 +120,7 @@ namespace Idea.Tests
         [Fact]
         public async Task Create_CreateInCommitedUow_InsideNotCommitedUow_ShouldNotStoreData()
         {
-            using (var uow = _factory.Create())
+            using (_factory.Create())
             {
                 using (var uow2 = _factory.Create())
                 {
@@ -136,7 +142,7 @@ namespace Idea.Tests
         {
             using (var uow = _factory.Create())
             {
-                using (var uow2 = _factory.Create())
+                using (_factory.Create())
                 {
                     await _authorRepository.CreateAsync(AuthorSeed.TSUTSUI);
                 }
@@ -157,7 +163,7 @@ namespace Idea.Tests
         {
             using (var uow = _factory.Create())
             {
-                using (var uow2 = _factory.Create())
+                using (_factory.Create())
                 {
                     using (var uow3 = _factory.Create())
                     {
@@ -209,12 +215,12 @@ namespace Idea.Tests
             {
                 var author = await _authorRepository.FindAsync(AuthorSeed.ID_COELHO);
                 author.Lastname = lastname;
-                
+
                 await _authorRepository.UpdateAsync(author);
                 await uow.CommitAsync();
             }
 
-            using (var uow = _factory.Create())
+            using (_factory.Create())
             {
                 var author = await _authorRepository.FindAsync(AuthorSeed.ID_COELHO);
 
@@ -256,7 +262,7 @@ namespace Idea.Tests
                 await uow.CommitAsync();
             }
 
-            using (var uow = _factory.Create())
+            using (_factory.Create())
             {
                 var s = await _authorRepository.FindAsync(AuthorSeed.ID_STEINBECK);
                 var e = await _authorRepository.FindAsync(AuthorSeed.ID_SAINT_EXUPERI);

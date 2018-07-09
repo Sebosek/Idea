@@ -1,8 +1,11 @@
 ﻿using System.Threading.Tasks;
 
+using Idea.Entity;
+
 namespace Idea.Repository
 {
     public interface IRepository<TEntity, in TKey>
+        where TEntity : IEntity<TKey>
     {
         Task<TEntity> FindAsync(TKey id);
 

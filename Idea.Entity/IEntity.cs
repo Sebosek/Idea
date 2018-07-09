@@ -1,11 +1,7 @@
-﻿using System;
-
-namespace Idea.Entity
+﻿namespace Idea.Entity
 {
-    public interface IEntity<TKey>
+    public interface IEntity<out TKey>
     {
-        TKey Id { get; set; }
-        DateTime Created { get; set; }
-        DateTime? Canceled { get; set; }
+        TKey Id { get; }
     }
 }

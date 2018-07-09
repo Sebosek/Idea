@@ -1,14 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Idea.UnitOfWork.EntityFrameworkCore
+﻿namespace Idea.UnitOfWork.EntityFrameworkCore
 {
-    public class UnitOfWorkGeneration<TDbContext> : UnitOfWorkGeneration
-        where TDbContext : DbContext
+    public class UnitOfWorkGeneration<TDbContext, TKey> : UnitOfWorkGeneration
+        where TDbContext : ModelContext<TKey>
     {
         protected override void Release(IUnitOfWork uow)
         {
-            var current = uow as UnitOfWork<TDbContext>;
-            if (current != null)
+            if (uow is UnitOfWork<TDbContext, TKey> current)
             {
                 current.Release();
             }

@@ -3,9 +3,11 @@
 using Idea.Tests.Entity;
 using Idea.Tests.Fixture.Seed;
 using Idea.UnitOfWork;
+using Idea.UnitOfWork.EntityFrameworkCore;
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
+
+using UnitOfWorkGenerationFactory = Idea.UnitOfWork.UnitOfWorkGenerationFactory;
 
 namespace Idea.Tests.Fixture
 {
@@ -15,17 +17,22 @@ namespace Idea.Tests.Fixture
 
         private IUnitOfWorkManager _manager;
 
+        private IDbContextFactory<TestDbContext> _dbContextFactory;
+
         public TestDbContext Context => _context;
 
         public IUnitOfWorkManager UowManager => _manager;
+
+        public IDbContextFactory<TestDbContext> DbContextFactory => _dbContextFactory;
 
         public DbFixture()
         {
             var options = new DbContextOptionsBuilder();
             options.UseInMemoryDatabase("UnitTest");
 
-            _manager = new UnitOfWorkManager(new UnitOfWorkGenerationFactory());
             _context = new TestDbContext(options.Options);
+            _dbContextFactory = new DbContextFactory<TestDbContext>(o => o.UseInMemoryDatabase("UnitTest"));
+            _manager = new UnitOfWorkManager(new UnitOfWorkGenerationFactory());
 
             SeedData();
             Context.SaveChanges();
