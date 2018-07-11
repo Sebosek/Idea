@@ -26,31 +26,17 @@ namespace Idea.Cookbook.Migrations
 
                     b.Property<float?>("Amount");
 
-                    b.Property<DateTime>("Created");
-
-                    b.Property<Guid>("CreatedBy");
-
                     b.Property<string>("Name");
 
                     b.Property<Guid?>("RecipeId");
-
-                    b.Property<DateTime?>("Removed");
-
-                    b.Property<Guid>("RemovedBy");
 
                     b.Property<Guid>("UnitId");
 
                     b.Property<Guid?>("UnitId1");
 
-                    b.Property<DateTime?>("Updated");
-
-                    b.Property<Guid>("UpdatedBy");
-
                     b.HasKey("Id");
 
                     b.HasIndex("RecipeId");
-
-                    b.HasIndex("Removed");
 
                     b.HasIndex("UnitId");
 
@@ -64,25 +50,11 @@ namespace Idea.Cookbook.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("Created");
-
-                    b.Property<Guid>("CreatedBy");
-
                     b.Property<string>("Directions");
 
                     b.Property<string>("Name");
 
-                    b.Property<DateTime?>("Removed");
-
-                    b.Property<Guid>("RemovedBy");
-
-                    b.Property<DateTime?>("Updated");
-
-                    b.Property<Guid>("UpdatedBy");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("Removed");
 
                     b.ToTable("Recipe");
                 });
@@ -92,32 +64,22 @@ namespace Idea.Cookbook.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("Created");
-
-                    b.Property<Guid>("CreatedBy");
-
                     b.Property<string>("Name");
-
-                    b.Property<DateTime?>("Removed");
-
-                    b.Property<Guid>("RemovedBy");
 
                     b.Property<string>("Symbol");
 
-                    b.Property<DateTime?>("Updated");
-
-                    b.Property<Guid>("UpdatedBy");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("Removed");
 
                     b.ToTable("Unit");
 
                     b.HasData(
-                        new { Id = new Guid("011dbeeb-895d-4bde-b651-91ccf204b9fa"), Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"), Name = "Kilogram", RemovedBy = new Guid("00000000-0000-0000-0000-000000000000"), Symbol = "Kg", UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000") },
-                        new { Id = new Guid("4ec94793-cc7f-45cc-a06a-05c65f0c2d58"), Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"), Name = "Gram", RemovedBy = new Guid("00000000-0000-0000-0000-000000000000"), Symbol = "g", UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000") },
-                        new { Id = new Guid("2611bf28-869e-4fdb-84e7-6b418abb3cca"), Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"), Name = "Liter", RemovedBy = new Guid("00000000-0000-0000-0000-000000000000"), Symbol = "l", UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000") }
+                        new { Id = new Guid("3078babe-42f2-41cf-a0a9-e3b0c7c7bf45"), Name = "Kilogram", Symbol = "Kg" },
+                        new { Id = new Guid("f8c2854d-15eb-4372-930c-70244566bfb7"), Name = "Gram", Symbol = "g" },
+                        new { Id = new Guid("576f18fe-fcdb-4937-969d-4480d3c5128f"), Name = "Liter", Symbol = "l" },
+                        new { Id = new Guid("4463240b-eacc-45ca-89d0-aa8d326b87ae"), Name = "Mililiter", Symbol = "ml" },
+                        new { Id = new Guid("1901a437-8249-44be-8373-0e72da21ff9e"), Name = "Tea spoon", Symbol = "tsp" },
+                        new { Id = new Guid("b0bf7ddb-45be-4f31-836a-53476eb9cb65"), Name = "Spoon", Symbol = "sp" },
+                        new { Id = new Guid("3fb0208b-cb90-431a-a4cd-6d38636c7706"), Name = "Piece", Symbol = "piece" }
                     );
                 });
 

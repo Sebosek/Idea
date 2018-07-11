@@ -17,20 +17,24 @@ namespace Idea.Cookbook
 
         protected override void DbModel(ModelBuilder builder) =>
             builder
-                .Record<Unit, Guid>(e => e.HasData(UnitData()))
-                .Record<Ingredient, Guid>(e =>
+                .Entity<Unit, Guid>(e => e.HasData(UnitData()))
+                .Entity<Ingredient, Guid>(e =>
                 {
                     e.Property(p => p.UnitId).IsRequired();
                     e.HasOne<Unit>().WithMany().HasForeignKey(k => k.UnitId);
                 })
-                .Record<Recipe, Guid>(e => e.HasMany(m => m.Ingredients).WithOne(o => o.Recipe).HasForeignKey(k => k.RecipeId));
+                .Entity<Recipe, Guid>(e => e.HasMany(m => m.Ingredients).WithOne(o => o.Recipe).HasForeignKey(k => k.RecipeId));
 
         private Unit[] UnitData() =>
             new[]
                 {
                     new Unit { Id = Guid.NewGuid(), Name = "Kilogram", Symbol = "Kg" },
                     new Unit { Id = Guid.NewGuid(), Name = "Gram", Symbol = "g" },
-                    new Unit { Id = Guid.NewGuid(), Name = "Liter", Symbol = "l" }
+                    new Unit { Id = Guid.NewGuid(), Name = "Liter", Symbol = "l" },
+                    new Unit { Id = Guid.NewGuid(), Name = "Mililiter", Symbol = "ml" },
+                    new Unit { Id = Guid.NewGuid(), Name = "Tea spoon", Symbol = "tsp" },
+                    new Unit { Id = Guid.NewGuid(), Name = "Spoon", Symbol = "sp" },
+                    new Unit { Id = Guid.NewGuid(), Name = "Piece", Symbol = "piece" }
                 };
     }
 }

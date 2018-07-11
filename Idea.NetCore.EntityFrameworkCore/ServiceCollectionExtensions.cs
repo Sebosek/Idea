@@ -32,10 +32,10 @@ namespace Idea.NetCore.EntityFrameworkCore
                 .AddEntityExpand<DateTimeEntityExpand<TKey>, TKey>()
                 .AddEntityExpand<IdentityExpand<TKey>, TKey>();
 
-        public static IServiceCollection AddRepository<TDbContext, TEntity, TKey>(this IServiceCollection services)
+        public static IServiceCollection AddRepository<TModelContext, TEntity, TKey>(this IServiceCollection services)
             where TEntity : class, IEntity<TKey> 
-            where TDbContext : ModelContext<TKey> =>
-            services.AddScoped<IRepository<TEntity, TKey>, Repository<TDbContext, TEntity, TKey>>();
+            where TModelContext : ModelContext<TKey> =>
+            services.AddScoped<IRepository<TEntity, TKey>, Repository<TModelContext, TEntity, TKey>>();
 
         public static IServiceCollection AddEntityExpand<TEntityExpand, TKey>(this IServiceCollection services)
             where TEntityExpand : class, IEntityExpand<TKey> =>

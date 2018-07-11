@@ -5,7 +5,7 @@ using Idea.Entity;
 
 namespace Idea.Cookbook.Entities
 {
-    public class Unit : Record<Guid>
+    public class Unit : Entity<Guid>
     {
         public string Symbol { get; set; }
 

@@ -12,12 +12,6 @@ namespace Idea.Cookbook.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<Guid>(nullable: false),
-                    Removed = table.Column<DateTime>(nullable: true),
-                    RemovedBy = table.Column<Guid>(nullable: false),
-                    Updated = table.Column<DateTime>(nullable: true),
-                    UpdatedBy = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Directions = table.Column<string>(nullable: true)
                 },
@@ -31,12 +25,6 @@ namespace Idea.Cookbook.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<Guid>(nullable: false),
-                    Removed = table.Column<DateTime>(nullable: true),
-                    RemovedBy = table.Column<Guid>(nullable: false),
-                    Updated = table.Column<DateTime>(nullable: true),
-                    UpdatedBy = table.Column<Guid>(nullable: false),
                     Symbol = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true)
                 },
@@ -50,12 +38,6 @@ namespace Idea.Cookbook.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<Guid>(nullable: false),
-                    Removed = table.Column<DateTime>(nullable: true),
-                    RemovedBy = table.Column<Guid>(nullable: false),
-                    Updated = table.Column<DateTime>(nullable: true),
-                    UpdatedBy = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Amount = table.Column<float>(nullable: true),
                     UnitId = table.Column<Guid>(nullable: false),
@@ -87,28 +69,22 @@ namespace Idea.Cookbook.Migrations
 
             migrationBuilder.InsertData(
                 table: "Unit",
-                columns: new[] { "Id", "Created", "CreatedBy", "Name", "Removed", "RemovedBy", "Symbol", "Updated", "UpdatedBy" },
-                values: new object[] { new Guid("011dbeeb-895d-4bde-b651-91ccf204b9fa"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Kilogram", null, new Guid("00000000-0000-0000-0000-000000000000"), "Kg", null, new Guid("00000000-0000-0000-0000-000000000000") });
-
-            migrationBuilder.InsertData(
-                table: "Unit",
-                columns: new[] { "Id", "Created", "CreatedBy", "Name", "Removed", "RemovedBy", "Symbol", "Updated", "UpdatedBy" },
-                values: new object[] { new Guid("4ec94793-cc7f-45cc-a06a-05c65f0c2d58"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Gram", null, new Guid("00000000-0000-0000-0000-000000000000"), "g", null, new Guid("00000000-0000-0000-0000-000000000000") });
-
-            migrationBuilder.InsertData(
-                table: "Unit",
-                columns: new[] { "Id", "Created", "CreatedBy", "Name", "Removed", "RemovedBy", "Symbol", "Updated", "UpdatedBy" },
-                values: new object[] { new Guid("2611bf28-869e-4fdb-84e7-6b418abb3cca"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Liter", null, new Guid("00000000-0000-0000-0000-000000000000"), "l", null, new Guid("00000000-0000-0000-0000-000000000000") });
+                columns: new[] { "Id", "Name", "Symbol" },
+                values: new object[,]
+                {
+                    { new Guid("3078babe-42f2-41cf-a0a9-e3b0c7c7bf45"), "Kilogram", "Kg" },
+                    { new Guid("f8c2854d-15eb-4372-930c-70244566bfb7"), "Gram", "g" },
+                    { new Guid("576f18fe-fcdb-4937-969d-4480d3c5128f"), "Liter", "l" },
+                    { new Guid("4463240b-eacc-45ca-89d0-aa8d326b87ae"), "Mililiter", "ml" },
+                    { new Guid("1901a437-8249-44be-8373-0e72da21ff9e"), "Tea spoon", "tsp" },
+                    { new Guid("b0bf7ddb-45be-4f31-836a-53476eb9cb65"), "Spoon", "sp" },
+                    { new Guid("3fb0208b-cb90-431a-a4cd-6d38636c7706"), "Piece", "piece" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ingredient_RecipeId",
                 table: "Ingredient",
                 column: "RecipeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Ingredient_Removed",
-                table: "Ingredient",
-                column: "Removed");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ingredient_UnitId",
@@ -119,16 +95,6 @@ namespace Idea.Cookbook.Migrations
                 name: "IX_Ingredient_UnitId1",
                 table: "Ingredient",
                 column: "UnitId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Recipe_Removed",
-                table: "Recipe",
-                column: "Removed");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Unit_Removed",
-                table: "Unit",
-                column: "Removed");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
