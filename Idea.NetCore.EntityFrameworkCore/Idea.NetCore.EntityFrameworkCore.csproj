@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <VersionPrefix>2.0.0</VersionPrefix>
@@ -18,5 +17,4 @@
     <ProjectReference Include="..\Idea.UnitOfWork.EntityFrameworkCore\Idea.UnitOfWork.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Idea.UnitOfWork\Idea.UnitOfWork.csproj" />
   </ItemGroup>
-
 </Project>

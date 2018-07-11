@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Idea.Cookbook\Idea.Cookbook\Idea.Cookbook.csproj" />
+    <ProjectReference Include="..\Idea.Cookbook\Idea.Cookbook.csproj" />
   </ItemGroup>
 
 </Project>

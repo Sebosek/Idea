@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-using Idea.Entity;
+﻿using Idea.Entity;
 using Idea.Repository;
 using Idea.UnitOfWork;
 
